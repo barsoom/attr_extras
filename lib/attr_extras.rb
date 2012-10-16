@@ -14,7 +14,7 @@ module AttrExtras
       end
     end
 
-    def attr_reader_private(*keys)
+    def attr_private(*keys)
       attr_reader *keys
       private *keys
     end

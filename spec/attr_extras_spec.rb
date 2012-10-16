@@ -3,7 +3,7 @@ require "attr_extras"
 
 class Example
   attr_init :foo, :bar
-  attr_reader_private :foo, :bar
+  attr_private :foo, :bar
 end
 
 describe Object, ".attr_init" do
@@ -18,7 +18,7 @@ describe Object, ".attr_init" do
   end
 end
 
-describe Object, ".attr_reader_private" do
+describe Object, ".attr_private" do
   it "creates private readers" do
     example = Example.new("Foo", "Bar")
     example.send(:foo).must_equal "Foo"

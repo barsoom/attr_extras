@@ -5,7 +5,7 @@ Takes the boilerplate out of some common Ruby patterns and complements `attr` (`
 Provides:
 
 * `attr_init :foo, :bar` to define an initializer that takes two arguments and assigns `@foo` and `@bar`.
-* `attr_reader_private :foo, :bar` to define private readers for `@foo` and `@bar`.
+* `attr_private :foo, :bar` to define private readers for `@foo` and `@bar`.
 
 
 ## Example
@@ -13,7 +13,7 @@ Provides:
 ``` ruby
 class MyClass
   attr_init :foo, :bar
-  attr_reader_private :foo
+  attr_private :foo
 
   def oof
     foo.reverse  # Uses the private method.
