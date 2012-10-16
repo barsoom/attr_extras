@@ -1,11 +1,12 @@
 # attr\_extras
 
-Takes the boilerplate out of some common Ruby patterns and complements `attr` (`attr_accessor`), `attr_reader` and `attr_writer` nicely.
+Takes some boilerplate out of Ruby and complements `attr` (`attr_accessor`), `attr_reader` and `attr_writer` nicely by providing:
 
-Provides:
+**`attr_init :foo, :bar`**<br>
+Defines an initializer that takes two arguments and assigns `@foo` and `@bar`.
 
-* `attr_init :foo, :bar` to define an initializer that takes two arguments and assigns `@foo` and `@bar`.
-* `attr_private :foo, :bar` to define private readers for `@foo` and `@bar`.
+**`attr_private :foo, :bar`**<br>
+Defines private readers for `@foo` and `@bar`.
 
 
 ## Example
@@ -16,12 +17,13 @@ class MyClass
   attr_private :foo
 
   def oof
-    foo.reverse  # Uses the private method.
+    foo.reverse
   end
 end
 
 x = MyClass.new("Foo!", "Bar!")
 x.oof  # => "!ooF"
+x.foo  # NoMethodError: private method `foo' called.
 ```
 
 
@@ -29,7 +31,7 @@ x.oof  # => "!ooF"
 
 Add this line to your application's `Gemfile`:
 
-    gem 'attr_extras'
+    gem "attr_extras"
 
 And then execute:
 
