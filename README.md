@@ -44,7 +44,7 @@ Or install it yourself as:
 
 ## License
 
-Copyright (c) 2012 Barsoom AB
+Copyright (c) 2012 [Barsoom AB](http://barsoom.se)
 
 MIT License
 
