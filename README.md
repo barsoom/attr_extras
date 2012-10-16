@@ -1,6 +1,6 @@
 # attr\_extras
 
-Takes some boilerplate out of Ruby and complements `attr` (`attr_accessor`), `attr_reader` and `attr_writer` nicely by providing:
+Takes some boilerplate out of Ruby and complements `attr_accessor`, `attr_reader` and `attr_writer` nicely by providing:
 
 `attr_init :foo, :bar`<br>
 Defines an initializer that takes two arguments and assigns `@foo` and `@bar`.
