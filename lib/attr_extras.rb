@@ -2,7 +2,7 @@ require "attr_extras/version"
 
 module AttrExtras
   module ClassMethods
-    def attr_init(*names)
+    def attr_initialize(*names)
       define_method(:initialize) do |*values|
         unless values.length == names.length
           raise ArgumentError, "wrong number of arguments (#{values.length} for #{names.length})"

@@ -2,7 +2,7 @@ require "minitest/autorun"
 require "attr_extras"
 
 class Example
-  attr_init :foo, :bar
+  attr_initialize :foo, :bar
   attr_private :foo, :bar
 end
 

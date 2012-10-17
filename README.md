@@ -2,7 +2,7 @@
 
 Takes some boilerplate out of Ruby and complements `attr_accessor`, `attr_reader` and `attr_writer` nicely by providing:
 
-`attr_init :foo, :bar`<br>
+`attr_initialize :foo, :bar`<br>
 Defines an initializer that takes two arguments and assigns `@foo` and `@bar`.
 
 `attr_private :foo, :bar`<br>
@@ -13,7 +13,7 @@ Defines private readers for `@foo` and `@bar`.
 
 ``` ruby
 class MyClass
-  attr_init :foo, :bar
+  attr_initialize :foo, :bar
   attr_private :foo
 
   def oof
