@@ -1,4 +1,4 @@
-![Build status](https://secure.travis-ci.org/barsoom/attr_extras.png) | [builds](https://travis-ci.org/#!/barsoom/attr_extras/builds)
+[![Build status](https://secure.travis-ci.org/barsoom/attr_extras.png)](https://travis-ci.org/#!/barsoom/attr_extras/builds)
 
 # attr\_extras
 
