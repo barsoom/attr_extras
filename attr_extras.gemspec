@@ -14,6 +14,9 @@ Gem::Specification.new do |gem|
   gem.require_paths = ["lib"]
   gem.version       = AttrExtras::VERSION
 
+  # For Travis CI.
+  gem.add_development_dependency "rake"
+
   if RUBY_VERSION < "1.9.3"
     gem.add_development_dependency "minitest"
   end
