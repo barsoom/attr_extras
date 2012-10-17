@@ -1,3 +1,5 @@
+![Build status](https://secure.travis-ci.org/barsoom/attr_extras.png) | [builds](https://travis-ci.org/#!/barsoom/attr_extras/builds)
+
 # attr\_extras
 
 Takes some boilerplate out of Ruby and complements `attr_accessor`, `attr_reader` and `attr_writer` nicely by providing:
