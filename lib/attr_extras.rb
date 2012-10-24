@@ -18,6 +18,18 @@ module AttrExtras
       attr_reader *names
       private *names
     end
+
+    def attr_id_query(*names)
+      names.each do |name|
+        unless name.to_s.end_with?("?")
+          raise "#{__method__} wants `#{name}?`, not `#{name}`."
+        end
+
+        define_method(name) do            # def foo?
+          !!send("#{name.to_s.chop}_id")  #   !!send("foo_id")
+        end                               # end
+      end
+    end
   end
 end
 

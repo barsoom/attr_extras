@@ -10,6 +10,9 @@ Defines an initializer that takes two arguments and assigns `@foo` and `@bar`.
 `attr_private :foo, :bar`<br>
 Defines private readers for `@foo` and `@bar`.
 
+`attr_id_query :foo?, :bar?`<br>
+Defines query methods like `foo?` which is true iff `foo_id` is truthy. Goes well with Active Record.
+
 
 ## Example
 
@@ -17,15 +20,21 @@ Defines private readers for `@foo` and `@bar`.
 class MyClass
   attr_initialize :foo, :bar
   attr_private :foo
+  attr_id_query :item?
 
   def oof
     foo.reverse
   end
+
+  def item_id
+    123
+  end
 end
 
 x = MyClass.new("Foo!", "Bar!")
-x.oof  # => "!ooF"
-x.foo  # NoMethodError: private method `foo' called.
+x.oof    # => "!ooF"
+x.foo    # NoMethodError: private method `foo' called.
+x.item?  # => true
 ```
 
 
