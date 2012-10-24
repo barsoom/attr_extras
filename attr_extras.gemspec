@@ -4,7 +4,7 @@ require File.expand_path('../lib/attr_extras/version', __FILE__)
 Gem::Specification.new do |gem|
   gem.authors       = ["Henrik Nyh"]
   gem.email         = ["henrik@nyh.se"]
-  gem.summary       = %q{Adds attr_initialize and attr_private methods.}
+  gem.summary       = %q{Takes some boilerplate out of Ruby with methods like attr_initialize.}
   gem.homepage      = "https://github.com/barsoom/attr_extras"
 
   gem.files         = `git ls-files`.split($\)
