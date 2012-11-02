@@ -25,9 +25,9 @@ module AttrExtras
 
         raise "#{__method__} wants `#{name}?`, not `#{name}`." unless name.end_with?("?")
 
-        define_method(name) do            # def foo?
+        define_method(name) do       # def foo?
           !!send("#{name.chop}_id")  #   !!send("foo_id")
-        end                               # end
+        end                          # end
       end
     end
   end
