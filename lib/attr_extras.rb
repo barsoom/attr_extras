@@ -21,12 +21,12 @@ module AttrExtras
 
     def attr_id_query(*names)
       names.each do |name|
-        unless name.to_s.end_with?("?")
-          raise "#{__method__} wants `#{name}?`, not `#{name}`."
-        end
+        name = name.to_s
+
+        raise "#{__method__} wants `#{name}?`, not `#{name}`." unless name.end_with?("?")
 
         define_method(name) do            # def foo?
-          !!send("#{name.to_s.chop}_id")  #   !!send("foo_id")
+          !!send("#{name.chop}_id")  #   !!send("foo_id")
         end                               # end
       end
     end
