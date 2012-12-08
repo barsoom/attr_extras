@@ -11,7 +11,11 @@ Defines an initializer that takes two arguments and assigns `@foo` and `@bar`.
 Defines private readers for `@foo` and `@bar`.
 
 `attr_id_query :foo?, :bar?`<br>
-Defines query methods like `foo?` which is true iff `foo_id` is truthy. Goes well with Active Record.
+Defines query methods like `foo?`, which is true iff `foo_id` is truthy. Goes well with Active Record.
+
+Findability has been a central consideration.
+Hence the long name `attr_initialize`, so you see it when scanning for the initializer;
+and the enforced questionmarks with `attr_id_query :foo?`, so you can search for that method.
 
 
 ## Example
