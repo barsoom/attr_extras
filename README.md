@@ -10,6 +10,9 @@ Defines an initializer that takes two arguments and assigns `@foo` and `@bar`.
 `attr_private :foo, :bar`<br>
 Defines private readers for `@foo` and `@bar`.
 
+`pattr_initialize :foo, :bar`<br>
+Defines both initializer and private readers.
+
 `attr_id_query :foo?, :bar?`<br>
 Defines query methods like `foo?`, which is true iff `foo_id` is truthy. Goes well with Active Record.
 

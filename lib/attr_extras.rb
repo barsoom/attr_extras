@@ -19,6 +19,11 @@ module AttrExtras
       private *names
     end
 
+    def pattr_initialize(*names)
+      attr_initialize *names
+      attr_private *names
+    end
+
     def attr_id_query(*names)
       names.each do |name|
         name = name.to_s

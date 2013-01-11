@@ -6,12 +6,16 @@ class Example
   attr_private :foo, :bar
 end
 
+class PattrExample
+  pattr_initialize :foo, :bar
+end
+
 class QueryExample
   attr_id_query :baz?, :boink?
   attr_accessor :baz_id
 end
 
-describe Object, ".attr_init" do
+describe Object, ".attr_initialize" do
   it "creates an initializer setting those instance variables" do
     example = Example.new("Foo", "Bar")
     example.instance_variable_get("@foo").must_equal "Foo"
@@ -29,6 +33,13 @@ describe Object, ".attr_private" do
     example.send(:foo).must_equal "Foo"
     example.send(:bar).must_equal "Bar"
     lambda { example.foo }.must_raise NoMethodError
+  end
+end
+
+describe Object, ".pattr_initialize" do
+  it "creates both initializer and private readers" do
+    example = PattrExample.new("Foo", "Bar")
+    example.send(:foo).must_equal "Foo"
   end
 end
 
