@@ -38,4 +38,6 @@ module AttrExtras
   end
 end
 
-Object.extend AttrExtras::ClassMethods
+class Class
+  include AttrExtras::ClassMethods
+end
