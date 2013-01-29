@@ -47,7 +47,8 @@ x.foo    # NoMethodError: private method `foo' called.
 x.item?  # => true
 
 class MyMethodObject
-  method_object :fooable?, :foo
+  method_object :fooable?,
+    :foo
 
   def fooable?
     foo == :some_value

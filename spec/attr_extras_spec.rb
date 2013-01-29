@@ -16,7 +16,8 @@ class QueryExample
 end
 
 class MethodObjectExample
-  method_object :fooable?, :foo
+  method_object :fooable?,
+    :foo
 
   def fooable?
     foo
