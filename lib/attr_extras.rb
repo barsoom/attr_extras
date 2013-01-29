@@ -24,6 +24,15 @@ module AttrExtras
       attr_private *names
     end
 
+    def method_object(method_name, *names)
+      metaclass = (class << self; self; end)
+      metaclass.send(:define_method, method_name) do |*values|
+        new(*values).send(method_name)
+      end
+
+      pattr_initialize *names
+    end
+
     def attr_id_query(*names)
       names.each do |name|
         name = name.to_s

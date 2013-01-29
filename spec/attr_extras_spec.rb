@@ -15,6 +15,21 @@ class QueryExample
   attr_accessor :baz_id
 end
 
+class MethodObjectExample
+  method_object :fooable?, :foo
+
+  def fooable?
+    foo
+  end
+end
+
+describe Object, ".method_object" do
+  it "creates a class method that instantiates and runs that instance method" do
+    assert MethodObjectExample.fooable?(true)
+    refute MethodObjectExample.fooable?(false)
+  end
+end
+
 describe Object, ".attr_initialize" do
   it "creates an initializer setting those instance variables" do
     example = Example.new("Foo", "Bar")

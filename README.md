@@ -13,6 +13,9 @@ Defines private readers for `@foo` and `@bar`.
 `pattr_initialize :foo, :bar`<br>
 Defines both initializer and private readers.
 
+`method_object :fooable?, :foo`<br>
+Defines a `.fooable?` class method that takes one argument, for a method object.
+
 `attr_id_query :foo?, :bar?`<br>
 Defines query methods like `foo?`, which is true iff `foo_id` is truthy. Goes well with Active Record.
 
@@ -42,6 +45,17 @@ x = MyClass.new("Foo!", "Bar!")
 x.oof    # => "!ooF"
 x.foo    # NoMethodError: private method `foo' called.
 x.item?  # => true
+
+class MyMethodObject
+  method_object :fooable?, :foo
+
+  def fooable?
+    foo == :some_value
+  end
+end
+
+MyMethodObject.fooable?(:some_value)     # => true
+MyMethodObject.fooable?(:another_value)  # => false
 ```
 
 
