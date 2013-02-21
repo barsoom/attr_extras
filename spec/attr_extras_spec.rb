@@ -48,7 +48,7 @@ describe Object, ".attr_initialize" do
   end
 
   it "can set ivars from a hash" do
-    example = ExampleWithHash.new("Foo", bar: "Bar", baz: "Baz")
+    example = ExampleWithHash.new("Foo", :bar => "Bar", :baz => "Baz")
     example.instance_variable_get("@foo").must_equal "Foo"
     example.instance_variable_get("@bar").must_equal "Bar"
     example.instance_variable_get("@baz").must_equal "Baz"
@@ -71,7 +71,7 @@ describe Object, ".pattr_initialize" do
   end
 
   it "works with hash ivars" do
-    example = ExampleWithHash.new("Foo", bar: "Bar")
+    example = ExampleWithHash.new("Foo", :bar => "Bar")
     example.send(:bar).must_equal "Bar"
   end
 end
