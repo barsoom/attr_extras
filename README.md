@@ -7,6 +7,9 @@ Takes some boilerplate out of Ruby and complements `attr_accessor`, `attr_reader
 `attr_initialize :foo, :bar`<br>
 Defines an initializer that takes two arguments and assigns `@foo` and `@bar`.
 
+`attr_initialize :foo, [:bar, :baz]`<br>
+Defines an initializer that takes one regular argument, assigning `@foo`, and one hash argument, assigning `@bar` and `@baz`.
+
 `attr_private :foo, :bar`<br>
 Defines private readers for `@foo` and `@bar`.
 
@@ -57,6 +60,14 @@ end
 
 MyMethodObject.fooable?(:some_value)     # => true
 MyMethodObject.fooable?(:another_value)  # => false
+
+class MyHashyObject
+  attr_initialize :foo, [:bar, :baz]
+  attr_reader :bar
+end
+
+x = MyHashyObject.new("Foo!", bar: "Bar!", baz: "Baz!")
+x.bar  # => "Bar!"
 ```
 
 

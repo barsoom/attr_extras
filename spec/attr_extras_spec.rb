@@ -25,6 +25,10 @@ class MethodObjectExample
   end
 end
 
+class ExampleWithHash
+  pattr_initialize :foo, [:bar, :baz]
+end
+
 describe Object, ".method_object" do
   it "creates a class method that instantiates and runs that instance method" do
     assert MethodObjectExample.fooable?(true)
@@ -42,6 +46,13 @@ describe Object, ".attr_initialize" do
   it "requires all arguments" do
     lambda { Example.new("Foo") }.must_raise ArgumentError
   end
+
+  it "can set ivars from a hash" do
+    example = ExampleWithHash.new("Foo", bar: "Bar", baz: "Baz")
+    example.instance_variable_get("@foo").must_equal "Foo"
+    example.instance_variable_get("@bar").must_equal "Bar"
+    example.instance_variable_get("@baz").must_equal "Baz"
+  end
 end
 
 describe Object, ".attr_private" do
@@ -57,6 +68,11 @@ describe Object, ".pattr_initialize" do
   it "creates both initializer and private readers" do
     example = PattrExample.new("Foo", "Bar")
     example.send(:foo).must_equal "Foo"
+  end
+
+  it "works with hash ivars" do
+    example = ExampleWithHash.new("Foo", bar: "Bar")
+    example.send(:bar).must_equal "Bar"
   end
 end
 

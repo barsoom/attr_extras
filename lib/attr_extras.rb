@@ -8,8 +8,14 @@ module AttrExtras
           raise ArgumentError, "wrong number of arguments (#{values.length} for #{names.length})"
         end
 
-        names.zip(values).each do |name, value|
-          instance_variable_set("@#{name}", value)
+        names.zip(values).each do |name_or_names, value|
+          if name_or_names.is_a?(Array)
+            name_or_names.each do |key|
+              instance_variable_set("@#{key}", value[key])
+            end
+          else
+            instance_variable_set("@#{name_or_names}", value)
+          end
         end
       end
     end
@@ -21,7 +27,7 @@ module AttrExtras
 
     def pattr_initialize(*names)
       attr_initialize *names
-      attr_private *names
+      attr_private *names.flatten
     end
 
     def method_object(method_name, *names)
