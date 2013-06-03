@@ -74,7 +74,7 @@ x.bar  # => "Bar!"
 
 `Struct` has some behavior you may not expect. Say you have this:
 
-```
+``` ruby
 class Greeter < Struct.new(:user)
   def greet
     puts "Hello #{user.name}!"
@@ -84,7 +84,7 @@ end
 
 The `Struct` won't actually require you to provide any arguments. You could do this and it won't complain until `nil.name` explodes on you:
 
-```
+``` ruby
 Greeter.new.greet
 ```
 
@@ -94,7 +94,7 @@ Further, inheriting from `Struct` arguably suggests that you have a mere data st
 
 With `attr_extras`, you have none of these issues:
 
-```
+``` ruby
 class Greeter
   pattr_initialize :user
 
