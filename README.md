@@ -70,6 +70,45 @@ x = MyHashyObject.new("Foo!", bar: "Bar!", baz: "Baz!")
 x.bar  # => "Bar!"
 ```
 
+## Why not use `Struct`?
+
+`Struct` has some behavior you may not expect. Say you have this:
+
+```
+class Greeter < Struct.new(:user)
+  def greet
+    puts "Hello #{user.name}!"
+  end
+end
+```
+
+The `Struct` won't actually require you to provide any arguments. You could do this and it won't complain until `nil.name` explodes on you:
+
+```
+Greeter.new.greet
+```
+
+Also, the Greeter will have a public `user` accessor even if you only need it internally, so your public interface is unnecessarily large.
+
+Further, inheriting from `Struct` arguably suggests that you have a mere data structure, not a full-blown class with rich behavior.
+
+With `attr_extras`, you have none of these issues:
+
+```
+class Greeter
+  pattr_initialize :user
+
+  def greet
+    puts "Hello #{user.name}!"
+  end
+end
+```
+
+## Why not use `private; attr_reader :foo`?
+
+Instead of `attr_private :foo`, you could do `private; attr_reader :foo`.
+
+Other than being more to type, declaring `attr_reader` after `private` will actually give you a warning (deserved or not) if you run Ruby with warnings turned on.
 
 ## Installation
 
@@ -84,7 +123,6 @@ And then execute:
 Or install it yourself as:
 
     gem install attr_extras
-
 
 ## License
 
