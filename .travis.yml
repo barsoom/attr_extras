@@ -1,11 +1,6 @@
 language: ruby
 rvm:
-  # 1.9 rubies
+  - 2.0.0
   - 1.9.3
   - rbx-19mode
   - jruby-19mode
-
-  # 1.8 rubies
-  - ree
-  - jruby-18mode
-  - rbx-18mode

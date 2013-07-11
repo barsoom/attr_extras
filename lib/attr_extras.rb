@@ -31,8 +31,7 @@ module AttrExtras
     end
 
     def method_object(method_name, *names)
-      metaclass = (class << self; self; end)
-      metaclass.send(:define_method, method_name) do |*values|
+      singleton_class.send(:define_method, method_name) do |*values|
         new(*values).send(method_name)
       end
 
