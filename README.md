@@ -22,6 +22,9 @@ Defines a `.fooable?` class method that delegates to an instance method.
 `attr_id_query :foo?, :bar?`<br>
 Defines query methods like `foo?`, which is true iff `foo_id` is truthy. Goes well with Active Record.
 
+`attr_query :foo?, :bar?`<br>
+Defines query methods like `foo?`, which is true iff `foo` is truthy.
+
 Findability has been a central consideration.
 Hence the long name `attr_initialize`, so you see it when scanning for the initializer;
 and the enforced questionmarks with `attr_id_query :foo?`, so you can search for that method.
@@ -34,6 +37,7 @@ class MyClass
   attr_initialize :foo, :bar
   attr_private :foo
   attr_id_query :item?
+  attr_query :oof?
 
   def oof
     foo.reverse
@@ -48,6 +52,7 @@ x = MyClass.new("Foo!", "Bar!")
 x.oof    # => "!ooF"
 x.foo    # NoMethodError: private method `foo' called.
 x.item?  # => true
+x.oof?   # => true
 
 class MyMethodObject
   method_object :fooable?,

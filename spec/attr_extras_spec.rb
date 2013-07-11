@@ -13,7 +13,8 @@ end
 
 class QueryExample
   attr_id_query :baz?, :boink?
-  attr_accessor :baz_id
+  attr_query :flurp?
+  attr_accessor :baz_id, :flurp
 end
 
 class MethodObjectExample
@@ -86,5 +87,18 @@ describe Object, ".attr_id_query" do
 
   it "requires a trailing questionmark" do
     lambda { Object.attr_id_query(:foo) }.must_raise RuntimeError
+  end
+end
+
+describe Object, ".attr_query" do
+  it "creates attribute query methods" do
+    example = QueryExample.new
+    refute example.flurp?
+    example.flurp = "!"
+    assert example.flurp?
+  end
+
+  it "requires a trailing questionmark" do
+    lambda { Object.attr_query(:foo) }.must_raise RuntimeError
   end
 end
