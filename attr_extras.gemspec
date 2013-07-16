@@ -12,6 +12,7 @@ Gem::Specification.new do |gem|
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.name          = "attr_extras"
   gem.require_paths = ["lib"]
+  gem.license       = "MIT"
   gem.version       = AttrExtras::VERSION
 
   # For Travis CI.
