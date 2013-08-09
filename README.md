@@ -77,37 +77,8 @@ x.bar  # => "Bar!"
 
 ## Why not use `Struct`?
 
-`Struct` has some behavior you may not expect. Say you have this:
+See: ["Struct inheritance is overused"](http://thepugautomatic.com/2013/08/struct-inheritance-is-overused/)
 
-``` ruby
-class Greeter < Struct.new(:user)
-  def greet
-    puts "Hello #{user.name}!"
-  end
-end
-```
-
-The `Struct` won't actually require you to provide any arguments. You could do this and it won't complain until `nil.name` explodes on you:
-
-``` ruby
-Greeter.new.greet
-```
-
-Also, the Greeter will have a public `user` accessor even if you only need it internally, so your public interface is unnecessarily large.
-
-Further, inheriting from `Struct` arguably suggests that you have a mere data structure, not a full-blown class with rich behavior.
-
-With `attr_extras`, you have none of these issues:
-
-``` ruby
-class Greeter
-  pattr_initialize :user
-
-  def greet
-    puts "Hello #{user.name}!"
-  end
-end
-```
 
 ## Why not use `private; attr_reader :foo`?
 
