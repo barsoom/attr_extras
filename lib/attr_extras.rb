@@ -21,13 +21,13 @@ module AttrExtras
     end
 
     def attr_private(*names)
-      attr_reader *names
-      private *names
+      attr_reader(*names)
+      private(*names)
     end
 
     def pattr_initialize(*names)
-      attr_initialize *names
-      attr_private *names.flatten
+      attr_initialize(*names)
+      attr_private(*names.flatten)
     end
 
     def method_object(method_name, *names)
@@ -35,7 +35,7 @@ module AttrExtras
         new(*values).send(method_name)
       end
 
-      pattr_initialize *names
+      pattr_initialize(*names)
     end
 
     def attr_query(*names)
