@@ -44,14 +44,12 @@ module AttrExtras
 
     def pattr_initialize(*names)
       attr_initialize(*names)
-
-      flat_names = names.flatten.map { |x| x.to_s.sub(/!\z/, "") }
-      attr_private(*flat_names)
+      attr_private *attr_flat_names(names)
     end
 
     def attr_value(*names)
       attr_initialize(*names)
-      attr_reader(*names.flatten)
+      attr_reader *attr_flat_names(names)
     end
 
     def method_object(method_name, *names)
@@ -71,6 +69,10 @@ module AttrExtras
     end
 
     private
+
+    def attr_flat_names(names)
+      names.flatten.map { |x| x.to_s.sub(/!\z/, "") }
+    end
 
     def attr_query_with_suffix(*names, suffix)
       names.each do |name|
