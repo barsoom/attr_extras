@@ -47,7 +47,7 @@ Defines both initializer and private readers.
 Defines both initializer and public readers.
 
 `method_object :fooable?, :foo`<br>
-Defines a `.fooable?` class method that delegates to an instance method.
+Defines a `.fooable?` class method that takes one argument (`:foo`) and delegates to an instance method that can access `foo` as a private reader.
 
 `attr_id_query :foo?, :bar?`<br>
 Defines query methods like `foo?`, which is true iff `foo_id` is truthy. Goes well with Active Record.
