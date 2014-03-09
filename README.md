@@ -64,8 +64,7 @@ and the enforced questionmarks with `attr_id_query :foo?`, so you can search for
 
 ``` ruby
 class MyClass
-  attr_initialize :foo, :bar
-  attr_private :foo
+  pattr_initialize :foo, :bar
   attr_id_query :item?
   attr_query :oof?
 
@@ -84,6 +83,7 @@ x.foo    # NoMethodError: private method `foo' called.
 x.item?  # => true
 x.oof?   # => true
 
+
 class MyMethodObject
   method_object :fooable?,
     :foo
@@ -96,6 +96,7 @@ end
 MyMethodObject.fooable?(:some_value)     # => true
 MyMethodObject.fooable?(:another_value)  # => false
 
+
 class MyHashyObject
   attr_initialize :foo, [:bar, :baz]
   attr_reader :bar
@@ -104,14 +105,15 @@ end
 x = MyHashyObject.new("Foo!", bar: "Bar!", baz: "Baz!")
 x.bar  # => "Bar!"
 
+
 class MyValueObject
   attr_value :foo, :bar
 end
 
 x = MyValueObject.new(5, 10)
-x.foo # => 5
-x.bar # => 10
-x.foo = 20 # NoMethodError: undefined method `foo=''` 
+x.foo  # => 5
+x.bar  # => 10
+x.foo = 20  # NoMethodError: undefined method `foo=''`
 ```
 
 ## Why not use `Struct`?
