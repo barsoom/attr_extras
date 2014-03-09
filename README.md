@@ -2,7 +2,34 @@
 
 # attr\_extras
 
-Takes some boilerplate out of Ruby and complements `attr_accessor`, `attr_reader` and `attr_writer` nicely by providing:
+Takes some boilerplate out of Ruby, lowering the barrier to extracting small focused classes, without the downsides of using `Struct`.
+
+Instead of
+
+```
+class InvoiceBuilder
+  def initialize(invoice, employee)
+    @invoice, @employee = invoice, employee
+  end
+
+  private
+
+  attr_reader :invoice, :employee
+end
+```
+
+you can just do
+
+```
+class InvoiceBuilder
+  pattr_initialize :invoice, :employee
+end
+```
+
+This nicely complements Ruby's built-in `attr_accessor`, `attr_reader` and `attr_writer`.
+
+
+## Usage
 
 `attr_initialize :foo, :bar`<br>
 Defines an initializer that takes two arguments and assigns `@foo` and `@bar`.
