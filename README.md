@@ -44,10 +44,10 @@ Defines private readers for `@foo` and `@bar`.
 Defines both initializer and private readers.
 
 `attr_value :foo, :bar`<br>
-Defines both initializer and public readers.
+Defines both initializer and public readers, for immutable value objects.
 
 `method_object :fooable?, :foo`<br>
-Defines a `.fooable?` class method that takes one argument (`:foo`) and delegates to an instance method that can access `foo` as a private reader.
+Defines a `.fooable?` class method that takes one argument (`:foo`) and delegates to an instance method that can access `foo` as a private reader, useful for [method objects](http://refactoring.com/catalog/replaceMethodWithMethodObject.html).
 
 `attr_id_query :foo?, :bar?`<br>
 Defines query methods like `foo?`, which is true iff `foo_id` is truthy. Goes well with Active Record.
