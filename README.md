@@ -127,7 +127,7 @@ Instead of `attr_private :foo`, you could do `private; attr_reader :foo`.
 
 Other than being more to type, declaring `attr_reader` after `private` will actually give you a warning (deserved or not) if you run Ruby with warnings turned on.
 
-If you don't want the dependency on `attr_extras`, you can get rid of the warnings with `attr_reader :foo; private :foo` or just define a regular private method.
+If you don't want the dependency on `attr_extras`, you can get rid of the warnings with `attr_reader :foo; private :foo`. Or just define a regular private method.
 
 
 ## Installation
@@ -143,6 +143,7 @@ And then execute:
 Or install it yourself as:
 
     gem install attr_extras
+
 
 ## License
 
