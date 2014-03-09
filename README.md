@@ -2,7 +2,7 @@
 
 # attr\_extras
 
-Takes some boilerplate out of Ruby, lowering the barrier to extracting small focused classes, without the downsides of using `Struct`.
+Takes some boilerplate out of Ruby, lowering the barrier to extracting small focused classes, without [the downsides of using `Struct`](http://thepugautomatic.com/2013/08/struct-inheritance-is-overused/).
 
 Instead of
 
