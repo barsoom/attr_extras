@@ -38,6 +38,11 @@ module AttrExtras
       attr_private(*names.flatten)
     end
 
+    def attr_value(*names)
+      attr_initialize(*names)
+      attr_reader(*names.flatten)
+    end
+
     def method_object(method_name, *names)
       singleton_class.send(:define_method, method_name) do |*values|
         new(*values).send(method_name)

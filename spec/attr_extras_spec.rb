@@ -98,6 +98,27 @@ describe Object, ".pattr_initialize" do
   end
 end
 
+describe Object, ".attr_value" do
+  it "creates both initializer and public readers" do
+    klass = Class.new do
+      attr_value :foo, :bar
+    end
+
+    example = klass.new("Foo", "Bar")
+    example.foo.must_equal "Foo"
+    lambda { example.foo = "new value" }.must_raise NoMethodError
+  end
+
+  it "works with hash ivars" do
+    klass = Class.new do
+      attr_value :foo, [:bar, :baz]
+    end
+
+    example = klass.new("Foo", :bar => "Bar")
+    example.bar.must_equal "Bar"
+  end
+end
+
 describe Object, ".attr_id_query" do
   it "creates id query methods" do
     klass = Class.new do

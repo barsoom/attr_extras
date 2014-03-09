@@ -43,6 +43,9 @@ Defines private readers for `@foo` and `@bar`.
 `pattr_initialize :foo, :bar`<br>
 Defines both initializer and private readers.
 
+`attr_value :foo, :bar`<br>
+Defines both initializer and public readers.
+
 `method_object :fooable?, :foo`<br>
 Defines a `.fooable?` class method that delegates to an instance method.
 
@@ -100,6 +103,15 @@ end
 
 x = MyHashyObject.new("Foo!", bar: "Bar!", baz: "Baz!")
 x.bar  # => "Bar!"
+
+class MyValueObject
+  attr_value :foo, :bar
+end
+
+x = MyValueObject.new(5, 10)
+x.foo # => 5
+x.bar # => 10
+x.foo = 20 # NoMethodError: undefined method `foo=''` 
 ```
 
 ## Why not use `Struct`?
