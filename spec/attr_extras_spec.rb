@@ -47,6 +47,18 @@ describe Object, ".attr_initialize" do
     example.instance_variable_get("@bar").must_equal "Bar"
     example.instance_variable_get("@baz").must_equal "Baz"
   end
+
+  it "treats hash values as optional" do
+    klass = Class.new do
+      pattr_initialize :foo, [:bar, :baz]
+    end
+
+    example = klass.new("Foo", :bar => "Bar")
+    example.instance_variable_get("@baz").must_equal nil
+
+    example = klass.new("Foo")
+    example.instance_variable_get("@bar").must_equal nil
+  end
 end
 
 describe Object, ".attr_private" do

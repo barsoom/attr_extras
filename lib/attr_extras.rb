@@ -3,13 +3,21 @@ require "attr_extras/version"
 module AttrExtras
   module ClassMethods
     def attr_initialize(*names)
+      min_arity = names.count { |n| not n.is_a?(Array) }
+      max_arity = names.length
+
       define_method(:initialize) do |*values|
-        unless values.length == names.length
-          raise ArgumentError, "wrong number of arguments (#{values.length} for #{names.length})"
+        provided_arity = values.length
+
+        unless (min_arity..max_arity).include?(provided_arity)
+          arity_range = [min_arity, max_arity].uniq.join("..")
+          raise ArgumentError, "wrong number of arguments (#{provided_arity} for #{arity_range})"
         end
 
         names.zip(values).each do |name_or_names, value|
           if name_or_names.is_a?(Array)
+            value ||= {}
+
             name_or_names.each do |key|
               instance_variable_set("@#{key}", value[key])
             end
