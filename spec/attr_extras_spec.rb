@@ -39,7 +39,7 @@ describe Object, ".attr_initialize" do
 
   it "can set ivars from a hash" do
     klass = Class.new do
-      pattr_initialize :foo, [:bar, :baz]
+      attr_initialize :foo, [:bar, :baz]
     end
 
     example = klass.new("Foo", :bar => "Bar", :baz => "Baz")
@@ -50,7 +50,7 @@ describe Object, ".attr_initialize" do
 
   it "treats hash values as optional" do
     klass = Class.new do
-      pattr_initialize :foo, [:bar, :baz]
+      attr_initialize :foo, [:bar, :baz]
     end
 
     example = klass.new("Foo", :bar => "Bar")
@@ -58,6 +58,17 @@ describe Object, ".attr_initialize" do
 
     example = klass.new("Foo")
     example.instance_variable_get("@bar").must_equal nil
+  end
+
+  it "can require hash values" do
+    klass = Class.new do
+      attr_initialize [:optional, :required!]
+    end
+
+    example = klass.new(:required => "X")
+    example.instance_variable_get("@required").must_equal "X"
+
+    lambda { klass.new(:optional => "X") }.must_raise KeyError
   end
 end
 
@@ -90,11 +101,12 @@ describe Object, ".pattr_initialize" do
 
   it "works with hash ivars" do
     klass = Class.new do
-      pattr_initialize :foo, [:bar, :baz]
+      pattr_initialize :foo, [:bar, :baz!]
     end
 
-    example = klass.new("Foo", :bar => "Bar")
+    example = klass.new("Foo", :bar => "Bar", :baz => "Baz")
     example.send(:bar).must_equal "Bar"
+    example.send(:baz).must_equal "Baz"
   end
 end
 

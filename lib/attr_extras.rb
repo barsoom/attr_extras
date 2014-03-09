@@ -18,11 +18,20 @@ module AttrExtras
           if name_or_names.is_a?(Array)
             value ||= {}
 
-            name_or_names.each do |key|
-              instance_variable_set("@#{key}", value[key])
+            name_or_names.each do |name|
+              if name.to_s.end_with?("!")
+                actual_name = name.to_s.chop.to_sym
+                actual_value = value.fetch(actual_name)
+              else
+                actual_name = name
+                actual_value = value[name]
+              end
+
+              instance_variable_set("@#{actual_name}", actual_value)
             end
           else
-            instance_variable_set("@#{name_or_names}", value)
+            name = name_or_names
+            instance_variable_set("@#{name}", value)
           end
         end
       end
@@ -35,7 +44,9 @@ module AttrExtras
 
     def pattr_initialize(*names)
       attr_initialize(*names)
-      attr_private(*names.flatten)
+
+      flat_names = names.flatten.map { |x| x.to_s.sub(/!\z/, "") }
+      attr_private(*flat_names)
     end
 
     def attr_value(*names)

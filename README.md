@@ -34,8 +34,8 @@ This nicely complements Ruby's built-in `attr_accessor`, `attr_reader` and `attr
 `attr_initialize :foo, :bar`<br>
 Defines an initializer that takes two arguments and assigns `@foo` and `@bar`.
 
-`attr_initialize :foo, [:bar, :baz]`<br>
-Defines an initializer that takes one regular argument, assigning `@foo`, and one hash argument, assigning `@bar` and `@baz`.
+`attr_initialize :foo, [:bar, :baz!]`<br>
+Defines an initializer that takes one regular argument, assigning `@foo`, and one hash argument, assigning `@bar` (optional) and `@baz` (required).
 
 `attr_private :foo, :bar`<br>
 Defines private readers for `@foo` and `@bar`.
