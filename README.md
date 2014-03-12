@@ -34,20 +34,23 @@ This nicely complements Ruby's built-in `attr_accessor`, `attr_reader` and `attr
 `attr_initialize :foo, :bar`<br>
 Defines an initializer that takes two arguments and assigns `@foo` and `@bar`.
 
-`attr_initialize :foo, [:bar, :baz!]`<br>
+`attr_initialize :foo, [:bar, :baz!]`,
 Defines an initializer that takes one regular argument, assigning `@foo`, and one hash argument, assigning `@bar` (optional) and `@baz` (required).
+
+`attr_initialize [:bar, :baz!]`,
+Defines an initializer that takes one hash argument, assigning `@bar` (optional) and `@baz` (required).
 
 `attr_private :foo, :bar`<br>
 Defines private readers for `@foo` and `@bar`.
 
 `pattr_initialize :foo, :bar`<br>
-Defines both initializer and private readers.
+Defines both initializer and private readers. The `[]` notation for hash arguments is also supported.
 
 `attr_value :foo, :bar`<br>
 Defines both initializer and public readers, for immutable value objects.
 
 `method_object :fooable?, :foo`<br>
-Defines a `.fooable?` class method that takes one argument (`:foo`) and delegates to an instance method that can access `foo` as a private reader, useful for [method objects](http://refactoring.com/catalog/replaceMethodWithMethodObject.html).
+Defines a `.fooable?` class method that takes one argument (`:foo`) and delegates to an instance method that can access `foo` as a private reader, useful for [method objects](http://refactoring.com/catalog/replaceMethodWithMethodObject.html). The `[]` notation for hash arguments is also supported.
 
 `attr_id_query :foo?, :bar?`<br>
 Defines query methods like `foo?`, which is true iff `foo_id` is truthy. Goes well with Active Record.
