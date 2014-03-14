@@ -47,6 +47,7 @@ Defines private readers for `@foo` and `@bar`.
 Defines both initializer and private readers. The `[]` notation for hash arguments is also supported.
 
 `attr_value :foo, :bar`<br>
+NOTE: experimental. Likely to be renamed, modified or removed soon.<br>
 Defines both initializer and public readers, for immutable value objects.
 
 `method_object :fooable?, :foo`<br>
