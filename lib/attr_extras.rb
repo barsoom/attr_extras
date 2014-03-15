@@ -22,6 +22,14 @@ module AttrExtras
 
         names.all? { |attr| self.public_send(attr) == other.public_send(attr) }
       end
+
+      # Both #eql? and #hash are required for hash identity.
+
+      alias_method :eql?, :==
+
+      define_method(:hash) do
+        [self.class.name, *names.map { |attr| public_send(attr) }].hash
+      end
     end
 
     def pattr_initialize(*names)

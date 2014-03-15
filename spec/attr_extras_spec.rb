@@ -213,6 +213,30 @@ describe Object, ".attr_value" do
 
     assert instance != "a string"
   end
+
+  it "hashes objects the same if they have the same attributes" do
+    klass = Class.new do
+      attr_initialize :foo
+      attr_value :foo
+    end
+
+    example1 = klass.new("Foo")
+    example2 = klass.new("Foo")
+    example3 = klass.new("Bar")
+
+    example1.hash.must_equal example2.hash
+    example1.hash.wont_equal example3.hash
+
+    assert example1.eql?(example2), "Examples should be 'eql?'"
+    refute example2.eql?(example3), "Examples should not be 'eql?'"
+
+    Set[example1, example2, example3].length.must_equal 2
+
+    hash = {}
+    hash[example1] = :awyeah
+    hash[example3] = :wat
+    hash[example2].must_equal :awyeah
+  end
 end
 
 describe Object, ".attr_id_query" do
