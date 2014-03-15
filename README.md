@@ -118,12 +118,12 @@ You don't have to specify readers if you don't want them: `method_object :fooabl
 
 ### `attr_id_query :foo?, :bar?`<br>
 
-Defines query methods like `foo?`, which is true iff `foo_id` is truthy. Goes well with Active Record.
+Defines query methods like `foo?`, which is true if (and only if) `foo_id` is truthy. Goes well with Active Record.
 
 
 ### `attr_query :foo?, :bar?`<br>
 
-Defines query methods like `foo?`, which is true iff `foo` is truthy.
+Defines query methods like `foo?`, which is true if (and only if) `foo` is truthy.
 
 
 ## Philosophy
