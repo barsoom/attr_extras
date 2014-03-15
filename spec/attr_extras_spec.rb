@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 require "minitest/autorun"
 require "minitest/pride"
 require "attr_extras"
@@ -139,6 +141,36 @@ describe Object, ".attr_value" do
     example = klass.new("Foo", :bar => "Bar", :baz => "Baz")
     example.bar.must_equal "Bar"
     example.baz.must_equal "Baz"
+  end
+
+  it "defines equality based on the attributes" do
+    klass = Class.new do
+      attr_value :foo, :bar
+    end
+
+    example1 = klass.new("Foo", "Bar")
+    example2 = klass.new("Foo", "Bar")
+    example3 = klass.new("Arroz", "Feijão")
+
+    assert example1 == example2, "Examples should be equal"
+    refute example1 != example2, "Examples should be equal"
+
+    assert example1 != example3, "Examples should not be equal"
+  end
+
+  it "defines equality based on the actual type" do
+    klass1 = Class.new do
+      attr_value :foo
+    end
+    klass2 = Class.new do
+      attr_value :foo
+    end
+
+    example1 = klass1.new("Foo")
+    example2 = klass2.new("Foo")
+
+    assert example1 != example2, "Examples should not be equal"
+    refute example1 == example2, "Examples should not be equal"
   end
 end
 

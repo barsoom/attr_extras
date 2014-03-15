@@ -49,7 +49,15 @@ module AttrExtras
 
     def attr_value(*names)
       attr_initialize(*names)
-      attr_reader *attr_flat_names(names)
+
+      flat_names = attr_flat_names(names)
+      attr_reader *flat_names
+
+      define_method(:==) do |other|
+        return false unless other.is_a?(self.class)
+
+        flat_names.all? { |attr| self.public_send(attr) == other.public_send(attr) }
+      end
     end
 
     def method_object(method_name, *names)
