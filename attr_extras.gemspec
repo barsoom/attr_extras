@@ -2,7 +2,7 @@
 require File.expand_path('../lib/attr_extras/version', __FILE__)
 
 Gem::Specification.new do |gem|
-  gem.authors       = ["Henrik Nyh", "Joakim Kolsjö"]
+  gem.authors       = ["Henrik Nyh", "Joakim Kolsjö", "Victor Arias"]
   gem.email         = ["henrik@nyh.se"]
   gem.summary       = %q{Takes some boilerplate out of Ruby with methods like attr_initialize.}
   gem.homepage      = "https://github.com/barsoom/attr_extras"
