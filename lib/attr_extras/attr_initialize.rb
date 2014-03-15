@@ -3,19 +3,17 @@ class AttrInitialize
     @klass, @names = klass, names
   end
 
+  attr_reader :klass, :names
+  private :klass, :names
+
   def apply
+    # The define_method block can't call our methods, so we need to make
+    # things available via local variables.
     names = @names
+    validate_arity = method(:validate_arity)
 
-    min_arity = names.count { |n| not n.is_a?(Array) }
-    max_arity = names.length
-
-    @klass.send(:define_method, :initialize) do |*values|
-      provided_arity = values.length
-
-      unless (min_arity..max_arity).include?(provided_arity)
-        arity_range = [min_arity, max_arity].uniq.join("..")
-        raise ArgumentError, "wrong number of arguments (#{provided_arity} for #{arity_range})"
-      end
+    klass.send(:define_method, :initialize) do |*values|
+      validate_arity.call(values.length)
 
       names.zip(values).each do |name_or_names, value|
         if name_or_names.is_a?(Array)
@@ -37,6 +35,18 @@ class AttrInitialize
           instance_variable_set("@#{name}", value)
         end
       end
+    end
+  end
+
+  private
+
+  def validate_arity(provided_arity)
+    arity_without_hashes = names.count { |name| not name.is_a?(Array) }
+    arity_with_hashes = names.length
+
+    unless (arity_without_hashes..arity_with_hashes).include?(provided_arity)
+      arity_range = [arity_without_hashes, arity_with_hashes].uniq.join("..")
+      raise ArgumentError, "wrong number of arguments (#{provided_arity} for #{arity_range})"
     end
   end
 end
