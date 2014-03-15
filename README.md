@@ -79,7 +79,7 @@ The `attr_initialize` notation notation for hash arguments is also supported: `v
 
 ### `method_object :fooable?, :foo`<br>
 
-Defines a `.fooable?` class method that takes one argument (`foo`) and delegates to an instance method that can access `foo` as a private reader.
+Defines a `.fooable?` class method that takes arguments (`foo`) and delegates to an instance method that can access those arguments as private readers.
 
 This is useful for [method objects](http://refactoring.com/catalog/replaceMethodWithMethodObject.html):
 
@@ -97,6 +97,17 @@ class PriceCalculator
   def factor
     1 + rand
   end
+end
+```
+
+Shortcut for
+
+``` ruby
+attr_initialize :foo
+attr_private :foo
+
+def self.fooable?(foo)
+  new(foo).fooable?
 end
 ```
 
