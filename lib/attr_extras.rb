@@ -14,16 +14,6 @@ module AttrExtras
       private(*names)
     end
 
-    def pattr_initialize(*names)
-      attr_initialize(*names)
-      attr_private *Utils.flat_names(names)
-    end
-
-    def vattr_initialize(*names)
-      attr_initialize(*names)
-      attr_value *Utils.flat_names(names)
-    end
-
     def attr_value(*names)
       attr_reader *names
 
@@ -32,6 +22,16 @@ module AttrExtras
 
         names.all? { |attr| self.public_send(attr) == other.public_send(attr) }
       end
+    end
+
+    def pattr_initialize(*names)
+      attr_initialize(*names)
+      attr_private *Utils.flat_names(names)
+    end
+
+    def vattr_initialize(*names)
+      attr_initialize(*names)
+      attr_value *Utils.flat_names(names)
     end
 
     def method_object(method_name, *names)
