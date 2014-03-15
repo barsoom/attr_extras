@@ -52,7 +52,7 @@ Defines private readers for `@foo` and `@bar`.
 
 ### `attr_value :foo, :bar`
 
-Defines public readers. Does not define writers, as value objects are typically immutable.
+Defines public readers. Does not define writers, as [value objects](http://en.wikipedia.org/wiki/Value_object) are typically immutable.
 
 Defines object equality: two value objects of the same class with the same values are equal.
 
