@@ -191,6 +191,28 @@ describe Object, ".attr_value" do
     assert example1 != example2, "Examples should not be equal"
     refute example1 == example2, "Examples should not be equal"
   end
+
+  it "considers an instance equal to itself" do
+    klass = Class.new do
+      attr_initialize :foo
+      attr_value :foo
+    end
+
+    instance = klass.new("Foo")
+
+    assert instance == instance, "Instance should be equal to itself"
+  end
+
+  it "can compare value objects to other kinds of objects" do
+    klass = Class.new do
+      attr_initialize :foo
+      attr_value :foo
+    end
+
+    instance = klass.new("Foo")
+
+    assert instance != "a string"
+  end
 end
 
 describe Object, ".attr_id_query" do
