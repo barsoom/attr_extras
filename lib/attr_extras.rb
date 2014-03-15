@@ -15,7 +15,7 @@ module AttrExtras
     end
 
     def attr_value(*names)
-      attr_reader *names
+      attr_reader(*names)
 
       define_method(:==) do |other|
         return false unless other.is_a?(self.class)
