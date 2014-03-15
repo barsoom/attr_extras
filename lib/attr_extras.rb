@@ -4,7 +4,7 @@ require "attr_extras/attr_query"
 require "attr_extras/utils"
 
 module AttrExtras
-  module ClassMethods
+  module ModuleMethods
     def attr_initialize(*names)
       AttrInitialize.new(self, names).apply
     end
@@ -52,6 +52,6 @@ module AttrExtras
   end
 end
 
-class Class
-  include AttrExtras::ClassMethods
+class Module
+  include AttrExtras::ModuleMethods
 end
