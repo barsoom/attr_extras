@@ -79,7 +79,26 @@ The `attr_initialize` notation notation for hash arguments is also supported: `v
 
 ### `method_object :fooable?, :foo`<br>
 
-Defines a `.fooable?` class method that takes one argument (`:foo`) and delegates to an instance method that can access `foo` as a private reader, useful for [method objects](http://refactoring.com/catalog/replaceMethodWithMethodObject.html).
+Defines a `.fooable?` class method that takes one argument (`foo`) and delegates to an instance method that can access `foo` as a private reader.
+
+This is useful for [method objects](http://refactoring.com/catalog/replaceMethodWithMethodObject.html):
+
+``` ruby
+class PriceCalculator
+  method_object :calculate,
+    :order
+
+  def calculate
+    order.price * factor
+  end
+
+  private
+
+  def factor
+    1 + rand
+  end
+end
+```
 
 The `attr_initialize` notation notation for hash arguments is also supported: `method_object :fooable?, :foo, [:bar, :baz!]`
 
@@ -87,10 +106,12 @@ You don't have to specify readers if you don't want them: `method_object :fooabl
 
 
 ### `attr_id_query :foo?, :bar?`<br>
+
 Defines query methods like `foo?`, which is true iff `foo_id` is truthy. Goes well with Active Record.
 
 
 ### `attr_query :foo?, :bar?`<br>
+
 Defines query methods like `foo?`, which is true iff `foo` is truthy.
 
 
@@ -125,19 +146,6 @@ x.item?  # => true
 x.oof?   # => true
 
 
-class MyMethodObject
-  method_object :fooable?,
-    :foo
-
-  def fooable?
-    foo == :some_value
-  end
-end
-
-MyMethodObject.fooable?(:some_value)     # => true
-MyMethodObject.fooable?(:another_value)  # => false
-
-
 class MyHashyObject
   attr_initialize :foo, [:bar, :baz]
   attr_reader :bar
@@ -155,6 +163,8 @@ x = MyValueObject.new(5, 10)
 x.foo  # => 5
 x.bar  # => 10
 x.foo = 20  # NoMethodError: undefined method `foo=''`
+
+MyValueObject.new(1) == MyValueObject.new(1)  # true
 ```
 
 ## Why not use `Struct`?
