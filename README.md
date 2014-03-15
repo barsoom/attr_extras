@@ -93,14 +93,26 @@ class PriceCalculator
     :order
 
   def calculate
-    order.price * factor
+    total * factor
   end
 
   private
 
+  def total
+    order.items.map(&:price).inject(:+)
+  end
+
   def factor
     1 + rand
   end
+end
+
+class Order
+  def price
+    PriceCalculator.calculate(self)
+  end
+
+  # …
 end
 ```
 
