@@ -66,7 +66,7 @@ attr_initialize :foo, :bar
 attr_private :foo, :bar
 ```
 
-The `attr_initialize` notation notation for hash arguments is also supported: `pattr_initialize :foo, [:bar, :baz!]`
+The `attr_initialize` notation for hash arguments is also supported: `pattr_initialize :foo, [:bar, :baz!]`
 
 
 ### `vattr_initialize :foo, :bar`
@@ -127,7 +127,7 @@ def self.fooable?(foo)
 end
 ```
 
-The `attr_initialize` notation notation for hash arguments is also supported: `method_object :fooable?, :foo, [:bar, :baz!]`
+The `attr_initialize` notation for hash arguments is also supported: `method_object :fooable?, :foo, [:bar, :baz!]`
 
 You don't have to specify readers if you don't want them: `method_object :fooable?` is also valid.
 
