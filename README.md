@@ -78,7 +78,7 @@ attr_initialize :foo, :bar
 attr_value :foo, :bar
 ```
 
-The `attr_initialize` notation notation for hash arguments is also supported: `vattr_initialize :foo, [:bar, :baz!]`
+The `attr_initialize` notation for hash arguments is also supported: `vattr_initialize :foo, [:bar, :baz!]`
 
 
 ### `method_object :fooable?, :foo`<br>
@@ -180,7 +180,7 @@ Or install it yourself as:
 
 ## License
 
-Copyright (c) 2012 [Barsoom AB](http://barsoom.se)
+Copyright (c) 2012-2014 [Barsoom AB](http://barsoom.se)
 
 MIT License
 
