@@ -1,4 +1,4 @@
-class AttrInitialize
+class AttrExtras::AttrInitialize
   def initialize(klass, names)
     @klass, @names = klass, names
   end
