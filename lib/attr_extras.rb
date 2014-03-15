@@ -47,16 +47,18 @@ module AttrExtras
       attr_private *attr_flat_names(names)
     end
 
-    def attr_value(*names)
+    def vattr_initialize(*names)
       attr_initialize(*names)
+      attr_value *attr_flat_names(names)
+    end
 
-      flat_names = attr_flat_names(names)
-      attr_reader *flat_names
+    def attr_value(*names)
+      attr_reader *names
 
       define_method(:==) do |other|
         return false unless other.is_a?(self.class)
 
-        flat_names.all? { |attr| self.public_send(attr) == other.public_send(attr) }
+        names.all? { |attr| self.public_send(attr) == other.public_send(attr) }
       end
     end
 

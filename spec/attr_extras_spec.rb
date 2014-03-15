@@ -117,34 +117,50 @@ describe Object, ".pattr_initialize" do
     end
 
     example = klass.new("Foo", :bar => "Bar", :baz => "Baz")
-    example.send(:bar).must_equal "Bar"
     example.send(:baz).must_equal "Baz"
   end
 end
 
-describe Object, ".attr_value" do
-  it "creates both initializer and public readers" do
+describe Object, ".vattr_initialize" do
+  it "creates initializer, value readers and value object identity" do
     klass = Class.new do
-      attr_value :foo, :bar
+      vattr_initialize :foo, :bar
     end
 
-    example = klass.new("Foo", "Bar")
-    example.foo.must_equal "Foo"
-    lambda { example.foo = "new value" }.must_raise NoMethodError
+    example1 = klass.new("Foo", "Bar")
+    example2 = klass.new("Foo", "Bar")
+
+    example1.foo.must_equal "Foo"
+    example1.must_equal example2
   end
 
   it "works with hash ivars" do
     klass = Class.new do
-      attr_value :foo, [:bar, :baz!]
+      vattr_initialize :foo, [:bar, :baz!]
     end
 
-    example = klass.new("Foo", :bar => "Bar", :baz => "Baz")
-    example.bar.must_equal "Bar"
-    example.baz.must_equal "Baz"
+    example1 = klass.new("Foo", :bar => "Bar", :baz => "Baz")
+    example2 = klass.new("Foo", :bar => "Bar", :baz => "Baz")
+    example1.baz.must_equal "Baz"
+    example1.must_equal example2
+  end
+end
+
+describe Object, ".attr_value" do
+  it "creates public readers" do
+    klass = Class.new do
+      attr_value :foo, :bar
+    end
+
+    example = klass.new
+    example.instance_variable_set("@foo", "Foo")
+    example.foo.must_equal "Foo"
+    lambda { example.foo = "new value" }.must_raise NoMethodError
   end
 
   it "defines equality based on the attributes" do
     klass = Class.new do
+      attr_initialize :foo, :bar
       attr_value :foo, :bar
     end
 
@@ -155,14 +171,17 @@ describe Object, ".attr_value" do
     assert example1 == example2, "Examples should be equal"
     refute example1 != example2, "Examples should be equal"
 
+    refute example1 == example3, "Examples should not be equal"
     assert example1 != example3, "Examples should not be equal"
   end
 
   it "defines equality based on the actual type" do
     klass1 = Class.new do
+      attr_initialize :foo
       attr_value :foo
     end
     klass2 = Class.new do
+      attr_initialize :foo
       attr_value :foo
     end
 
