@@ -28,6 +28,10 @@ end
 
 This nicely complements Ruby's built-in `attr_accessor`, `attr_reader` and `attr_writer`.
 
+Supports positional arguments as well as optional and required hash arguments.
+
+Also provides conveniences for creating value objects, method objects and query methods.
+
 
 ## Usage
 
