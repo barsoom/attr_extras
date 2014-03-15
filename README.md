@@ -48,7 +48,7 @@ Defines both initializer and private readers. The `[]` notation for hash argumen
 
 `attr_value :foo, :bar`<br>
 NOTE: experimental. Likely to be renamed, modified or removed soon.<br>
-Defines both initializer and public readers, for immutable value objects.
+Defines both initializer and public readers. Does not define writers as value objects are typically immutable. Defines object equality: two value objects of the same class with the same values are equal.
 
 `method_object :fooable?, :foo`<br>
 Defines a `.fooable?` class method that takes one argument (`:foo`) and delegates to an instance method that can access `foo` as a private reader, useful for [method objects](http://refactoring.com/catalog/replaceMethodWithMethodObject.html). The `[]` notation for hash arguments is also supported.
