@@ -28,7 +28,7 @@ module AttrExtras
       alias_method :eql?, :==
 
       define_method(:hash) do
-        [self.class.name, *names.map { |attr| public_send(attr) }].hash
+        [self.class, *names.map { |attr| public_send(attr) }].hash
       end
     end
 
