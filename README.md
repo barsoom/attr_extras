@@ -31,42 +31,72 @@ This nicely complements Ruby's built-in `attr_accessor`, `attr_reader` and `attr
 
 ## Usage
 
-`attr_initialize :foo, :bar`<br>
+
+### `attr_initialize :foo, :bar`
+
 Defines an initializer that takes two arguments and assigns `@foo` and `@bar`.
 
-`attr_initialize :foo, [:bar, :baz!]`,
-Defines an initializer that takes one regular argument, assigning `@foo`, and one hash argument, assigning `@bar` (optional) and `@baz` (required).
+`attr_initialize :foo, [:bar, :baz!]` defines an initializer that takes one regular argument, assigning `@foo`, and one hash argument, assigning `@bar` (optional) and `@baz` (required).
 
-`attr_initialize [:bar, :baz!]`,
-Defines an initializer that takes one hash argument, assigning `@bar` (optional) and `@baz` (required).
+`attr_initialize [:bar, :baz!]` defines an initializer that takes one hash argument, assigning `@bar` (optional) and `@baz` (required).
 
-`attr_private :foo, :bar`<br>
+
+### `attr_private :foo, :bar`
+
 Defines private readers for `@foo` and `@bar`.
 
-`attr_value :foo, :bar`<br>
-Defines public readers. Does not define writers, as value objects are typically immutable. Defines object equality: two value objects of the same class with the same values are equal.
 
-`pattr_initialize :foo, :bar`<br>
-Defines both initializer and private readers. The `[]` notation for hash arguments is also supported.
+### `attr_value :foo, :bar`
 
-`vattr_initialize :foo, :bar`<br>
-Defines initializer, public readers and value object identity (like `attr_value`).
+Defines public readers. Does not define writers, as value objects are typically immutable.
 
-`attr_value :foo, :bar`<br>
-Defines public readers. Does not define writers, as value objects are typically immutable. Defines object equality: two value objects of the same class with the same values are equal.
+Defines object equality: two value objects of the same class with the same values are equal.
 
-`method_object :fooable?, :foo`<br>
-Defines a `.fooable?` class method that takes one argument (`:foo`) and delegates to an instance method that can access `foo` as a private reader, useful for [method objects](http://refactoring.com/catalog/replaceMethodWithMethodObject.html). The `[]` notation for hash arguments is also supported.
+
+### `pattr_initialize :foo, :bar`
+
+Defines both initializer and private readers: shortcut for
+
+```
+attr_initialize :foo, :bar
+attr_private :foo, :bar
+```
+
+The `attr_initialize` notation notation for hash arguments is also supported: `pattr_initialize :foo, [:bar, :baz!]`
+
+
+### `vattr_initialize :foo, :bar`
+
+Defines initializer, public readers and value object identity: shortcut for
+
+```
+attr_initialize :foo, :bar
+attr_value :foo, :bar
+```
+
+The `attr_initialize` notation notation for hash arguments is also supported: `vattr_initialize :foo, [:bar, :baz!]`
+
+
+### `method_object :fooable?, :foo`<br>
+
+Defines a `.fooable?` class method that takes one argument (`:foo`) and delegates to an instance method that can access `foo` as a private reader, useful for [method objects](http://refactoring.com/catalog/replaceMethodWithMethodObject.html).
+
+The `attr_initialize` notation notation for hash arguments is also supported: `method_object :fooable?, :foo, [:bar, :baz!]`
 
 You don't have to specify readers if you don't want them: `method_object :fooable?` is also valid.
 
-`attr_id_query :foo?, :bar?`<br>
+
+### `attr_id_query :foo?, :bar?`<br>
 Defines query methods like `foo?`, which is true iff `foo_id` is truthy. Goes well with Active Record.
 
-`attr_query :foo?, :bar?`<br>
+
+### `attr_query :foo?, :bar?`<br>
 Defines query methods like `foo?`, which is true iff `foo` is truthy.
 
-Findability has been a central consideration.
+
+## Philosophy
+
+Findability is a core value.
 Hence the long name `attr_initialize`, so you see it when scanning for the initializer;
 and the enforced questionmarks with `attr_id_query :foo?`, so you can search for that method.
 
