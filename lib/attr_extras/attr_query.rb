@@ -3,7 +3,7 @@ module AttrExtras::AttrQuery
     names.each do |name|
       name = name.to_s
 
-      raise "#{__method__} wants `#{name}?`, not `#{name}`." unless name.end_with?("?")
+      raise ArgumentError, "#{__method__} wants `#{name}?`, not `#{name}`." unless name.end_with?("?")
 
       klass.send(:define_method, name) do  # def foo?
         !!send("#{name.chop}#{suffix}")    #   !!send("foo_id")

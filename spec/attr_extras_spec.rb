@@ -230,7 +230,7 @@ describe Object, ".attr_id_query" do
   end
 
   it "requires a trailing questionmark" do
-    lambda { Object.attr_id_query(:foo) }.must_raise RuntimeError
+    lambda { Object.attr_id_query(:foo) }.must_raise ArgumentError
   end
 end
 
@@ -248,7 +248,7 @@ describe Object, ".attr_query" do
   end
 
   it "requires a trailing questionmark" do
-    lambda { Object.attr_query(:foo) }.must_raise RuntimeError
+    lambda { Object.attr_query(:foo) }.must_raise ArgumentError
   end
 end
 
