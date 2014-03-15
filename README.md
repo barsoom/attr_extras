@@ -137,51 +137,6 @@ Hence the long name `attr_initialize`, so you see it when scanning for the initi
 and the enforced questionmarks with `attr_id_query :foo?`, so you can search for that method.
 
 
-## Example
-
-``` ruby
-class MyClass
-  pattr_initialize :foo, :bar
-  attr_id_query :item?
-  attr_query :oof?
-
-  def oof
-    foo.reverse
-  end
-
-  def item_id
-    123
-  end
-end
-
-x = MyClass.new("Foo!", "Bar!")
-x.oof    # => "!ooF"
-x.foo    # NoMethodError: private method `foo' called.
-x.item?  # => true
-x.oof?   # => true
-
-
-class MyHashyObject
-  attr_initialize :foo, [:bar, :baz]
-  attr_reader :bar
-end
-
-x = MyHashyObject.new("Foo!", bar: "Bar!", baz: "Baz!")
-x.bar  # => "Bar!"
-
-
-class MyValueObject
-  attr_value :foo, :bar
-end
-
-x = MyValueObject.new(5, 10)
-x.foo  # => 5
-x.bar  # => 10
-x.foo = 20  # NoMethodError: undefined method `foo=''`
-
-MyValueObject.new(1) == MyValueObject.new(1)  # true
-```
-
 ## Why not use `Struct`?
 
 See: ["Struct inheritance is overused"](http://thepugautomatic.com/2013/08/struct-inheritance-is-overused/)
