@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 require_relative "spec_helper"
 require "set"
 
@@ -12,94 +10,103 @@ describe Object, ".attr_value" do
     example = klass.new
     example.instance_variable_set("@foo", "Foo")
     example.foo.must_equal "Foo"
-    lambda { example.foo = "new value" }.must_raise NoMethodError
   end
 
-  it "defines equality based on the attributes" do
+  it "does not create writers" do
     klass = Class.new do
-      attr_initialize :foo, :bar
-      attr_value :foo, :bar
+      attr_value :foo
     end
 
-    example1 = klass.new("Foo", "Bar")
-    example2 = klass.new("Foo", "Bar")
-    example3 = klass.new("Arroz", "Feijão")
-
-    assert example1 == example2, "Examples should be equal"
-    refute example1 != example2, "Examples should be equal"
-
-    refute example1 == example3, "Examples should not be equal"
-    assert example1 != example3, "Examples should not be equal"
+    lambda { klass.new.foo = "new value" }.must_raise NoMethodError
   end
 
-  it "defines equality based on the actual type" do
-    klass1 = Class.new do
-      attr_initialize :foo
-      attr_value :foo
-    end
-    klass2 = Class.new do
-      attr_initialize :foo
-      attr_value :foo
-    end
+  describe "object equality" do
+    it "is based on attribute values" do
+      klass = Class.new do
+        attr_initialize :foo, :bar
+        attr_value :foo, :bar
+      end
 
-    example1 = klass1.new("Foo")
-    example2 = klass2.new("Foo")
+      example1 = klass.new("Foo", "Bar")
+      example2 = klass.new("Foo", "Bar")
+      example3 = klass.new("Foo", "Wat")
 
-    assert example1 != example2, "Examples should not be equal"
-    refute example1 == example2, "Examples should not be equal"
-  end
+      assert example1 == example2, "Examples should be equal"
+      refute example1 != example2, "Examples should be equal"
 
-  it "considers an instance equal to itself" do
-    klass = Class.new do
-      attr_initialize :foo
-      attr_value :foo
+      refute example1 == example3, "Examples should not be equal"
+      assert example1 != example3, "Examples should not be equal"
     end
 
-    instance = klass.new("Foo")
+    it "is based on class" do
+      klass1 = Class.new do
+        attr_initialize :foo
+        attr_value :foo
+      end
+      klass2 = Class.new do
+        attr_initialize :foo
+        attr_value :foo
+      end
 
-    assert instance == instance, "Instance should be equal to itself"
-  end
+      example1 = klass1.new("Foo")
+      example2 = klass2.new("Foo")
 
-  it "can compare value objects to other kinds of objects" do
-    klass = Class.new do
-      attr_initialize :foo
-      attr_value :foo
+      assert example1 != example2, "Examples should not be equal"
+      refute example1 == example2, "Examples should not be equal"
     end
 
-    instance = klass.new("Foo")
+    it "considers an instance equal to itself" do
+      klass = Class.new do
+        attr_initialize :foo
+        attr_value :foo
+      end
 
-    assert instance != "a string"
-  end
+      instance = klass.new("Foo")
 
-  it "hashes objects the same if they have the same attributes" do
-    klass = Class.new do
-      attr_initialize :foo
-      attr_value :foo
-    end
-    klass2 = Class.new do
-      attr_initialize :foo
-      attr_value :foo
+      assert instance == instance, "Instance should be equal to itself"
     end
 
-    example1 = klass.new("Foo")
-    example2 = klass.new("Foo")
-    example3 = klass.new("Bar")
-    example4 = klass2.new("Foo")
+    it "can compare value objects to other kinds of objects" do
+      klass = Class.new do
+        attr_initialize :foo
+        attr_value :foo
+      end
 
-    example1.hash.must_equal example2.hash
-    example1.hash.wont_equal example3.hash
-    example1.hash.wont_equal example4.hash
+      instance = klass.new("Foo")
 
-    assert example1.eql?(example2), "Examples should be 'eql?'"
-    refute example1.eql?(example3), "Examples should not be 'eql?'"
-    refute example1.eql?(example4), "Examples should not be 'eql?'"
+      assert instance != "a string"
+    end
 
-    Set[example1, example2, example3, example4].length.must_equal 3
+    it "hashes objects the same if they have the same attributes" do
+      klass1 = Class.new do
+        attr_initialize :foo
+        attr_value :foo
+      end
+      klass2 = Class.new do
+        attr_initialize :foo
+        attr_value :foo
+      end
 
-    hash = {}
-    hash[example1] = :awyeah
-    hash[example3] = :wat
-    hash[example4] = :nooooo
-    hash[example2].must_equal :awyeah
+      klass1_foo = klass1.new("Foo")
+      klass1_foo2 = klass1.new("Foo")
+      klass1_bar = klass1.new("Bar")
+      klass2_foo = klass2.new("Foo")
+
+      klass1_foo.hash.must_equal klass1_foo2.hash
+      klass1_foo.hash.wont_equal klass1_bar.hash
+      klass1_foo.hash.wont_equal klass2_foo.hash
+
+      assert klass1_foo.eql?(klass1_foo2), "Examples should be 'eql?'"
+      refute klass1_foo.eql?(klass1_bar), "Examples should not be 'eql?'"
+      refute klass1_foo.eql?(klass2_foo), "Examples should not be 'eql?'"
+
+      Set[klass1_foo, klass1_foo2, klass1_bar, klass2_foo].length.must_equal 3
+
+      hash = {}
+      hash[klass1_foo] = :awyeah
+      hash[klass1_bar] = :wat
+      hash[klass2_foo] = :nooooo
+      hash[klass1_foo2].must_equal :awyeah
+    end
   end
 end
