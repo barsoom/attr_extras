@@ -189,6 +189,14 @@ Or to see warnings (try not to have any):
 `RUBYOPT=-w rake`
 
 
+## Contributors
+
+* [Henrik Nyh](https://github.com/henrik)
+* [Joakim Kolsjö](https://github.com/joakimk)
+* [Victor Arias](https://github.com/victorarias)
+* [Teo Ljungberg](https://github.com/teoljungberg)
+
+
 ## License
 
 Copyright (c) 2012-2014 [Barsoom AB](http://barsoom.se)
