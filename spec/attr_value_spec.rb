@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-require 'set'
+require "set"
 require_relative "spec_helper"
 
 describe Object, ".attr_value" do
