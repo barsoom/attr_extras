@@ -178,6 +178,17 @@ Or install it yourself as:
     gem install attr_extras
 
 
+## Running the tests
+
+Run then with:
+
+`rake`
+
+Or to see warnings (try not to have any):
+
+`RUBYOPT=-w rake`
+
+
 ## License
 
 Copyright (c) 2012-2014 [Barsoom AB](http://barsoom.se)
