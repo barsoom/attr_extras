@@ -10,6 +10,10 @@ module AttrExtras
     end
 
     def attr_private(*names)
+      # Need this to avoid "private attribute?" warnings when running
+      # the full test suite; not sure why exactly.
+      public
+
       attr_reader(*names)
       private(*names)
     end
