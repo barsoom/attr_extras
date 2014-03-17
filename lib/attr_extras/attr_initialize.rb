@@ -38,7 +38,7 @@ class AttrExtras::AttrInitialize
     arity_with_hashes    = names.length
 
     unless (arity_without_hashes..arity_with_hashes).include?(provided_arity)
-      arity_range = [arity_without_hashes, arity_with_hashes].uniq.join("..")
+      arity_range = [ arity_without_hashes, arity_with_hashes ].uniq.join("..")
       raise ArgumentError, "wrong number of arguments (#{provided_arity} for #{arity_range})"
     end
   end
