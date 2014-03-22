@@ -47,8 +47,8 @@ module AttrExtras
     end
 
     def method_object(method_name, *names)
-      singleton_class.send(:define_method, method_name) do |*values|
-        new(*values).send(method_name)
+      define_singleton_method(method_name) do |*values|
+        new(*values).public_send(method_name)
       end
 
       pattr_initialize(*names)
