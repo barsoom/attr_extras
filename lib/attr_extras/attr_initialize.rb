@@ -49,7 +49,7 @@ class AttrExtras::AttrInitialize
       value = hash.fetch(actual_name)
     else
       actual_name = name
-      value = hash[name]
+      value = hash[actual_name]
     end
 
     instance.instance_variable_set("@#{actual_name}", value)
