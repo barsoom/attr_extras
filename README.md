@@ -143,9 +143,11 @@ Defines query methods like `foo?`, which is true if (and only if) `foo` is truth
 
 ### `attr_implement :foo, :bar`<br>
 
-Defines methods `foo` and `bar` that raise e.g. `"Implement a 'foo' method"`, suitable for abstract base classes.
+Defines nullary (0-argument) methods `foo` and `bar` that raise e.g. `"Implement a 'foo()' method"`.
 
-The methods accept any number of arguments, but if you have methods that require arguments, a regular method may be more clear.
+`attr_implement :foo, [:name, :age]` will define a binary (2-argument) method `foo` that raises `"Implement a 'foo(name, age)' method"`.
+
+This is suitable for [abstract methods](http://en.wikipedia.org/wiki/Abstract_method#Abstract_methods) in base classes, e.g. when using the [template method pattern](http://en.wikipedia.org/wiki/Template_method_pattern).
 
 
 ## Philosophy
