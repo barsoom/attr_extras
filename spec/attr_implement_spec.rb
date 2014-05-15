@@ -11,7 +11,7 @@ describe Object, ".attr_implement" do
     exception.message.must_equal "Implement a 'foo' method"
   end
 
-  it "accepts any number of arguments" do
+  it "creates methods that accept any number of arguments" do
     klass = Class.new do
       attr_implement :foo
     end
