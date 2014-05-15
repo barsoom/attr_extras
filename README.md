@@ -145,6 +145,8 @@ Defines query methods like `foo?`, which is true if (and only if) `foo` is truth
 
 Defines methods `foo` and `bar` that raise e.g. `"Implement a 'foo' method"`, suitable for abstract base classes.
 
+The methods accept any number of arguments, but if you have methods that require arguments, a regular method may be more clear.
+
 
 ## Philosophy
 
