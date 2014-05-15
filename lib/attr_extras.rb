@@ -61,6 +61,14 @@ module AttrExtras
     def attr_id_query(*names)
       AttrQuery.define_with_suffix(self, "_id", *names)
     end
+
+    def attr_implement(*names)
+      names.each do |name|
+        define_method(name) do |*_|
+          raise "Implement a '#{name}' method"
+        end
+      end
+    end
   end
 end
 

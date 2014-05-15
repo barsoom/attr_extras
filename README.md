@@ -141,6 +141,10 @@ Defines query methods like `foo?`, which is true if (and only if) `foo_id` is tr
 
 Defines query methods like `foo?`, which is true if (and only if) `foo` is truthy.
 
+### `attr_implement :foo, :bar`<br>
+
+Defines methods `foo` and `bar` that raise e.g. `"Implement a 'foo' method"`, suitable for abstract base classes.
+
 
 ## Philosophy
 
@@ -195,6 +199,7 @@ Or to see warnings (try not to have any):
 * [Joakim Kolsjö](https://github.com/joakimk)
 * [Victor Arias](https://github.com/victorarias)
 * [Teo Ljungberg](https://github.com/teoljungberg)
+* [Kim Persson](https://github.com/lavinia)
 
 
 ## License
