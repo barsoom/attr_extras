@@ -5,8 +5,8 @@ require "attr_extras/utils"
 
 module AttrExtras
   module ModuleMethods
-    def attr_initialize(*names)
-      AttrInitialize.new(self, names).apply
+    def attr_initialize(*names, &block)
+      AttrInitialize.new(self, names, block).apply
     end
 
     def attr_private(*names)
@@ -36,13 +36,13 @@ module AttrExtras
       end
     end
 
-    def pattr_initialize(*names)
-      attr_initialize(*names)
+    def pattr_initialize(*names, &block)
+      attr_initialize(*names, &block)
       attr_private(*Utils.flat_names(names))
     end
 
-    def vattr_initialize(*names)
-      attr_initialize(*names)
+    def vattr_initialize(*names, &block)
+      attr_initialize(*names, &block)
       attr_value(*Utils.flat_names(names))
     end
 

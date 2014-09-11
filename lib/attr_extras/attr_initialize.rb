@@ -1,6 +1,6 @@
 class AttrExtras::AttrInitialize
-  def initialize(klass, names)
-    @klass, @names = klass, names
+  def initialize(klass, names, block)
+    @klass, @names, @block = klass, names, block
   end
 
   attr_reader :klass, :names
@@ -10,6 +10,7 @@ class AttrExtras::AttrInitialize
     # The define_method block can't call our methods, so we need to make
     # things available via local variables.
     names = @names
+    block = @block
     validate_arity = method(:validate_arity)
     set_ivar_from_hash = method(:set_ivar_from_hash)
 
@@ -27,6 +28,10 @@ class AttrExtras::AttrInitialize
           name = name_or_names
           instance_variable_set("@#{name}", value)
         end
+      end
+
+      if block
+        instance_eval(&block)
       end
     end
   end
