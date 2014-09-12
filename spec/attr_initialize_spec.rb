@@ -64,31 +64,4 @@ describe Object, ".attr_initialize" do
 
     example.copy.must_equal "expected"
   end
-
-  it "can reference private initializer methods in an initializer block" do
-    klass = Class.new do
-      pattr_initialize :value do
-        @copy = value
-      end
-
-      attr_reader :copy
-    end
-
-    example = klass.new("expected")
-
-    example.copy.must_equal "expected"
-  end
-
-  it "can define an initializer block for value objects" do
-    called = false
-    klass = Class.new do
-      vattr_initialize :value do
-        called = true
-      end
-    end
-
-    klass.new("expected")
-
-    called.must_equal true
-  end
 end
