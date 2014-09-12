@@ -45,6 +45,8 @@ Defines an initializer that takes two arguments and assigns `@foo` and `@bar`.
 `attr_initialize [:bar, :baz!]` defines an initializer that takes one hash argument, assigning `@bar` (optional) and `@baz` (required).
 
 
+`attr_initialize` can also accept a block which will be invoked after initialization. This is useful for calling `super` appropriately in subclasses or initializing private data as necessary.
+
 ### `attr_private :foo, :bar`
 
 Defines private readers for `@foo` and `@bar`.
