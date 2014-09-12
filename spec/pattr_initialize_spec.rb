@@ -18,4 +18,18 @@ describe Object, ".pattr_initialize" do
     example = klass.new("Foo", :bar => "Bar", :baz => "Baz")
     example.send(:baz).must_equal "Baz"
   end
+
+  it "can reference private initializer methods in an initializer block" do
+    klass = Class.new do
+      pattr_initialize :value do
+        @copy = value
+      end
+
+      attr_reader :copy
+    end
+
+    example = klass.new("expected")
+
+    example.copy.must_equal "expected"
+  end
 end

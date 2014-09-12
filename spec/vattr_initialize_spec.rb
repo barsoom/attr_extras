@@ -23,4 +23,17 @@ describe Object, ".vattr_initialize" do
     example1.baz.must_equal "Baz"
     example1.must_equal example2
   end
+
+  it "can accept an initializer block" do
+    called = false
+    klass = Class.new do
+      vattr_initialize :value do
+        called = true
+      end
+    end
+
+    klass.new("expected")
+
+    called.must_equal true
+  end
 end
