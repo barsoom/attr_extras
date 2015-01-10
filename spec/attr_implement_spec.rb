@@ -58,7 +58,7 @@ describe Object, ".attr_implement" do
     klass.new.foo.must_equal "bar"
   end
 
-  it "does not mess up missing method handling" do
+  it "does not mess up missing-method handling" do
     klass = Class.new do
       attr_implement :foo
     end
