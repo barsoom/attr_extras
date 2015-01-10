@@ -159,6 +159,8 @@ def my_method
 end
 ```
 
+though it is shorter, more declarative, gives you a clear message and handles edge cases you might not have thought about (see tests).
+
 
 ## Philosophy
 
