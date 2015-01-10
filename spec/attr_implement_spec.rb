@@ -38,9 +38,13 @@ describe Object, ".attr_implement" do
     subklass.new.foo.must_equal "bar"
   end
 
-  # E.g. Active Record defines column query methods like "admin?"
+  # E.g. when Active Record defines column query methods like "admin?"
   # higher up in the ancestor chain.
   it "does not raise if method is implemented in a superclass" do
+    foo_interface = Module.new do
+      attr_implement :foo
+    end
+
     superklass = Class.new do
       def foo
         "bar"
@@ -48,7 +52,7 @@ describe Object, ".attr_implement" do
     end
 
     klass = Class.new(superklass) do
-      attr_implement :foo
+      include foo_interface
     end
 
     klass.new.foo.must_equal "bar"
