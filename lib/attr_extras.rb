@@ -66,17 +66,23 @@ module AttrExtras
       arg_names = names.last.is_a?(Array) ? names.pop : []
       arity = arg_names.length
 
-      names.each do |name|
-        define_method(name) do |*args|
-          provided_arity = args.length
+      mod = Module.new do
+        define_method :method_missing do |name, *args|
+          if names.include?(name)
+            provided_arity = args.length
 
-          if provided_arity != arity
-            raise ArgumentError, "wrong number of arguments (#{provided_arity} for #{arity})"
+            if provided_arity != arity
+              raise ArgumentError, "wrong number of arguments (#{provided_arity} for #{arity})"
+            end
+
+            raise "Implement a '#{name}(#{arg_names.join(", ")})' method"
+          else
+            super(name, *args)
           end
-
-          raise "Implement a '#{name}(#{arg_names.join(", ")})' method"
         end
       end
+
+      include mod
     end
   end
 end
