@@ -151,6 +151,14 @@ Defines nullary (0-argument) methods `foo` and `bar` that raise e.g. `"Implement
 
 This is suitable for [abstract methods](http://en.wikipedia.org/wiki/Abstract_method#Abstract_methods) in base classes, e.g. when using the [template method pattern](http://en.wikipedia.org/wiki/Template_method_pattern).
 
+It's more or less a shortcut for
+
+``` ruby
+def my_method
+  raise "Implement me in a subclass!"
+end
+```
+
 
 ## Philosophy
 
