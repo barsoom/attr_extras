@@ -53,4 +53,12 @@ describe Object, ".attr_implement" do
 
     klass.new.foo.must_equal "bar"
   end
+
+  it "does not mess up missing method handling" do
+    klass = Class.new do
+      attr_implement :foo
+    end
+
+    lambda { klass.new.some_other_method }.must_raise NoMethodError
+  end
 end
