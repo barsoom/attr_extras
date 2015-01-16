@@ -130,7 +130,7 @@ Defines a `.call` class method that delegates to an instance method by the same 
 This is a special case of `static_facade` for when you want a [Method Object](http://refactoring.com/catalog/replaceMethodWithMethodObject.html), and the class name itself will communicate the action it performs.
 
 ``` ruby
-class PriceCalculator
+class CalculatePrice
   method_object :order
 
   def call
@@ -150,7 +150,7 @@ end
 
 class Order
   def price
-    PriceCalculator.call(self)
+    CalculatePrice.call(self)
   end
 end
 ```
