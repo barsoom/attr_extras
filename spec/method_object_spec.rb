@@ -1,29 +1,28 @@
 require_relative "spec_helper"
 
 describe Object, ".method_object" do
-  it "creates a class method that instantiates and runs that instance method" do
+  it "creates a .call class method that instantiates and runs the #call instance method" do
     klass = Class.new do
-      method_object :fooable?,
-        :foo
+      method_object :foo
 
-      def fooable?
+      def call
         foo
       end
     end
 
-    assert klass.fooable?(true)
-    refute klass.fooable?(false)
+    assert klass.call(true)
+    refute klass.call(false)
   end
 
   it "doesn't require attributes" do
     klass = Class.new do
-      method_object :fooable?
+      method_object
 
-      def fooable?
+      def call
         true
       end
     end
 
-    assert klass.fooable?
+    assert klass.call
   end
 end

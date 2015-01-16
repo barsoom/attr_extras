@@ -83,18 +83,57 @@ attr_value :foo, :bar
 The `attr_initialize` notation for hash arguments is also supported: `vattr_initialize :foo, [:bar, :baz!]`
 
 
-### `method_object :fooable?, :foo`<br>
+### `static_facade :fooable?, :foo`<br>
 
-Defines a `.fooable?` class method that takes arguments (`foo`) and delegates to an instance method that can access those arguments as private readers.
+Defines a `.fooable?` class method that delegates to an instance method by the same name, having first provided `foo` as a private reader.
 
-This is useful for [method objects](http://refactoring.com/catalog/replaceMethodWithMethodObject.html):
+This is handy when a class-method API makes sense but you still want [the refactorability of instance methods](http://blog.codeclimate.com/blog/2012/11/14/why-ruby-class-methods-resist-refactoring/).
+
+``` ruby
+class PublishingPolicy
+  static_facade :allow?, :user
+  static_facade :disallow?, :user
+
+  def allow?
+    user.admin? && …
+  end
+
+  def disallow?
+    !allow?
+  end
+end
+
+PublishingPolicy.allow?(user)
+```
+
+`static_facade :fooable?, :foo` is a shortcut for
+
+``` ruby
+pattr_initialize :foo
+
+def self.fooable?(foo)
+  new(foo).fooable?
+end
+```
+
+The `attr_initialize` notation for hash arguments is also supported: `static_facade :fooable?, :foo, [:bar, :baz!]`
+
+You don't have to specify arguments/readers if you don't want them: just `static_facade :fooable?` is also valid.
+
+
+### `method_object :foo`
+
+*NOTE: v4.0.0 made a breaking change! `static_facade` does exactly what `method_object` used to do; the new `method_object` no longer accepts a method name argument.*
+
+Defines a `.call` class method that delegates to an instance method by the same name, having first provided `foo` as a private reader.
+
+This is a special case of `static_facade` for when you want a [Method Object](http://refactoring.com/catalog/replaceMethodWithMethodObject.html), and the class name itself will communicate the action it performs.
 
 ``` ruby
 class PriceCalculator
-  method_object :calculate,
-    :order
+  method_object :order
 
-  def calculate
+  def call
     total * factor
   end
 
@@ -111,27 +150,30 @@ end
 
 class Order
   def price
-    PriceCalculator.calculate(self)
+    PriceCalculator.call(self)
   end
-
-  # …
 end
 ```
 
-Shortcut for
+`method_object :foo` is a shortcut for
 
 ``` ruby
-attr_initialize :foo
-attr_private :foo
+static_facade :call, :foo
+```
 
-def self.fooable?(foo)
-  new(foo).fooable?
+which is a shortcut for
+
+``` ruby
+pattr_initialize :foo
+
+def self.call(foo)
+  new(foo).call
 end
 ```
 
-The `attr_initialize` notation for hash arguments is also supported: `method_object :fooable?, :foo, [:bar, :baz!]`
+The `attr_initialize` notation for hash arguments is also supported: `method_object :foo, [:bar, :baz!]`
 
-You don't have to specify readers if you don't want them: `method_object :fooable?` is also valid.
+You don't have to specify arguments/readers if you don't want them: just `method_object` is also valid.
 
 
 ### `attr_id_query :foo?, :bar?`<br>

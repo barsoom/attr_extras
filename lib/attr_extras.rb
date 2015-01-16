@@ -46,12 +46,16 @@ module AttrExtras
       attr_value(*Utils.flat_names(names))
     end
 
-    def method_object(method_name, *names)
+    def static_facade(method_name, *names)
       define_singleton_method(method_name) do |*values|
         new(*values).public_send(method_name)
       end
 
       pattr_initialize(*names)
+    end
+
+    def method_object(*names)
+      static_facade :call, *names
     end
 
     def attr_query(*names)
