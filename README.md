@@ -122,7 +122,7 @@ It does not define writers, because [value objects](http://en.wikipedia.org/wiki
 
 ### `static_facade`
 
-`static_facade :allow?, :user` defines a `.allow?` class method that delegates to an instance method by the same name, having first provided `user` as a private reader.
+`static_facade :allow?, :user` defines an `.allow?` class method that delegates to an instance method by the same name, having first provided `user` as a private reader.
 
 This is handy when a class-method API makes sense but you still want [the refactorability of instance methods](http://blog.codeclimate.com/blog/2012/11/14/why-ruby-class-methods-resist-refactoring/).
 
@@ -158,6 +158,8 @@ end
 The `attr_initialize` notation for hash arguments is also supported: `static_facade :allow?, :user, [:user_agent, :ip!]`
 
 You don't have to specify arguments/readers if you don't want them: just `static_facade :tuesday?` is also valid.
+
+"Static façade" is the least bad name for this pattern we've come up with. Suggestions are welcome.
 
 
 ### `method_object`
