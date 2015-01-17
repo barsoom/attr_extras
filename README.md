@@ -131,14 +131,9 @@ Example:
 ``` ruby
 class PublishingPolicy
   static_facade :allow?, :user
-  static_facade :disallow?, :user
 
   def allow?
     user.admin? && complicated_extracted_method
-  end
-
-  def disallow?
-    !allow?
   end
 
   private
