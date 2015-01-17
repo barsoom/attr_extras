@@ -263,12 +263,15 @@ Hence the long name `attr_initialize`, so you see it when scanning for the initi
 and the enforced questionmarks with `attr_id_query :foo?`, so you can search for that method.
 
 
-## Why not use `Struct` instead of `pattr_initialize`?
+## Q & A
+
+
+### Why not use `Struct` instead of `pattr_initialize`?
 
 See: ["Struct inheritance is overused"](http://thepugautomatic.com/2013/08/struct-inheritance-is-overused/)
 
 
-## Why not use `private; attr_reader :foo` instead of `attr_private`?
+### Why not use `private; attr_reader :foo` instead of `attr_private`?
 
 Instead of `attr_private :foo`, you could do `private; attr_reader :foo`.
 
