@@ -115,9 +115,7 @@ The `attr_initialize` notation for hash arguments is also supported: `vattr_init
 
 ### `attr_value`
 
-`attr_value :foo, :bar` defines public readers for `@foo` and `@bar`.
-
-It also defines object equality: two value objects of the same class with the same values will be considered equal (with `==` and `eql?`, in `Set`s, as `Hash` keys etc).
+`attr_value :foo, :bar` defines public readers for `@foo` and `@bar` and also defines object equality: two value objects of the same class with the same values will be considered equal (with `==` and `eql?`, in `Set`s, as `Hash` keys etc).
 
 It does not define writers, because [value objects](http://en.wikipedia.org/wiki/Value_object) are typically immutable.
 
