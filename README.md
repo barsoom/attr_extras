@@ -57,8 +57,6 @@ attr_initialize :foo, :bar
 attr_private :foo, :bar
 ```
 
-The [`attr_initialize`](#attr_initialize) notation for hash arguments is also supported: `pattr_initialize :foo, [:bar, :baz!]`
-
 Example:
 
 ```
@@ -73,6 +71,8 @@ end
 Item.new("Pug", 100).price_with_vat  # => 125.0
 ```
 
+The [`attr_initialize`](#attr_initialize) notation for hash arguments is also supported: `pattr_initialize :foo, [:bar, :baz!]`
+
 
 ### `vattr_initialize`
 
@@ -82,8 +82,6 @@ Item.new("Pug", 100).price_with_vat  # => 125.0
 attr_initialize :foo, :bar
 attr_value :foo, :bar
 ```
-
-The `attr_initialize` notation for hash arguments is also supported: `vattr_initialize :foo, [:bar, :baz!]`
 
 Example:
 
@@ -95,6 +93,8 @@ end
 Country.new("SE") == Country.new("SE")  # => true
 Country.new("SE").code  # => "SE"
 ```
+
+The `attr_initialize` notation for hash arguments is also supported: `vattr_initialize :foo, [:bar, :baz!]`
 
 
 ### `attr_initialize`
