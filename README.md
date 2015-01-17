@@ -170,11 +170,11 @@ You don't have to specify arguments/readers if you don't want them: just `static
 
 ### `method_object`
 
-*NOTE: v4.0.0 made a breaking change! `static_facade` does exactly what `method_object` used to do; the new `method_object` no longer accepts a method name argument.*
+*NOTE: v4.0.0 made a breaking change! [`static_facade`](#static_facade) does exactly what `method_object` used to do; the new `method_object` no longer accepts a method name argument.*
 
 `method_object :foo` defines a `.call` class method that delegates to an instance method by the same name, having first provided `foo` as a private reader.
 
-This is a special case of `static_facade` for when you want a [Method Object](http://refactoring.com/catalog/replaceMethodWithMethodObject.html), and the class name itself will communicate the action it performs.
+This is a special case of [`static_facade`](#static_facade) for when you want a [Method Object](http://refactoring.com/catalog/replaceMethodWithMethodObject.html), and the class name itself will communicate the action it performs.
 
 Example:
 
