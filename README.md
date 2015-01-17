@@ -76,7 +76,7 @@ The [`attr_initialize`](#attr_initialize) notation for hash arguments is also su
 
 ### `vattr_initialize`
 
-`vattr_initialize :foo, :bar` defines initializer, public readers and value object identity: shortcut for
+`vattr_initialize :foo, :bar` defines initializer, public readers and [value object identity](#attr_value): shortcut for
 
 ``` ruby
 attr_initialize :foo, :bar
