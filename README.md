@@ -204,6 +204,8 @@ class Order
 end
 ```
 
+You could even do `CalculatePrice.(self)` if you like, since we're using the [`call` convention](http://www.ruby-doc.org/core-2.2.0/Proc.html#method-i-call).
+
 `method_object :foo` is a shortcut for
 
 ``` ruby
