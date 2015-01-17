@@ -134,11 +134,17 @@ class PublishingPolicy
   static_facade :disallow?, :user
 
   def allow?
-    user.admin? && …
+    user.admin? && complicated_extracted_method
   end
 
   def disallow?
     !allow?
+  end
+
+  private
+
+  def complicated_extracted_method
+    # …
   end
 end
 
