@@ -271,9 +271,7 @@ and the enforced questionmarks with `attr_id_query :foo?`, so you can search for
 See: ["Struct inheritance is overused"](http://thepugautomatic.com/2013/08/struct-inheritance-is-overused/)
 
 
-### Why not use `private; attr_reader :foo` instead of `attr_private`?
-
-Instead of `attr_private :foo`, you could do `private; attr_reader :foo`.
+### Why not use `private; attr_reader :foo` instead of `attr_private :foo`?
 
 Other than being more to type, declaring `attr_reader` after `private` will actually give you a warning (deserved or not) if you run Ruby with warnings turned on.
 
