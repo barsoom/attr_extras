@@ -6,7 +6,7 @@ Takes some boilerplate out of Ruby, lowering the barrier to extracting small foc
 
 Instead of
 
-```
+``` ruby
 class InvoiceBuilder
   def initialize(invoice, employee)
     @invoice, @employee = invoice, employee
@@ -20,7 +20,7 @@ end
 
 you can just do
 
-```
+``` ruby
 class InvoiceBuilder
   pattr_initialize :invoice, :employee
 end
@@ -52,14 +52,14 @@ Also provides conveniences for creating value objects, method objects, query met
 
 `pattr_initialize :foo, :bar` defines both initializer and private readers: shortcut for
 
-```
+``` ruby
 attr_initialize :foo, :bar
 attr_private :foo, :bar
 ```
 
 Example:
 
-```
+``` ruby
 class Item
   pattr_initalize :name, :price
 
@@ -78,14 +78,14 @@ The [`attr_initialize`](#attr_initialize) notation for hash arguments is also su
 
 `vattr_initialize :foo, :bar` defines initializer, public readers and value object identity: shortcut for
 
-```
+``` ruby
 attr_initialize :foo, :bar
 attr_value :foo, :bar
 ```
 
 Example:
 
-```
+``` ruby
 class Country
   vattr_initialize :code
 end
