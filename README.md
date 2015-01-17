@@ -71,7 +71,7 @@ end
 Item.new("Pug", 100).price_with_vat  # => 125.0
 ```
 
-The [`attr_initialize`](#attr_initialize) notation for hash arguments is also supported: `pattr_initialize :foo, [:bar, :baz!]`
+[The `attr_initialize` notation](#attr_initialize) for hash arguments is also supported: `pattr_initialize :foo, [:bar, :baz!]`
 
 
 ### `vattr_initialize`
@@ -94,7 +94,7 @@ Country.new("SE") == Country.new("SE")  # => true
 Country.new("SE").code  # => "SE"
 ```
 
-The `attr_initialize` notation for hash arguments is also supported: `vattr_initialize :foo, [:bar, :baz!]`
+[The `attr_initialize` notation](#attr_initialize) for hash arguments is also supported: `vattr_initialize :foo, [:bar, :baz!]`
 
 
 ### `attr_initialize`
@@ -161,7 +161,7 @@ def self.allow?(user)
 end
 ```
 
-The `attr_initialize` notation for hash arguments is also supported: `static_facade :allow?, :user, [:user_agent, :ip!]`
+[The `attr_initialize` notation](#attr_initialize) for hash arguments is also supported: `static_facade :allow?, :user, [:user_agent, :ip!]`
 
 You don't have to specify arguments/readers if you don't want them: just `static_facade :tuesday?` is also valid.
 
@@ -222,7 +222,7 @@ def self.call(foo)
 end
 ```
 
-The `attr_initialize` notation for hash arguments is also supported: `method_object :foo, [:bar, :baz!]`
+[The `attr_initialize` notation](#attr_initialize) for hash arguments is also supported: `method_object :foo, [:bar, :baz!]`
 
 You don't have to specify arguments/readers if you don't want them: just `method_object` is also valid.
 
