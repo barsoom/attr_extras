@@ -18,11 +18,16 @@ class AttrExtras::AttrInitialize
       validate_arity.call(values.length)
 
       names.zip(values).each do |name_or_names, value|
-        if name_or_names.is_a?(Array)
+        case name_or_names
+        when Array
           hash = value || {}
 
           name_or_names.each do |name|
             set_ivar_from_hash.call(self, name, hash)
+          end
+        when Hash
+          name_or_names.each do |name, default_value|
+            instance_variable_set("@#{name}", value || default_value)
           end
         else
           name = name_or_names
@@ -39,7 +44,7 @@ class AttrExtras::AttrInitialize
   private
 
   def validate_arity(provided_arity)
-    arity_without_hashes = names.count { |name| not name.is_a?(Array) }
+    arity_without_hashes = names.count { |name| !name.is_a?(Array) && !name.is_a?(Hash) }
     arity_with_hashes    = names.length
 
     unless (arity_without_hashes..arity_with_hashes).include?(provided_arity)

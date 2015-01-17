@@ -64,4 +64,22 @@ describe Object, ".attr_initialize" do
 
     example.copy.must_equal "expected"
   end
+
+  it "allows optional attributes with default values" do
+    klass = Class.new do
+      attr_initialize :foo, :bar => "Bar"
+    end
+
+    example = klass.new("Foo")
+    example.instance_variable_get("@bar").must_equal "Bar"
+  end
+
+  it "overwrites default values for optional attributes" do
+    klass = Class.new do
+      attr_initialize :foo, :bar => "Bar"
+    end
+
+    example = klass.new("Foo", "Rab")
+    example.instance_variable_get("@bar").must_equal "Rab"
+  end
 end
