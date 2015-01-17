@@ -295,7 +295,7 @@ Or install it yourself as:
 
 ## Running the tests
 
-Run then with:
+Run them with:
 
 `rake`
 
