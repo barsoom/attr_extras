@@ -51,7 +51,7 @@ describe Object, ".attr_initialize" do
     lambda { klass.new(:optional => "X") }.must_raise KeyError
   end
 
-  it "can accept a block for initialization" do
+  it "accepts a block for initialization" do
     klass = Class.new do
       attr_initialize :value do
         @copy = @value
