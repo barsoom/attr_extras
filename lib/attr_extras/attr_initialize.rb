@@ -15,7 +15,7 @@ class AttrExtras::AttrInitialize
     set_ivar_from_hash = method(:set_ivar_from_hash)
 
     klass.send(:define_method, :initialize) do |*values|
-      validate_arity.call(values.length)
+      validate_arity.call(values.length, self.class)
 
       names.zip(values).each do |name_or_names, value|
         if name_or_names.is_a?(Array)
@@ -38,13 +38,13 @@ class AttrExtras::AttrInitialize
 
   private
 
-  def validate_arity(provided_arity)
+  def validate_arity(provided_arity, klass)
     arity_without_hashes = names.count { |name| not name.is_a?(Array) }
     arity_with_hashes    = names.length
 
     unless (arity_without_hashes..arity_with_hashes).include?(provided_arity)
       arity_range = [ arity_without_hashes, arity_with_hashes ].uniq.join("..")
-      raise ArgumentError, "wrong number of arguments (#{provided_arity} for #{arity_range})"
+      raise ArgumentError, "wrong number of arguments (#{provided_arity} for #{arity_range}) for #{klass.name} initializer"
     end
   end
 

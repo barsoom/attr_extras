@@ -4,6 +4,10 @@ describe Object, ".attr_initialize" do
   let(:klass) do
     Class.new do
       attr_initialize :foo, :bar
+
+      def self.name
+        "ExampleClass"
+      end
     end
   end
 
@@ -14,7 +18,8 @@ describe Object, ".attr_initialize" do
   end
 
   it "requires all arguments" do
-    lambda { klass.new("Foo") }.must_raise ArgumentError
+    exception = lambda { klass.new("Foo") }.must_raise ArgumentError
+    exception.message.must_equal "wrong number of arguments (1 for 2) for ExampleClass initializer"
   end
 
   it "can set ivars from a hash" do
