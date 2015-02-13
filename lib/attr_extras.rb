@@ -41,10 +41,21 @@ module AttrExtras
       attr_private(*Utils.flat_names(names))
     end
 
+    alias_method :attr_private_initialize, :pattr_initialize
+
     def vattr_initialize(*names, &block)
       attr_initialize(*names, &block)
       attr_value(*Utils.flat_names(names))
     end
+
+    alias_method :attr_value_initialize, :vattr_initialize
+
+    def rattr_initialize(*names, &block)
+      attr_initialize(*names, &block)
+      attr_reader(*Utils.flat_names(names))
+    end
+
+    alias_method :attr_reader_initialize, :rattr_initialize
 
     def static_facade(method_name, *names)
       define_singleton_method(method_name) do |*values|

@@ -38,8 +38,9 @@ Also provides conveniences for creating value objects, method objects, query met
 * [`attr_initialize`](#attr_initialize)
 * [`attr_private`](#attr_private)
 * [`attr_value`](#attr_value)
-* [`pattr_initialize`](#pattr_initialize)
-* [`vattr_initialize`](#vattr_initialize)
+* [`pattr_initialize`](#pattr_initialize) / [`attr_private_initialize`](#attr_private_initialize)
+* [`vattr_initialize`](#vattr_initialize) / [`attr_value_initialize`](#attr_value_initialize)
+* [`rattr_initialize`](#rattr_initialize) / [`attr_reader_initialize`](#attr_reader_initialize)
 * [`static_facade`](#static_facade)
 * [`method_object`](#method_object)
 * [`attr_implement`](#attr_implement)
@@ -71,13 +72,16 @@ It does not define writers, because [value objects](http://en.wikipedia.org/wiki
 
 
 ### `pattr_initialize`
+### `attr_private_initialize`
 
-`pattr_initialize :foo, :bar` defines both initializer and private readers: shortcut for
+`pattr_initialize :foo, :bar` defines both initializer and private readers. Shortcut for:
 
 ``` ruby
 attr_initialize :foo, :bar
 attr_private :foo, :bar
 ```
+
+`attr_private_initialize` is an alias for `pattr_initialize`.
 
 Example:
 
@@ -95,15 +99,17 @@ Item.new("Pug", 100).price_with_vat  # => 125.0
 
 [The `attr_initialize` notation](#attr_initialize) for hash arguments is also supported: `pattr_initialize :foo, [:bar, :baz!]`
 
-
 ### `vattr_initialize`
+### `attr_value_initialize`
 
-`vattr_initialize :foo, :bar` defines initializer, public readers and [value object identity](#attr_value): shortcut for
+`vattr_initialize :foo, :bar` defines initializer, public readers and [value object identity](#attr_value). Shortcut for:
 
 ``` ruby
 attr_initialize :foo, :bar
 attr_value :foo, :bar
 ```
+
+`attr_value_initialize` is an alias for `vattr_initialize`.
 
 Example:
 
@@ -118,6 +124,35 @@ Country.new("SE").code  # => "SE"
 
 [The `attr_initialize` notation](#attr_initialize) for hash arguments is also supported: `vattr_initialize :foo, [:bar, :baz!]`
 
+
+### `rattr_initialize`
+### `attr_reader_initialize`
+
+`rattr_initialize :foo, :bar` defines both initializer and public readers. Shortcut for:
+
+``` ruby
+attr_initialize :foo, :bar
+attr_reader :foo, :bar
+```
+
+`attr_reader_initialize` is an alias for `rattr_initialize`.
+
+Example:
+
+``` ruby
+class PublishBook
+  rattr_initalize :book_name, :publisher_backend
+
+  def call
+    publisher_backend.publish book_name
+  end
+end
+
+service = PublishBook.new("A Novel")
+service.book_name # => "A Novel"
+```
+
+[The `attr_initialize` notation](#attr_initialize) for hash arguments is also supported: `rattr_initialize :foo, [:bar, :baz!]`
 
 ### `static_facade`
 

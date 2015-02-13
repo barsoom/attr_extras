@@ -11,7 +11,7 @@ describe Object, ".attr_implement" do
     exception.message.must_equal "Implement a 'foo()' method"
   end
 
-  it "allows specifying arity and argument names" do
+  it "accepts specifying arity and argument names" do
     klass = Class.new do
       attr_implement :foo, [:name, :age]
     end
