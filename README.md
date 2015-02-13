@@ -35,17 +35,39 @@ Also provides conveniences for creating value objects, method objects, query met
 
 ## Usage
 
-* [`pattr_initialize`](#pattr_initialize)
-* [`vattr_initialize`](#vattr_initialize)
 * [`attr_initialize`](#attr_initialize)
 * [`attr_private`](#attr_private)
 * [`attr_value`](#attr_value)
+* [`pattr_initialize`](#pattr_initialize)
+* [`vattr_initialize`](#vattr_initialize)
 * [`static_facade`](#static_facade)
 * [`method_object`](#method_object)
 * [`attr_implement`](#attr_implement)
 * [`attr_query`](#attr_query)
 * [`attr_id_query`](#attr_id_query)
 
+
+### `attr_initialize`
+
+`attr_initialize :foo, :bar` defines an initializer that takes two arguments and assigns `@foo` and `@bar`.
+
+`attr_initialize :foo, [:bar, :baz!]` defines an initializer that takes one regular argument, assigning `@foo`, and one hash argument, assigning `@bar` (optional) and `@baz` (required).
+
+`attr_initialize [:bar, :baz!]` defines an initializer that takes one hash argument, assigning `@bar` (optional) and `@baz` (required).
+
+`attr_initialize` can also accept a block which will be invoked after initialization. This is useful for calling `super` appropriately in subclasses or initializing private data as necessary.
+
+
+### `attr_private`
+
+`attr_private :foo, :bar` defines private readers for `@foo` and `@bar`.
+
+
+### `attr_value`
+
+`attr_value :foo, :bar` defines public readers for `@foo` and `@bar` and also defines object equality: two value objects of the same class with the same values will be considered equal (with `==` and `eql?`, in `Set`s, as `Hash` keys etc).
+
+It does not define writers, because [value objects](http://en.wikipedia.org/wiki/Value_object) are typically immutable.
 
 
 ### `pattr_initialize`
@@ -95,29 +117,6 @@ Country.new("SE").code  # => "SE"
 ```
 
 [The `attr_initialize` notation](#attr_initialize) for hash arguments is also supported: `vattr_initialize :foo, [:bar, :baz!]`
-
-
-### `attr_initialize`
-
-`attr_initialize :foo, :bar` defines an initializer that takes two arguments and assigns `@foo` and `@bar`.
-
-`attr_initialize :foo, [:bar, :baz!]` defines an initializer that takes one regular argument, assigning `@foo`, and one hash argument, assigning `@bar` (optional) and `@baz` (required).
-
-`attr_initialize [:bar, :baz!]` defines an initializer that takes one hash argument, assigning `@bar` (optional) and `@baz` (required).
-
-`attr_initialize` can also accept a block which will be invoked after initialization. This is useful for calling `super` appropriately in subclasses or initializing private data as necessary.
-
-
-### `attr_private`
-
-`attr_private :foo, :bar` defines private readers for `@foo` and `@bar`.
-
-
-### `attr_value`
-
-`attr_value :foo, :bar` defines public readers for `@foo` and `@bar` and also defines object equality: two value objects of the same class with the same values will be considered equal (with `==` and `eql?`, in `Set`s, as `Hash` keys etc).
-
-It does not define writers, because [value objects](http://en.wikipedia.org/wiki/Value_object) are typically immutable.
 
 
 ### `static_facade`
