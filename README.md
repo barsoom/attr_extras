@@ -341,6 +341,7 @@ Or to see warnings (try not to have any):
 * [Teo Ljungberg](https://github.com/teoljungberg)
 * [Kim Persson](https://github.com/lavinia)
 * [Joe Ferris](https://github.com/jferris)
+* [Julien Vanier](https://github.com/monkbroc)
 
 
 ## License
