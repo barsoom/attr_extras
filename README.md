@@ -81,7 +81,7 @@ attr_initialize :foo, :bar
 attr_private :foo, :bar
 ```
 
-`attr_private_initialize` is an alias for `pattr_initialize`.
+`pattr_initialize` is aliased as `attr_private_initialize` if you prefer a longer but clearer name.
 
 Example:
 
@@ -109,7 +109,7 @@ attr_initialize :foo, :bar
 attr_value :foo, :bar
 ```
 
-`attr_value_initialize` is an alias for `vattr_initialize`.
+`vattr_initialize` is aliased as `attr_value_initialize` if you prefer a longer but clearer name.
 
 Example:
 
@@ -135,7 +135,7 @@ attr_initialize :foo, :bar
 attr_reader :foo, :bar
 ```
 
-`attr_reader_initialize` is an alias for `rattr_initialize`.
+`rattr_initialize` is aliased as `attr_reader_initialize` if you prefer a longer but clearer name.
 
 Example:
 
@@ -149,7 +149,7 @@ class PublishBook
 end
 
 service = PublishBook.new("A Novel")
-service.book_name # => "A Novel"
+service.book_name  # => "A Novel"
 ```
 
 [The `attr_initialize` notation](#attr_initialize) for hash arguments is also supported: `rattr_initialize :foo, [:bar, :baz!]`
