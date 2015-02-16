@@ -1,5 +1,6 @@
 require "attr_extras/version"
 require "attr_extras/attr_initialize"
+require "attr_extras/attr_value"
 require "attr_extras/attr_query"
 require "attr_extras/utils"
 
@@ -19,21 +20,7 @@ module AttrExtras
     end
 
     def attr_value(*names)
-      attr_reader(*names)
-
-      define_method(:==) do |other|
-        return false unless other.is_a?(self.class)
-
-        names.all? { |attr| self.public_send(attr) == other.public_send(attr) }
-      end
-
-      # Both #eql? and #hash are required for hash identity.
-
-      alias_method :eql?, :==
-
-      define_method(:hash) do
-        [ self.class, *names.map { |attr| public_send(attr) } ].hash
-      end
+      AttrValue.new(self, *names).apply
     end
 
     def pattr_initialize(*names, &block)
