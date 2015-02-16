@@ -27,13 +27,14 @@ class AttrExtras::AttrValue
       names.all? { |attr| self.public_send(attr) == other.public_send(attr) }
     end
 
-    # Both #eql? and #hash are required for hash identity.
-
-    klass.send(:alias_method, :eql?, :==)
   end
 
   def define_hash_identity
     names = @names
+
+    # Both #eql? and #hash are required for hash identity.
+
+    klass.send(:alias_method, :eql?, :==)
 
     klass.send(:define_method, :hash) do
       [ self.class, *names.map { |attr| public_send(attr) } ].hash
