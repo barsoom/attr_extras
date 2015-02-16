@@ -19,18 +19,17 @@ class AttrExtras::AttrValue
   end
 
   def define_equals
-    names = @names
+    names = @names  # Make available within block.
 
     klass.send(:define_method, :==) do |other|
       return false unless other.is_a?(self.class)
 
       names.all? { |attr| self.public_send(attr) == other.public_send(attr) }
     end
-
   end
 
   def define_hash_identity
-    names = @names
+    names = @names  # Make available within block.
 
     # Both #eql? and #hash are required for hash identity.
 
