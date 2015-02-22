@@ -39,7 +39,7 @@ class AttrExtras::AttrInitialize
     end
   end
 
-  def set_ivar_from_args instance, args, value
+  def set_ivar_from_args(instance, args, value)
     case args
     when Array
       hash = value || {}

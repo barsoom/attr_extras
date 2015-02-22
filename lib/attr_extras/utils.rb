@@ -1,6 +1,6 @@
 module AttrExtras::Utils
   def self.flat_names(names)
-    names.map do |x|
+    names.flat_map { |x|
       case x
       when Array
         flat_names(x)
@@ -9,6 +9,6 @@ module AttrExtras::Utils
       else
         x.to_s.sub(/!\z/, "")
       end
-    end.flatten
+    }
   end
 end
