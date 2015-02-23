@@ -1,4 +1,4 @@
-require_relative "spec_helper"
+require "spec_helper"
 
 describe Object, ".method_object" do
   it "creates a .call class method that instantiates and runs the #call instance method" do

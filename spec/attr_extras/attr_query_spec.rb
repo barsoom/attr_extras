@@ -1,4 +1,4 @@
-require_relative "spec_helper"
+require "spec_helper"
 
 describe Object, ".attr_query" do
   it "creates attribute query methods" do

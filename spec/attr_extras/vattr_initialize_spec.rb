@@ -1,4 +1,4 @@
-require_relative "spec_helper"
+require "spec_helper"
 
 describe Object, ".vattr_initialize" do
   it "creates initializer, value readers and value object identity" do

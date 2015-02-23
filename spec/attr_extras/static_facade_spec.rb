@@ -1,4 +1,4 @@
-require_relative "spec_helper"
+require "spec_helper"
 
 describe Object, ".static_facade" do
   it "creates a class method that instantiates and runs that instance method" do
