@@ -77,7 +77,7 @@ module AttrExtras
               raise ArgumentError, "wrong number of arguments (#{provided_arity} for #{arity})"
             end
 
-            raise "Implement a '#{name}(#{arg_names.join(", ")})' method"
+            raise NotImplementedError, "Implement a '#{name}(#{arg_names.join(", ")})' method"
           else
             super(name, *args)
           end

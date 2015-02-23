@@ -7,7 +7,7 @@ describe Object, ".attr_implement" do
     end
 
     example = klass.new
-    exception = lambda { example.foo }.must_raise RuntimeError
+    exception = lambda { example.foo }.must_raise NotImplementedError
     exception.message.must_equal "Implement a 'foo()' method"
   end
 
@@ -18,7 +18,7 @@ describe Object, ".attr_implement" do
 
     example = klass.new
 
-    exception = lambda { example.foo(1, 2) }.must_raise RuntimeError
+    exception = lambda { example.foo(1, 2) }.must_raise NotImplementedError
     exception.message.must_equal "Implement a 'foo(name, age)' method"
 
     lambda { example.foo }.must_raise ArgumentError
@@ -64,5 +64,21 @@ describe Object, ".attr_implement" do
     end
 
     lambda { klass.new.some_other_method }.must_raise NoMethodError
+  end
+
+  it "raises an exception that is not caught by a generic runtime error rescue" do
+    klass = Class.new do
+      attr_implement :foo
+    end
+
+    example = klass.new
+    exception = lambda {
+      begin
+        example.foo
+      rescue
+        "Runtime error occured"
+      end
+    }.must_raise NotImplementedError
+    exception.message.must_equal "Implement a 'foo()' method"
   end
 end
