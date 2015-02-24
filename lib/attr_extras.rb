@@ -88,8 +88,9 @@ module AttrExtras
     end
   end
 
-  # MethodNotImplementedError inherits from Exception instead of StandardError so
-  # it will not be rescued unless it is specified explicitly (or its ancestor Exception).
+  # To prevents masking coding errors, MethodNotImplementedError inherits
+  # from Exception instead of StandardError so it will not be rescued
+  # unless it is specified explicitly (or its ancestor Exception).
   class MethodNotImplementedError < Exception
   end
 end
