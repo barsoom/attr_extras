@@ -77,7 +77,7 @@ module AttrExtras
               raise ArgumentError, "wrong number of arguments (#{provided_arity} for #{arity})"
             end
 
-            raise NotImplementedError, "Implement a '#{name}(#{arg_names.join(", ")})' method"
+            raise MethodNotImplementedError, "Implement a '#{name}(#{arg_names.join(", ")})' method"
           else
             super(name, *args)
           end
@@ -86,6 +86,11 @@ module AttrExtras
 
       include mod
     end
+  end
+
+  # MethodNotImplementedError inherits from Exception instead of StandardError so
+  # it will not be rescued unless it is specified explicitly (or its ancestor Exception).
+  class MethodNotImplementedError < Exception
   end
 end
 
