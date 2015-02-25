@@ -7,7 +7,7 @@ describe Object, ".attr_implement" do
     end
 
     example = klass.new
-    exception = lambda { example.foo }.must_raise RuntimeError
+    exception = lambda { example.foo }.must_raise AttrExtras::MethodNotImplementedError
     exception.message.must_equal "Implement a 'foo()' method"
   end
 
@@ -18,7 +18,7 @@ describe Object, ".attr_implement" do
 
     example = klass.new
 
-    exception = lambda { example.foo(1, 2) }.must_raise RuntimeError
+    exception = lambda { example.foo(1, 2) }.must_raise AttrExtras::MethodNotImplementedError
     exception.message.must_equal "Implement a 'foo(name, age)' method"
 
     lambda { example.foo }.must_raise ArgumentError
