@@ -5,6 +5,9 @@ require "attr_extras/attr_query"
 require "attr_extras/utils"
 
 module AttrExtras
+  # To avoid masking coding errors, we don't inherit from StandardError (which would be implicitly rescued). Forgetting to define a requisite method isn't just some runtime error.
+  class MethodNotImplementedError < Exception; end
+
   module ModuleMethods
     def attr_initialize(*names, &block)
       AttrInitialize.new(self, names, block).apply
@@ -86,12 +89,6 @@ module AttrExtras
 
       include mod
     end
-  end
-
-  # To prevents masking coding errors, MethodNotImplementedError inherits
-  # from Exception instead of StandardError so it will not be rescued
-  # unless it is specified explicitly (or its ancestor Exception).
-  class MethodNotImplementedError < Exception
   end
 end
 
