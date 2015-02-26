@@ -69,4 +69,46 @@ describe Object, ".attr_initialize" do
 
     example.copy.must_equal "expected"
   end
+
+  it "allows optional attributes with default values" do
+    klass = Class.new do
+      attr_initialize :foo, :bar => "Bar"
+    end
+
+    example = klass.new("Foo")
+    example.instance_variable_get("@bar").must_equal "Bar"
+  end
+
+  it "overwrites default values for optional attributes" do
+    klass = Class.new do
+      attr_initialize :foo, :bar => "Bar"
+    end
+
+    example = klass.new("Foo", "Rab")
+    example.instance_variable_get("@bar").must_equal "Rab"
+  end
+
+  it "allows hash attributes with default and required value" do
+    klass = Class.new do
+      attr_initialize :foo, [:required!, :bar => "Bar", :baz => "Baz"]
+    end
+
+    example = klass.new("Foo", required: "X")
+    example.instance_variable_get("@foo").must_equal "Foo"
+    example.instance_variable_get("@required").must_equal "X"
+    example.instance_variable_get("@bar").must_equal "Bar"
+    example.instance_variable_get("@baz").must_equal "Baz"
+
+    lambda { klass.new("Foo") }.must_raise KeyError
+  end
+
+  it "overwrites default values for hash attributes" do
+    klass = Class.new do
+      attr_initialize :foo, [:bar => "Bar", :baz => "Baz"]
+    end
+
+    example = klass.new("Foo", :bar => "Rab", :baz => "Zab")
+    example.instance_variable_get("@bar").must_equal "Rab"
+    example.instance_variable_get("@baz").must_equal "Zab"
+  end
 end
