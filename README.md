@@ -330,6 +330,10 @@ Other than being more to type, declaring `attr_reader` after `private` will actu
 
 If you don't want the dependency on `attr_extras`, you can get rid of the warnings with `attr_reader :foo; private :foo`. Or just define a regular private method.
 
+### Can I use attr\_extras in `BasicObject`s?
+
+No, sorry. It depends on various methods that `BasicObject`s don't have. Use a regular `Object` or make do without attr\_extras.
+
 
 ## Installation
 
