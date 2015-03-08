@@ -9,12 +9,12 @@ module AttrExtras
   class MethodNotImplementedError < Exception; end
 
   def self.mixin
-    self::ModuleMethods
+    self::Mixin
   end
 
   # Separate module so that mixing in the methods doesn't also mix in constants:
   # http://thepugautomatic.com/2014/02/private-api/
-  module ModuleMethods
+  module Mixin
     def attr_initialize(*names, &block)
       AttrInitialize.new(self, names, block).apply
     end
