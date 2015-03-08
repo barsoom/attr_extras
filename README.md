@@ -286,6 +286,29 @@ though it is shorter, more declarative, gives you a clear message and handles ed
 `attr_id_query :foo?, :bar?` defines query methods like `foo?`, which is true if (and only if) `foo_id` is truthy. Goes well with Active Record.
 
 
+## Explicit mode
+
+By default, attr\_extras will add methods to every class and module.
+
+This is not ideal if you're using attr\_extras in a library: those who depend on your library will get those methods as well.
+
+It's also not obvious where the methods come from. You can be more explicit about it, and restrict where the methods are added, like this:
+
+```
+require "attr_extras/explicit"
+
+class MyLib
+  extend AttrExtras.mixin
+
+  pattr_initialize :now_this_class_can_use_attr_extras
+end
+```
+
+Crucially, you need to `require "attr_extras/explicit"` *instead of* `require "attr_extras"`. Some frameworks, like Ruby on Rails, may automatically require everything in your `Gemfile`. You can avoid that with `gem "attr_extras", require: "attr_extras/explicit"`.
+
+In explicit mode, you need to call `extend AttrExtras.mixin` *in every class* that wants the attr\_extras methods.
+
+
 ## Philosophy
 
 Findability is a core value.
@@ -332,6 +355,8 @@ Run them with:
 Or to see warnings (try not to have any):
 
 `RUBYOPT=-w rake`
+
+The tests are intentionally split into two test suites for reasons described in `Rakefile`.
 
 
 ## Contributors

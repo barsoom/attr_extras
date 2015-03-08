@@ -1,5 +1,2 @@
-require "minitest/autorun"
-require "minitest/pride"
-
-$: << File.dirname(__FILE__) + "/../lib"
+require "spec_helper_without_loading_attr_extras"
 require "attr_extras"

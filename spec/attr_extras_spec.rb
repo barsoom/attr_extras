@@ -1,7 +1,7 @@
 require "spec_helper"
 
-describe AttrExtras, "in modules" do
-  it "is supported" do
+describe AttrExtras do
+  it "mixes helpers into all Modules (and thus all Classes)" do
     mod = Module.new do
       pattr_initialize :name
     end
