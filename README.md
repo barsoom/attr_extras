@@ -294,7 +294,7 @@ This is not ideal if you're using attr\_extras in a library: those who depend on
 
 It's also not obvious where the methods come from. You can be more explicit about it, and restrict where the methods are added, like this:
 
-```
+``` ruby
 require "attr_extras/explicit"
 
 class MyLib
