@@ -8,6 +8,8 @@ module AttrExtras
   # To avoid masking coding errors, we don't inherit from StandardError (which would be implicitly rescued). Forgetting to define a requisite method isn't just some runtime error.
   class MethodNotImplementedError < Exception; end
 
+  # Separate module for `include`ing so that mixing in the methods doesn't also mix in constants:
+  # http://thepugautomatic.com/2014/02/private-api/
   module ModuleMethods
     def attr_initialize(*names, &block)
       AttrInitialize.new(self, names, block).apply
