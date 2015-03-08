@@ -306,7 +306,7 @@ end
 
 Crucially, you need to `require "attr_extras/explicit"` *instead of* `require "attr_extras"`. Some frameworks, like Ruby on Rails, may automatically require everything in your `Gemfile`. You can avoid that with `gem "attr_extras", require: "attr_extras/explicit"`.
 
-In explicit mode, you need to call `extend AttrExtras.mixin` *in every class* that wants the attr\_extras methods.
+In explicit mode, you need to call `extend AttrExtras.mixin` *in every class or module* that wants the attr\_extras methods.
 
 
 ## Philosophy
