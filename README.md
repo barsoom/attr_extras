@@ -275,6 +275,23 @@ end
 
 though it is shorter, more declarative, gives you a clear message and handles edge cases you might not have thought about (see tests).
 
+Note that you can also use this with modules, to effectively mix in interfaces:
+
+``` ruby
+module Bookable
+  attr_implement :book, [:bookable]
+  attr_implement :booked?
+end
+
+class Invoice
+  include Bookable
+end
+
+class Payment
+  include Bookable
+end
+```
+
 
 ### `attr_query`
 
