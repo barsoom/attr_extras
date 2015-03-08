@@ -26,6 +26,7 @@ class AttrExtras::AttrImplement
       end
     end
 
-    @klass.include(mod)
+    # include is private in Ruby 2.0 and earlier.
+    @klass.send(:include, mod)
   end
 end
