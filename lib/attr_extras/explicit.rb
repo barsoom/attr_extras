@@ -2,6 +2,7 @@ require "attr_extras/version"
 require "attr_extras/attr_initialize"
 require "attr_extras/attr_value"
 require "attr_extras/attr_query"
+require "attr_extras/attr_implement"
 require "attr_extras/utils"
 
 module AttrExtras
@@ -74,26 +75,7 @@ module AttrExtras
     end
 
     def attr_implement(*names)
-      arg_names = names.last.is_a?(Array) ? names.pop : []
-      arity = arg_names.length
-
-      mod = Module.new do
-        define_method :method_missing do |name, *args|
-          if names.include?(name)
-            provided_arity = args.length
-
-            if provided_arity != arity
-              raise ArgumentError, "wrong number of arguments (#{provided_arity} for #{arity})"
-            end
-
-            raise MethodNotImplementedError, "Implement a '#{name}(#{arg_names.join(", ")})' method"
-          else
-            super(name, *args)
-          end
-        end
-      end
-
-      include mod
+      AttrImplement.new(self, names).apply
     end
   end
 end
