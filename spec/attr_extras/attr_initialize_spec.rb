@@ -33,6 +33,18 @@ describe Object, ".attr_initialize" do
     example.instance_variable_get("@baz").must_equal "Baz"
   end
 
+  it "blablabla" do
+    klass = Class.new do
+      attr_initialize :foo, [:bar, :baz => "WOW", :victor => "arias"]
+    end
+
+    example = klass.new("Foo", :bar => "Bar", victor: "garcia")
+    example.instance_variable_get("@foo").must_equal "Foo"
+    example.instance_variable_get("@bar").must_equal "Bar"
+    example.instance_variable_get("@victor").must_equal "arias"
+    example.instance_variable_get("@baz").must_equal "WOW"
+  end
+
   it "treats hash values as optional" do
     klass = Class.new do
       attr_initialize :foo, [:bar, :baz]
