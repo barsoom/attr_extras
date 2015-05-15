@@ -22,19 +22,15 @@ class AttrExtras::AttrInitialize
 
     klass.send(:define_method, :initialize) do |*values|
       validate_arity.call(values.length, self.class)
+      plain_values, hash_values = values.partition { |value| !value.is_a?(Hash) }
 
-      names.zip(values).each do |name_or_names, value|
-        if name_or_names.is_a?(Array)
-          value = default_values.merge(value || {})
-          hash = value || {}
+      attributes.plain.zip(plain_values).each do |name, value|
+        instance_variable_set("@#{name}", value)
+      end
 
-          name_or_names.each do |name|
-            set_ivar_from_hash.call(self, name, hash)
-          end
-        else
-          name = name_or_names
-          instance_variable_set("@#{name}", value)
-        end
+      hash_values_with_defaults = attributes.default_values.merge(hash_values.first || {})
+      attributes.hash.each do |name|
+        set_ivar_from_hash.call(self, name, hash_values_with_defaults)
       end
 
       if block
