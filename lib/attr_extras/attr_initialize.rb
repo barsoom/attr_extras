@@ -16,20 +16,20 @@ class AttrExtras::AttrInitialize
     validate_arity = method(:validate_arity)
     set_ivar_from_hash = method(:set_ivar_from_hash)
 
-    attributes = AttributesDeclaration.new(names)
+    declaration = AttributesDeclaration.new(names)
 
     klass.send(:define_method, :initialize) do |*values|
       validate_arity.call(values.length, self.class)
 
-      positional_attributes_values = values.take(attributes.positional.count)
-      hash_attributes_values = values.drop(attributes.positional.count)
+      positional_attributes_values = values.take(declaration.positional_attributes.count)
+      hash_attributes_values = values.drop(declaration.positional_attributes.count)
 
-      attributes.positional.zip(positional_attributes_values).each do |name, value|
+      declaration.positional_attributes.zip(positional_attributes_values).each do |name, value|
         instance_variable_set("@#{name}", value)
       end
 
-      hash_values_with_defaults = attributes.default_values.merge(hash_attributes_values.first || {})
-      attributes.hash.each do |name|
+      hash_values_with_defaults = declaration.default_values.merge(hash_attributes_values.first || {})
+      declaration.hash_attributes.each do |name|
         set_ivar_from_hash.call(self, name, hash_values_with_defaults)
       end
 

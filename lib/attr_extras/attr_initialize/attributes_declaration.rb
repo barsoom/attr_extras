@@ -10,7 +10,7 @@ module AttrExtras
         @names_with_array_of_hash_arguments = names_with_array_of_hash_arguments
       end
 
-      def positional
+      def positional_attributes
         return @attributes_names if @attributes_names
 
         @attributes_names = names_with_array_of_hash_arguments.take_while { |name_or_array| !name_or_array.is_a?(Array) }
@@ -19,7 +19,7 @@ module AttrExtras
         @attributes_names
       end
 
-      def hash
+      def hash_attributes
         @hash_names ||= hash_names_without_default_values + default_values.keys
       end
 
@@ -33,7 +33,7 @@ module AttrExtras
       private
 
       def hash_names_with_default_values
-        (names_with_array_of_hash_arguments - positional).flatten
+        (names_with_array_of_hash_arguments - positional_attributes).flatten
       end
 
       def hash_names_without_default_values
