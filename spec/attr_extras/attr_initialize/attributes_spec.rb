@@ -30,4 +30,14 @@ describe AttrExtras::AttrInitialize::Attributes do
     attributes.hash.must_equal [ :foo, :bar ]
     attributes.default_values.must_be_empty
   end
+
+  it "handles just hash arguments with default values" do
+    just_hash_arguments_with_default_values = [[ foo: "bar", wow: "uhu" ]]
+
+    attributes = AttrExtras::AttrInitialize::Attributes.new(just_hash_arguments_with_default_values)
+
+    attributes.plain.must_be_empty
+    attributes.hash.must_equal [ :foo, :wow ]
+    attributes.default_values.must_equal foo: "bar", wow: "uhu"
+  end
 end
