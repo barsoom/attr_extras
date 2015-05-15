@@ -11,6 +11,16 @@ describe AttrExtras::AttrInitialize::Attributes do
     attributes.default_values.must_equal baz: "WOW", victor: "arias"
   end
 
+  it "handles plain arguments with hash arguments without default values" do
+    names = [ :foo, :fuu, [ :bar, :bor ]]
+
+    attributes = AttrExtras::AttrInitialize::Attributes.new(names)
+
+    attributes.plain.must_equal [ :foo, :fuu ]
+    attributes.hash.must_equal [ :bar, :bor ]
+    attributes.default_values.must_be_empty
+  end
+
   it "handles just plain arguments" do
     no_hash_argument = [ :foo, :bar ]
 
