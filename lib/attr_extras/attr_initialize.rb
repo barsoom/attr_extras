@@ -1,4 +1,4 @@
-require "attr_extras/attr_initialize/extract_hash_default_values"
+require "attr_extras/attr_initialize/attributes"
 
 class AttrExtras::AttrInitialize
   def initialize(klass, names, block)
@@ -16,7 +16,7 @@ class AttrExtras::AttrInitialize
     validate_arity = method(:validate_arity)
     set_ivar_from_hash = method(:set_ivar_from_hash)
 
-    names, default_values = ExtractHashDefaultValues.call(names)
+    names, default_values = Attributes.call(names)
 
     klass.send(:define_method, :initialize) do |*values|
       validate_arity.call(values.length, self.class)
