@@ -22,7 +22,7 @@ class AttrExtras::AttrInitialize
       validate_arity.call(values.length, self.class)
 
       positional_attributes_values = values.take(attributes.positional.count)
-      hash_attributes_values = values.drop(attributes.positional.count) || []
+      hash_attributes_values = values.drop(attributes.positional.count)
 
       attributes.positional.zip(positional_attributes_values).each do |name, value|
         instance_variable_set("@#{name}", value)
