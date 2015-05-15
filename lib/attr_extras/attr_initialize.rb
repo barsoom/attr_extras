@@ -17,8 +17,6 @@ class AttrExtras::AttrInitialize
     set_ivar_from_hash = method(:set_ivar_from_hash)
 
     attributes = Attributes.new(names)
-    names = attributes.plain + [ attributes.hash ]
-    default_values = attributes.default_values
 
     klass.send(:define_method, :initialize) do |*values|
       validate_arity.call(values.length, self.class)
