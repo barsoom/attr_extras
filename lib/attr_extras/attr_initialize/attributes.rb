@@ -1,6 +1,9 @@
 module AttrExtras
   class AttrInitialize
     class Attributes
+      attr_reader :names_with_array_of_hash_arguments
+      private :names_with_array_of_hash_arguments
+
       def initialize(names_with_array_of_hash_arguments)
         @names_with_array_of_hash_arguments = names_with_array_of_hash_arguments
       end
@@ -29,8 +32,6 @@ module AttrExtras
       def hash_names_without_default_values
         hash_names_with_default_values.take_while { |name| !name.is_a?(Hash) }
       end
-
-      attr_reader :names_with_array_of_hash_arguments
     end
   end
 end
