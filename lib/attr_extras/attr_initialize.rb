@@ -1,3 +1,5 @@
+require "attr_extras/attr_initialize/attributes_declaration"
+
 class AttrExtras::AttrInitialize
   def initialize(klass, names, block)
     @klass, @names, @block = klass, names, block
@@ -14,20 +16,21 @@ class AttrExtras::AttrInitialize
     validate_arity = method(:validate_arity)
     set_ivar_from_hash = method(:set_ivar_from_hash)
 
+    declaration = AttributesDeclaration.new(names)
+
     klass.send(:define_method, :initialize) do |*values|
       validate_arity.call(values.length, self.class)
 
-      names.zip(values).each do |name_or_names, value|
-        if name_or_names.is_a?(Array)
-          hash = value || {}
+      positional_attributes_values = values.take(declaration.positional_attributes.count)
+      hash_attributes_values = values.drop(declaration.positional_attributes.count)
 
-          name_or_names.each do |name|
-            set_ivar_from_hash.call(self, name, hash)
-          end
-        else
-          name = name_or_names
-          instance_variable_set("@#{name}", value)
-        end
+      declaration.positional_attributes.zip(positional_attributes_values).each do |name, value|
+        instance_variable_set("@#{name}", value)
+      end
+
+      hash_values_with_defaults = declaration.default_values.merge(hash_attributes_values.first || {})
+      declaration.hash_attributes.each do |name|
+        set_ivar_from_hash.call(self, name, hash_values_with_defaults)
       end
 
       if block
