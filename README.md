@@ -29,7 +29,7 @@ end
 
 This nicely complements Ruby's built-in `attr_accessor`, `attr_reader` and `attr_writer`.
 
-Supports positional arguments as well as optional and required hash arguments.
+Supports positional arguments as well as optional and required hash arguments with or without default values.
 
 Also provides conveniences for creating value objects, method objects, query methods and abstract methods.
 
@@ -56,6 +56,8 @@ Also provides conveniences for creating value objects, method objects, query met
 `attr_initialize :foo, [:bar, :baz!]` defines an initializer that takes one regular argument, assigning `@foo`, and one hash argument, assigning `@bar` (optional) and `@baz` (required).
 
 `attr_initialize [:bar, :baz!]` defines an initializer that takes one hash argument, assigning `@bar` (optional) and `@baz` (required).
+
+`attr_initialize [ :foo, bar: "baz" ]` defines an initializer that takes one hash argument, assigning `@foo` (optional) and `@bar` (optional with a default value of `"baz"`).
 
 `attr_initialize` can also accept a block which will be invoked after initialization. This is useful for calling `super` appropriately in subclasses or initializing private data as necessary.
 
@@ -371,13 +373,17 @@ Or install it yourself as:
 
 Run them with:
 
-`rake`
+    rake
 
 Or to see warnings (try not to have any):
 
-`RUBYOPT=-w rake`
+    RUBYOPT=-w rake
 
 The tests are intentionally split into two test suites for reasons described in `Rakefile`.
+
+You can run an individual test using the [m](https://github.com/qrush/m) gem:
+
+    m spec/m spec/attr_extras/attr_initialize_spec.rb:48
 
 
 ## Contributors
