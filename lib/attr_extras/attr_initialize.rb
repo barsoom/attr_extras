@@ -16,14 +16,17 @@ class AttrExtras::AttrInitialize
     validate_arity = method(:validate_arity)
     set_ivar_from_hash = method(:set_ivar_from_hash)
 
-    names, default_values = Attributes.call(names)
+    #names, default_values = Attributes.new(names)
+    attributes = Attributes.new(names)
+    names = attributes.plain + [ attributes.hash ]
+    default_values = attributes.default_values
 
     klass.send(:define_method, :initialize) do |*values|
       validate_arity.call(values.length, self.class)
 
       names.zip(values).each do |name_or_names, value|
         if name_or_names.is_a?(Array)
-          value = default_values.merge(value)
+          value = default_values.merge(value || {})
           hash = value || {}
 
           name_or_names.each do |name|
