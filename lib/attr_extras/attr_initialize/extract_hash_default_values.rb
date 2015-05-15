@@ -19,10 +19,13 @@ module AttrExtras
         default_values = (hash_names - hash_names_without_default_values).first
 
         hash_names_with_default_values = default_values ? default_values.keys : []
-        hash_names = hash_names_with_default_values + hash_names_without_default_values
+        hash_names = hash_names_without_default_values + hash_names_with_default_values
+
+        attributes_names = plain_names
+        attributes_names << hash_names if hash_names.any?
 
         [
-          plain_names + [ hash_names_without_default_values + hash_names_with_default_values ],
+          attributes_names,
           default_values
         ]
       end

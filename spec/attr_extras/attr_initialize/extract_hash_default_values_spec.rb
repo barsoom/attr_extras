@@ -2,7 +2,7 @@ require "spec_helper"
 
 describe AttrExtras::AttrInitialize::ExtractHashDefaultValues, "#call" do
   it "extracts hash arguments and their default values" do
-    names = [:foo, :fuu, [:bar, :bor, {:baz=>"WOW", :victor=>"arias"}]]
+    names = [ :foo, :fuu, [ :bar, :bor, { :baz => "WOW", :victor => "arias" } ]]
 
     extracted_names, default_values = extract(names)
 

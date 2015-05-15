@@ -16,6 +16,7 @@ Gem::Specification.new do |gem|
   gem.version       = AttrExtras::VERSION
 
   gem.add_development_dependency "minitest", ">= 5"
+  gem.add_development_dependency "m", "~> 1.3.1"
 
   # For Travis CI.
   gem.add_development_dependency "rake"
