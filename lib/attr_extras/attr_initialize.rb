@@ -16,7 +16,6 @@ class AttrExtras::AttrInitialize
     validate_arity = method(:validate_arity)
     set_ivar_from_hash = method(:set_ivar_from_hash)
 
-    #names, default_values = Attributes.new(names)
     attributes = Attributes.new(names)
     names = attributes.plain + [ attributes.hash ]
     default_values = attributes.default_values
