@@ -50,4 +50,12 @@ describe AttrExtras::AttrInitialize::Attributes do
     attributes.hash.must_equal [ :foo, :wow ]
     attributes.default_values.must_equal foo: "bar", wow: "uhu"
   end
+
+  it "raises when there is a positional argument after the hash arguments" do
+    invalid_attribute_names = [ :foo, [ :bar ], :baz ]
+
+    attributes = AttrExtras::AttrInitialize::Attributes.new(invalid_attribute_names)
+
+    lambda { attributes.hash }.must_raise AttrExtras::InvalidParameterDeclaration
+  end
 end

@@ -1,4 +1,6 @@
 module AttrExtras
+  InvalidParameterDeclaration = Class.new(StandardError)
+
   class AttrInitialize
     class Attributes
       attr_reader :names_with_array_of_hash_arguments
@@ -9,7 +11,12 @@ module AttrExtras
       end
 
       def positional
-        @attributes_names ||= names_with_array_of_hash_arguments.take_while { |name_or_array| !name_or_array.is_a?(Array) }
+        return @attributes_names if @attributes_names
+
+        @attributes_names = names_with_array_of_hash_arguments.take_while { |name_or_array| !name_or_array.is_a?(Array) }
+        raise InvalidParameterDeclaration if (names_with_array_of_hash_arguments - @attributes_names).count > 1
+
+        @attributes_names
       end
 
       def hash
