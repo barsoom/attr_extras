@@ -1,4 +1,4 @@
-require "attr_extras/attr_initialize/attributes"
+require "attr_extras/attr_initialize/attributes_declaration"
 
 class AttrExtras::AttrInitialize
   def initialize(klass, names, block)
@@ -16,7 +16,7 @@ class AttrExtras::AttrInitialize
     validate_arity = method(:validate_arity)
     set_ivar_from_hash = method(:set_ivar_from_hash)
 
-    attributes = Attributes.new(names)
+    attributes = AttributesDeclaration.new(names)
 
     klass.send(:define_method, :initialize) do |*values|
       validate_arity.call(values.length, self.class)

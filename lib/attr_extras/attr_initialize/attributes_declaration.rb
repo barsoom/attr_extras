@@ -2,7 +2,7 @@ module AttrExtras
   InvalidParameterDeclaration = Class.new(StandardError)
 
   class AttrInitialize
-    class Attributes
+    class AttributesDeclaration
       attr_reader :names_with_array_of_hash_arguments
       private :names_with_array_of_hash_arguments
 
