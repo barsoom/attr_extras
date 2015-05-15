@@ -45,6 +45,15 @@ describe Object, ".attr_initialize" do
     example.instance_variable_get("@baz").must_equal "WOW"
   end
 
+  it "accepts a hash as a plain argument" do
+    klass = Class.new do
+      attr_initialize :foo
+    end
+
+    example = klass.new({ such: "hash" })
+    example.instance_variable_get("@foo").must_equal({ such: "hash" })
+  end
+
   it "treats hash values as optional" do
     klass = Class.new do
       attr_initialize :foo, [:bar, :baz]

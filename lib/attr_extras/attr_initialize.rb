@@ -20,13 +20,15 @@ class AttrExtras::AttrInitialize
 
     klass.send(:define_method, :initialize) do |*values|
       validate_arity.call(values.length, self.class)
-      plain_values, hash_values = values.partition { |value| !value.is_a?(Hash) }
 
-      attributes.plain.zip(plain_values).each do |name, value|
+      plain_attributes_values = values.take(attributes.plain.count)
+      hash_attributes_values = values.drop(attributes.plain.count) || []
+
+      attributes.plain.zip(plain_attributes_values).each do |name, value|
         instance_variable_set("@#{name}", value)
       end
 
-      hash_values_with_defaults = attributes.default_values.merge(hash_values.first || {})
+      hash_values_with_defaults = attributes.default_values.merge(hash_attributes_values.first || {})
       attributes.hash.each do |name|
         set_ivar_from_hash.call(self, name, hash_values_with_defaults)
       end
