@@ -21,10 +21,10 @@ class AttrExtras::AttrInitialize
     klass.send(:define_method, :initialize) do |*values|
       validate_arity.call(values.length, self.class)
 
-      plain_attributes_values = values.take(attributes.plain.count)
-      hash_attributes_values = values.drop(attributes.plain.count) || []
+      positional_attributes_values = values.take(attributes.positional.count)
+      hash_attributes_values = values.drop(attributes.positional.count) || []
 
-      attributes.plain.zip(plain_attributes_values).each do |name, value|
+      attributes.positional.zip(positional_attributes_values).each do |name, value|
         instance_variable_set("@#{name}", value)
       end
 
