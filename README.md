@@ -371,11 +371,15 @@ Or install it yourself as:
 
 Run them with:
 
-`rake`
+    rake
 
 Or to see warnings (try not to have any):
 
-`RUBYOPT=-w rake`
+    RUBYOPT=-w rake
+
+You can run an individual test using the [m](https://github.com/qrush/m) gem:
+
+    m spec/attr_extras/attr_initialize_spec.rb:48
 
 The tests are intentionally split into two test suites for reasons described in `Rakefile`.
 
