@@ -54,6 +54,13 @@ module AttrExtras
 
     alias_method :attr_reader_initialize, :rattr_initialize
 
+    def aattr_initialize(*names, &block)
+      attr_initialize(*names, &block)
+      attr_accessor(*Utils.flat_names(names))
+    end
+
+    alias_method :attr_accessor_initialize, :aattr_initialize
+
     def static_facade(method_name, *names)
       define_singleton_method(method_name) do |*values|
         new(*values).public_send(method_name)
