@@ -88,7 +88,7 @@ Example:
 
 ``` ruby
 class Item
-  pattr_initalize :name, :price
+  pattr_initialize :name, :price
 
   def price_with_vat
     price * 1.25
@@ -142,14 +142,14 @@ Example:
 
 ``` ruby
 class PublishBook
-  rattr_initalize :book_name, :publisher_backend
+  rattr_initialize :book_name, :publisher_backend
 
   def call
     publisher_backend.publish book_name
   end
 end
 
-service = PublishBook.new("A Novel")
+service = PublishBook.new("A Novel", publisher)
 service.book_name  # => "A Novel"
 ```
 
