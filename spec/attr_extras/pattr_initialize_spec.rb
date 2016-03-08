@@ -33,7 +33,7 @@ describe Object, ".pattr_initialize" do
     example.copy.must_equal "expected"
   end
 
-  it "accepts the alias attr_private_initializer" do
+  it "accepts the alias attr_private_initialize" do
     klass = Class.new do
       attr_private_initialize :foo, :bar
     end

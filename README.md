@@ -42,6 +42,7 @@ Also provides conveniences for creating value objects, method objects, query met
 * [`pattr_initialize`](#pattr_initialize) / [`attr_private_initialize`](#attr_private_initialize)
 * [`vattr_initialize`](#vattr_initialize) / [`attr_value_initialize`](#attr_value_initialize)
 * [`rattr_initialize`](#rattr_initialize) / [`attr_reader_initialize`](#attr_reader_initialize)
+* [`aattr_initialize`](#aattr_initialize) / [`attr_accessor_initialize`](#attr_accessor_initialize)
 * [`static_facade`](#static_facade)
 * [`method_object`](#method_object)
 * [`attr_implement`](#attr_implement)
@@ -154,6 +155,34 @@ service.book_name  # => "A Novel"
 ```
 
 [The `attr_initialize` notation](#attr_initialize) for hash arguments is also supported: `rattr_initialize :foo, [:bar, :baz!]`
+
+### `aattr_initialize`
+### `attr_accessor_initialize`
+
+`aattr_initialize :foo, :bar` defines an initializer, public readers, and public writers. It's a shortcut for:
+
+``` ruby
+attr_initialize :foo, :bar
+attr_accessor :foo, :bar
+```
+
+`aattr_initialize` is aliased as `attr_accessor_initialize`, if you prefer a longer but clearer name.
+
+Example:
+
+``` ruby
+class Client
+  aattr_initialize :username, :access_token
+end
+
+client = Client.new("barsoom", "SECRET")
+client.username # => "barsoom"
+
+client.access_token = "NEW_SECRET"
+client.access_token # => "NEW_SECRET"
+```
+
+[The `attr_initialize` notation](#attr_initialize) for hash arguments and blocks is also supported.
 
 ### `static_facade`
 

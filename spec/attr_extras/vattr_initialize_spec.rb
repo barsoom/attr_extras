@@ -37,7 +37,7 @@ describe Object, ".vattr_initialize" do
     called.must_equal true
   end
 
-  it "accepts the alias attr_value_initializer" do
+  it "accepts the alias attr_value_initialize" do
     klass = Class.new do
       attr_value_initialize :foo, :bar
     end
