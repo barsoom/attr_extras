@@ -224,6 +224,8 @@ end
 
 You don't have to specify arguments/readers if you don't want them: just `static_facade :tuesday?` is also valid.
 
+You can specify multiple method names as long as they can share the same initializer arguments: `static_facade [:allow?, :deny?], :user, [:user_agent, :ip!]`
+
 "Static façade" is the least bad name for this pattern we've come up with. Suggestions are welcome.
 
 

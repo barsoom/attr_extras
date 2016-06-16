@@ -26,4 +26,22 @@ describe Object, ".static_facade" do
 
     assert klass.fooable?
   end
+
+  it "accepts multiple method names" do
+    klass = Class.new do
+      static_facade [ :fooable?, :barable? ],
+        :foo
+
+      def fooable?
+        foo
+      end
+
+      def barable?
+        not foo
+      end
+    end
+
+    assert klass.fooable?(true)
+    assert klass.barable?(false)
+  end
 end
