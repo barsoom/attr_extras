@@ -58,14 +58,14 @@ describe Object, ".attr_initialize" do
 
   it "complains about unknown hash values" do
     klass = Class.new do
-      attr_initialize :foo, [:bar]
+      attr_initialize :foo, [:bar, :baz!]
     end
 
     # Should not raise.
-    klass.new("Foo", :bar => "Bar")
+    klass.new("Foo", :bar => "Bar", :baz => "Baz")
 
-    exception = lambda { klass.new("Foo", :bar => "Bar", :baz => "Baz") }.must_raise ArgumentError
-    exception.message.must_include "baz"
+    exception = lambda { klass.new("Foo", :bar => "Bar", :baz => "Baz", :hello => "Hello") }.must_raise ArgumentError
+    exception.message.must_include "[:hello]"
   end
 
   it "accepts a block for initialization" do
