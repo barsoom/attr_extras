@@ -58,6 +58,8 @@ Also provides conveniences for creating value objects, method objects, query met
 
 `attr_initialize [:bar, :baz!]` defines an initializer that takes one hash argument, assigning `@bar` (optional) and `@baz` (required).
 
+If you pass unknown hash arguments, you will get an `ArgumentError`.
+
 `attr_initialize` can also accept a block which will be invoked after initialization. This is useful for e.g. initializing private data as necessary.
 
 

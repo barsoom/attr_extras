@@ -21,6 +21,12 @@ class AttrExtras::AttrInitialize
         if name_or_names.is_a?(Array)
           hash = value || {}
 
+          known_keys = name_or_names.map { |name| name.to_s.sub(/!\z/, "").to_sym }
+          unknown_keys = hash.keys - known_keys
+          if unknown_keys.any?
+            raise ArgumentError, "Got unknown keys: #{unknown_keys.inspect}; allowed keys: #{known_keys.inspect}"
+          end
+
           name_or_names.each do |name|
             set_ivar_from_hash.call(self, name, hash)
           end

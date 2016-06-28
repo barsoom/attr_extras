@@ -56,6 +56,18 @@ describe Object, ".attr_initialize" do
     lambda { klass.new(:optional => "X") }.must_raise KeyError
   end
 
+  it "complains about unknown hash values" do
+    klass = Class.new do
+      attr_initialize :foo, [:bar]
+    end
+
+    # Should not raise.
+    klass.new("Foo", :bar => "Bar")
+
+    exception = lambda { klass.new("Foo", :bar => "Bar", :baz => "Baz") }.must_raise ArgumentError
+    exception.message.must_include "baz"
+  end
+
   it "accepts a block for initialization" do
     klass = Class.new do
       attr_initialize :value do
