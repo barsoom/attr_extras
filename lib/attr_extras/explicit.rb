@@ -86,5 +86,9 @@ module AttrExtras
     def attr_implement(*names)
       AttrImplement.new(self, names).apply
     end
+
+    def cattr_implement(*names)
+      AttrImplement.new(self.singleton_class, names).apply
+    end
   end
 end

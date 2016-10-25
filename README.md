@@ -46,6 +46,7 @@ Also provides conveniences for creating value objects, method objects, query met
 * [`static_facade`](#static_facade)
 * [`method_object`](#method_object)
 * [`attr_implement`](#attr_implement)
+* [`cattr_implement`](#cattr_implement)
 * [`attr_query`](#attr_query)
 * [`attr_id_query`](#attr_id_query)
 
@@ -322,6 +323,19 @@ end
 
 class Payment
   include Bookable
+end
+```
+
+
+### `cattr_implement`
+
+Like [`attr_implement`](#attr_implement) but for class methods.
+
+Example:
+
+``` ruby
+class TransportOrder
+  cattr_implement :must_be_tracked?
 end
 ```
 

@@ -66,3 +66,17 @@ describe Object, ".attr_implement" do
     lambda { klass.new.some_other_method }.must_raise NoMethodError
   end
 end
+
+describe Object, ".cattr_implement" do
+  it "applies to class methods" do
+    klass = Class.new do
+      cattr_implement :foo, [:name, :age]
+    end
+
+    exception = lambda { klass.foo(1, 2) }.must_raise AttrExtras::MethodNotImplementedError
+    exception.message.must_equal "Implement a 'foo(name, age)' method"
+
+    lambda { klass.foo }.must_raise ArgumentError
+  end
+
+end
