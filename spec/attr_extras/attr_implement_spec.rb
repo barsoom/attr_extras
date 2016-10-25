@@ -78,5 +78,4 @@ describe Object, ".cattr_implement" do
 
     lambda { klass.foo }.must_raise ArgumentError
   end
-
 end
