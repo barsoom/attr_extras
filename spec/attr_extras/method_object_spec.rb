@@ -25,4 +25,16 @@ describe Object, ".method_object" do
 
     assert klass.call
   end
+
+  it "passes along any block" do
+    klass = Class.new do
+      method_object
+
+      def call
+        yield
+      end
+    end
+
+    assert klass.call { :foo } == :foo
+  end
 end

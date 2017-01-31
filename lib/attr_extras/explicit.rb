@@ -63,8 +63,8 @@ module AttrExtras
 
     def static_facade(method_name_or_names, *names)
       Array(method_name_or_names).each do |method_name|
-        define_singleton_method(method_name) do |*values|
-          new(*values).public_send(method_name)
+        define_singleton_method(method_name) do |*values, &block|
+          new(*values).public_send(method_name, &block)
         end
       end
 

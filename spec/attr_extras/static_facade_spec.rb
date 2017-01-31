@@ -44,4 +44,16 @@ describe Object, ".static_facade" do
     assert klass.fooable?(true)
     assert klass.barable?(false)
   end
+
+  it "passes along any block to the instance method" do
+    klass = Class.new do
+      static_facade :foo
+
+      def foo
+        yield
+      end
+    end
+
+    assert klass.foo { :bar } == :bar
+  end
 end
