@@ -23,7 +23,7 @@ you can just do
 
 ``` ruby
 class InvoiceBuilder
-  pattr_initialize :invoice, :employee
+  attr_initialize :invoice, :employee
 end
 ```
 
