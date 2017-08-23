@@ -29,7 +29,7 @@ end
 
 This nicely complements Ruby's built-in `attr_accessor`, `attr_reader` and `attr_writer`.
 
-Supports positional arguments as well as optional and required hash arguments.
+Supports positional arguments as well as optional and required keyword arguments.
 
 Also provides conveniences for creating value objects, method objects, query methods and abstract methods.
 
@@ -55,11 +55,11 @@ Also provides conveniences for creating value objects, method objects, query met
 
 `attr_initialize :foo, :bar` defines an initializer that takes two arguments and assigns `@foo` and `@bar`.
 
-`attr_initialize :foo, [:bar, :baz!]` defines an initializer that takes one regular argument, assigning `@foo`, and one hash argument, assigning `@bar` (optional) and `@baz` (required).
+`attr_initialize :foo, [:bar, :baz!]` defines an initializer that takes one regular argument, assigning `@foo`, and two keyword arguments, assigning `@bar` (optional) and `@baz` (required).
 
-`attr_initialize [:bar, :baz!]` defines an initializer that takes one hash argument, assigning `@bar` (optional) and `@baz` (required).
+`attr_initialize [:bar, :baz!]` defines an initializer that takes two keyword arguments, assigning `@bar` (optional) and `@baz` (required).
 
-If you pass unknown hash arguments, you will get an `ArgumentError`.
+If you pass unknown keyword arguments, you will get an `ArgumentError`.
 
 `attr_initialize` can also accept a block which will be invoked after initialization. This is useful for e.g. initializing private data as necessary.
 
@@ -102,7 +102,7 @@ end
 Item.new("Pug", 100).price_with_vat  # => 125.0
 ```
 
-[The `attr_initialize` notation](#attr_initialize) for hash arguments is also supported: `pattr_initialize :foo, [:bar, :baz!]`
+[The `attr_initialize` notation](#attr_initialize) for keyword arguments is also supported: `pattr_initialize :foo, [:bar, :baz!]`
 
 ### `vattr_initialize`
 ### `attr_value_initialize`
@@ -127,7 +127,7 @@ Country.new("SE") == Country.new("SE")  # => true
 Country.new("SE").code  # => "SE"
 ```
 
-[The `attr_initialize` notation](#attr_initialize) for hash arguments is also supported: `vattr_initialize :foo, [:bar, :baz!]`
+[The `attr_initialize` notation](#attr_initialize) for keyword arguments is also supported: `vattr_initialize :foo, [:bar, :baz!]`
 
 
 ### `rattr_initialize`
@@ -157,7 +157,7 @@ service = PublishBook.new("A Novel", publisher)
 service.book_name  # => "A Novel"
 ```
 
-[The `attr_initialize` notation](#attr_initialize) for hash arguments is also supported: `rattr_initialize :foo, [:bar, :baz!]`
+[The `attr_initialize` notation](#attr_initialize) for keyword arguments is also supported: `rattr_initialize :foo, [:bar, :baz!]`
 
 ### `aattr_initialize`
 ### `attr_accessor_initialize`
@@ -185,7 +185,7 @@ client.access_token = "NEW_SECRET"
 client.access_token # => "NEW_SECRET"
 ```
 
-[The `attr_initialize` notation](#attr_initialize) for hash arguments and blocks is also supported.
+[The `attr_initialize` notation](#attr_initialize) for keyword arguments and blocks is also supported.
 
 ### `static_facade`
 
@@ -223,7 +223,7 @@ def self.allow?(user)
 end
 ```
 
-[The `attr_initialize` notation](#attr_initialize) for hash arguments is also supported: `static_facade :allow?, :user, [:user_agent, :ip!]`
+[The `attr_initialize` notation](#attr_initialize) for keyword arguments is also supported: `static_facade :allow?, :user, [:user_agent, :ip!]`
 
 You don't have to specify arguments/readers if you don't want them: just `static_facade :tuesday?` is also valid.
 
@@ -288,7 +288,7 @@ def self.call(foo)
 end
 ```
 
-[The `attr_initialize` notation](#attr_initialize) for hash arguments is also supported: `method_object :foo, [:bar, :baz!]`
+[The `attr_initialize` notation](#attr_initialize) for keyword arguments is also supported: `method_object :foo, [:bar, :baz!]`
 
 You don't have to specify arguments/readers if you don't want them: just `method_object` is also valid.
 
