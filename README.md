@@ -1,4 +1,4 @@
-[![Build status](https://secure.travis-ci.org/barsoom/attr_extras.png)](https://travis-ci.org/#!/barsoom/attr_extras/builds)
+[![Build status](https://secure.travis-ci.org/barsoom/attr_extras.svg)](https://travis-ci.org/#!/barsoom/attr_extras/builds)
 [![Code Climate](https://codeclimate.com/github/barsoom/attr_extras/badges/gpa.svg)](https://codeclimate.com/github/barsoom/attr_extras)
 
 # attr\_extras
