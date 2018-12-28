@@ -15,7 +15,7 @@ describe Object, ".pattr_initialize" do
       pattr_initialize :foo, [:bar, :baz!]
     end
 
-    example = klass.new("Foo", :bar => "Bar", :baz => "Baz")
+    example = klass.new("Foo", bar: "Bar", baz: "Baz")
     example.send(:baz).must_equal "Baz"
   end
 

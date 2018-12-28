@@ -19,5 +19,5 @@ Rake::TestTask.new(:test_explicit) do |t|
   t.test_files = explicit_tests
 end
 
-task :test => [ :test_implicit, :test_explicit ]
-task :default => :test
+task test: [ :test_implicit, :test_explicit ]
+task default: :test

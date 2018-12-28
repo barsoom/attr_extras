@@ -18,8 +18,8 @@ describe Object, ".vattr_initialize" do
       vattr_initialize :foo, [:bar, :baz!]
     end
 
-    example1 = klass.new("Foo", :bar => "Bar", :baz => "Baz")
-    example2 = klass.new("Foo", :bar => "Bar", :baz => "Baz")
+    example1 = klass.new("Foo", bar: "Bar", baz: "Baz")
+    example2 = klass.new("Foo", bar: "Bar", baz: "Baz")
     example1.baz.must_equal "Baz"
     example1.must_equal example2
   end

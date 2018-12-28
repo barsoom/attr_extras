@@ -15,7 +15,7 @@ describe Object, ".rattr_initialize" do
       rattr_initialize :foo, [:bar, :baz!]
     end
 
-    example = klass.new("Foo", :bar => "Bar", :baz => "Baz")
+    example = klass.new("Foo", bar: "Bar", baz: "Baz")
     example.public_send(:baz).must_equal "Baz"
   end
 

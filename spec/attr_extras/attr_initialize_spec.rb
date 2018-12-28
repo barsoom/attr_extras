@@ -27,7 +27,7 @@ describe Object, ".attr_initialize" do
       attr_initialize :foo, [:bar, :baz]
     end
 
-    example = klass.new("Foo", :bar => "Bar", :baz => "Baz")
+    example = klass.new("Foo", bar: "Bar", baz: "Baz")
     example.instance_variable_get("@foo").must_equal "Foo"
     example.instance_variable_get("@bar").must_equal "Bar"
     example.instance_variable_get("@baz").must_equal "Baz"
@@ -38,7 +38,7 @@ describe Object, ".attr_initialize" do
       attr_initialize :foo, [:bar, :baz]
     end
 
-    example = klass.new("Foo", :bar => "Bar")
+    example = klass.new("Foo", bar: "Bar")
     example.instance_variable_get("@baz").must_equal nil
 
     example = klass.new("Foo")
@@ -50,10 +50,10 @@ describe Object, ".attr_initialize" do
       attr_initialize [:optional, :required!]
     end
 
-    example = klass.new(:required => "X")
+    example = klass.new(required: "X")
     example.instance_variable_get("@required").must_equal "X"
 
-    lambda { klass.new(:optional => "X") }.must_raise KeyError
+    lambda { klass.new(optional: "X") }.must_raise KeyError
   end
 
   it "complains about unknown hash values" do
@@ -62,9 +62,9 @@ describe Object, ".attr_initialize" do
     end
 
     # Should not raise.
-    klass.new("Foo", :bar => "Bar", :baz => "Baz")
+    klass.new("Foo", bar: "Bar", baz: "Baz")
 
-    exception = lambda { klass.new("Foo", :bar => "Bar", :baz => "Baz", :hello => "Hello") }.must_raise ArgumentError
+    exception = lambda { klass.new("Foo", bar: "Bar", baz: "Baz", hello: "Hello") }.must_raise ArgumentError
     exception.message.must_include "[:hello]"
   end
 
