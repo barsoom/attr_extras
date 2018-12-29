@@ -1,4 +1,6 @@
 class AttrExtras::AttrInitialize
+  REQUIRED_SIGN = "!".freeze
+
   def initialize(klass, names, block)
     @klass, @names, @block = klass, names, block
   end
@@ -49,7 +51,9 @@ class AttrExtras::AttrInitialize
   def default_values
     @default_values ||= begin
       default_values_hash = names.flatten.select { |name| name.is_a?(Hash) }.inject(:merge) || {}
-      default_values_hash.transform_keys { |name| name.to_s.sub(/!\z/, "").to_sym }
+      cleared_default_values = {}
+      default_values_hash.each_key { |name| cleared_default_values[remove_required_sign(name)] = default_values_hash[name] }
+      cleared_default_values
     end
   end
 
@@ -60,12 +64,12 @@ class AttrExtras::AttrInitialize
   end
 
   def hash_args_names
-    @hash_args_names ||= hash_args.map { |name| name.to_s.sub(/!\z/, "").to_sym }
+    @hash_args_names ||= hash_args.map { |name| remove_required_sign(name) }
   end
 
   def hash_args_required
-    @hash_args_required ||= hash_args.select { |name| name.to_s.end_with?("!") }
-      .map { |name| name.to_s.chop.to_sym }
+    @hash_args_required ||= hash_args.select { |name| name.to_s.end_with?(REQUIRED_SIGN) }
+      .map { |name| remove_required_sign(name) }
   end
 
   def validate_arity(provided_arity, klass)
@@ -89,5 +93,9 @@ class AttrExtras::AttrInitialize
     if missing_args.any?
       raise KeyError, "Missing required keys: #{missing_args.inspect}"
     end
+  end
+
+  def remove_required_sign(name)
+    name.to_s.sub(/#{REQUIRED_SIGN}\z/, "").to_sym
   end
 end
