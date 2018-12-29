@@ -59,7 +59,11 @@ Also provides conveniences for creating value objects, method objects, query met
 
 `attr_initialize [:bar, :baz!]` defines an initializer that takes two keyword arguments, assigning `@bar` (optional) and `@baz` (required).
 
+Keyword arguments can have default values:
+`attr_initialize [:bar, baz: "default value"]` defines an initializer that takes two keyword arguments, assigning `@bar` (optional) and `@baz` (optional with default value `"default value"`).
+
 If you pass unknown keyword arguments, you will get an `ArgumentError`.
+If you don't pass required arguments and don't define default value for them, you will get a `KeyError`.
 
 `attr_initialize` can also accept a block which will be invoked after initialization. This is useful for e.g. initializing private data as necessary.
 
