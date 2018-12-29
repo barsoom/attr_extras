@@ -33,6 +33,20 @@ describe Object, ".attr_initialize" do
     example.instance_variable_get("@baz").must_equal "Baz"
   end
 
+  it "can set default values for keyword arguments" do
+    klass = Class.new do
+      attr_initialize :foo, [:bar, baz: "default baz"]
+    end
+
+    example = klass.new("Foo", bar: "Bar")
+    example.instance_variable_get("@foo").must_equal "Foo"
+    example.instance_variable_get("@bar").must_equal "Bar"
+    example.instance_variable_get("@baz").must_equal "default baz"
+
+    example = klass.new("Foo", bar: "Bar", baz: "Baz")
+    example.instance_variable_get("@baz").must_equal "Baz"
+  end
+
   it "treats hash values as optional" do
     klass = Class.new do
       attr_initialize :foo, [:bar, :baz]
