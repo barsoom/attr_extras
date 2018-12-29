@@ -39,10 +39,10 @@ describe Object, ".attr_initialize" do
     end
 
     example = klass.new("Foo", bar: "Bar")
-    example.instance_variable_get("@baz").must_equal nil
+    example.instance_variable_defined?("@baz").must_equal false
 
     example = klass.new("Foo")
-    example.instance_variable_get("@bar").must_equal nil
+    example.instance_variable_defined?("@bar").must_equal false
   end
 
   it "can require hash values" do
