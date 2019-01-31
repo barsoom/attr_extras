@@ -27,7 +27,7 @@ describe Object, ".aattr_initialize" do
       aattr_initialize :foo, [:bar, :baz!]
     end
 
-    example = klass.new("Foo", :bar => "Bar", :baz => "Baz")
+    example = klass.new("Foo", bar: "Bar", baz: "Baz")
 
     example.baz.must_equal "Baz"
   end

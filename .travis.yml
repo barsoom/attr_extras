@@ -7,5 +7,5 @@ rvm:
   - 2.0.0
   - jruby-head
 before_install:  # For jruby-head to work.
-  - gem install bundler
+  - gem install bundler || gem install bundler --version '< 2'
   - gem update bundler

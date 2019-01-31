@@ -1,3 +1,5 @@
+require "attr_extras/params_builder"
+
 class AttrExtras::AttrInitialize
   def initialize(klass, names, block)
     @klass, @names, @block = klass, names, block
@@ -9,31 +11,29 @@ class AttrExtras::AttrInitialize
   def apply
     # The define_method block can't call our methods, so we need to make
     # things available via local variables.
-    names = @names
     block = @block
+
+    klass_params = AttrExtras::AttrInitialize::ParamsBuilder.new(names)
+
     validate_arity = method(:validate_arity)
-    set_ivar_from_hash = method(:set_ivar_from_hash)
+    validate_args = method(:validate_args)
 
     klass.send(:define_method, :initialize) do |*values|
+      hash_values = values.select { |name| name.is_a?(Hash) }.inject(:merge) || {}
+
       validate_arity.call(values.length, self.class)
+      validate_args.call(values, klass_params)
 
-      names.zip(values).each do |name_or_names, value|
-        if name_or_names.is_a?(Array)
-          hash = value || {}
+      klass_params.default_values.each do |name, default_value|
+        instance_variable_set("@#{name}", default_value)
+      end
 
-          known_keys = name_or_names.map { |name| name.to_s.sub(/!\z/, "").to_sym }
-          unknown_keys = hash.keys - known_keys
-          if unknown_keys.any?
-            raise ArgumentError, "Got unknown keys: #{unknown_keys.inspect}; allowed keys: #{known_keys.inspect}"
-          end
+      klass_params.positional_args.zip(values).each do |name, value|
+        instance_variable_set("@#{name}", value)
+      end
 
-          name_or_names.each do |name|
-            set_ivar_from_hash.call(self, name, hash)
-          end
-        else
-          name = name_or_names
-          instance_variable_set("@#{name}", value)
-        end
+      hash_values.each do |name, value|
+        instance_variable_set("@#{name}", value)
       end
 
       if block
@@ -54,15 +54,16 @@ class AttrExtras::AttrInitialize
     end
   end
 
-  def set_ivar_from_hash(instance, name, hash)
-    if name.to_s.end_with?("!")
-      actual_name = name.to_s.chop.to_sym
-      value = hash.fetch(actual_name)
-    else
-      actual_name = name
-      value = hash[actual_name]
+  def validate_args(values, klass_params)
+    hash_values = values.select { |n| n.is_a?(Hash) }.inject(:merge) || {}
+    unknown_keys = hash_values.keys - klass_params.hash_args_names
+    if unknown_keys.any?
+      raise ArgumentError, "Got unknown keys: #{unknown_keys.inspect}; allowed keys: #{klass_params.hash_args_names.inspect}"
     end
 
-    instance.instance_variable_set("@#{actual_name}", value)
+    missing_args = klass_params.hash_args_required - klass_params.default_values.keys - hash_values.keys
+    if missing_args.any?
+      raise KeyError, "Missing required keys: #{missing_args.inspect}"
+    end
   end
 end
