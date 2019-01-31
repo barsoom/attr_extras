@@ -112,6 +112,7 @@ describe Object, ".attr_initialize" do
 
     # Should not raise.
     example = klass.new({ "invalid.ivar.name" => 123 })
+
     example.foo.must_equal({ "invalid.ivar.name" => 123 })
   end
 
