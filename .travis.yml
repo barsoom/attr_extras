@@ -2,9 +2,6 @@ language: ruby
 rvm:
   - 2.4.1
   - 2.3.3
-  - 2.2.5
-  - 2.1.10
-  - 2.0.0
   - jruby-head
 before_install:  # For jruby-head to work.
   - gem install bundler || gem install bundler --version '< 2'
