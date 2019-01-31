@@ -19,7 +19,7 @@ class AttrExtras::AttrInitialize
     validate_args = method(:validate_args)
 
     klass.send(:define_method, :initialize) do |*values|
-      hash_values = values.select { |name| name.is_a?(Hash) }.inject(:merge) || {}
+      hash_values = (values[(klass_params.positional_args.length)..-1] || []).inject(:merge) || {}
 
       validate_arity.call(values.length, self.class)
       validate_args.call(values, klass_params)

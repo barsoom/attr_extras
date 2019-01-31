@@ -1,5 +1,9 @@
 # Changelog
 
+# 6.2.0
+
+* Another bugfix when passing hash values to positional arguments.
+
 # 6.1.0
 
 * Bugfix when passing hash values to positional arguments.

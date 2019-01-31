@@ -103,6 +103,18 @@ describe Object, ".attr_initialize" do
     exception.message.must_include "[:bar]"
   end
 
+  # Regression.
+  it "doesn't store hash values to positional arguments as ivars" do
+    klass = Class.new do
+      attr_initialize :foo
+      attr_reader :foo
+    end
+
+    # Should not raise.
+    example = klass.new({ "invalid.ivar.name" => 123 })
+    example.foo.must_equal({ "invalid.ivar.name" => 123 })
+  end
+
   it "accepts a block for initialization" do
     klass = Class.new do
       attr_initialize :value do
