@@ -32,14 +32,10 @@ module AttrExtras
       def default_values
         @default_values ||= begin
           default_values_hash = names.flatten.select { |name| name.is_a?(Hash) }.inject(:merge) || {}
-          cleared_default_values = {}
 
-          default_values_hash.each_key do |name|
-            cleared_name = remove_required_sign(name)
-            cleared_default_values[cleared_name] = default_values_hash[name]
-          end
-
-          cleared_default_values
+          default_values_hash.map { |name, value|
+            [ remove_required_sign(name), value ]
+          }.to_h
         end
       end
 
