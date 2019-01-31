@@ -15,9 +15,9 @@ module AttrExtras
       end
 
       def hash_args
-        @hash_args ||= (names - positional_args).flatten.map { |name|
+        @hash_args ||= (names - positional_args).flatten.flat_map { |name|
           name.is_a?(Hash) ? name.keys : name
-        }.flatten
+        }
       end
 
       def hash_args_names
