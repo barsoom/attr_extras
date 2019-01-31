@@ -1,6 +1,10 @@
 # Changelog
 
-# 6.0.0
+# 6.1.0
+
+* Bugfix when passing hash values to positional arguments.
+
+# 6.0.0 (yanked)
 
 * Default arguments! Thanks to [Ola K](https://github.com/lesin). For example: `pattr_initialize [:foo, bar: "default value"]`
 

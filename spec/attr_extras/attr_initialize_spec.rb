@@ -82,6 +82,27 @@ describe Object, ".attr_initialize" do
     exception.message.must_include "[:hello]"
   end
 
+  # Regression.
+  it "assigns hash values to positional arguments even when there's also hash arguments" do
+    klass = Class.new do
+      attr_initialize :foo, [:bar]
+    end
+
+    # Should not raise.
+    klass.new({ inside_foo: 123 }, bar: 456)
+  end
+
+  # Regression.
+  it "only looks at hash arguments when determining missing required keys" do
+    klass = Class.new do
+      attr_initialize :foo, [:bar!]
+    end
+
+    # Provides a hash to "foo" but does not provide "bar".
+    exception = lambda { klass.new({ bar: 123 }) }.must_raise KeyError
+    exception.message.must_include "[:bar]"
+  end
+
   it "accepts a block for initialization" do
     klass = Class.new do
       attr_initialize :value do

@@ -55,8 +55,9 @@ class AttrExtras::AttrInitialize
   end
 
   def validate_args(values, klass_params)
-    hash_values = values.select { |n| n.is_a?(Hash) }.inject(:merge) || {}
+    hash_values = values[(klass_params.positional_args.length)..-1].inject(:merge) || {}
     unknown_keys = hash_values.keys - klass_params.hash_args_names
+
     if unknown_keys.any?
       raise ArgumentError, "Got unknown keys: #{unknown_keys.inspect}; allowed keys: #{klass_params.hash_args_names.inspect}"
     end
