@@ -24,6 +24,17 @@ describe Object, ".vattr_initialize" do
     example1.must_equal example2
   end
 
+  it "works with hash ivars and default values" do
+    klass = Class.new do
+      vattr_initialize :foo, [bar: "Bar", baz!: 'Baz']
+    end
+
+    example1 = klass.new("Foo")
+    example2 = klass.new("Foo")
+    example1.baz.must_equal "Baz"
+    example1.must_equal example2
+  end
+
   it "can accept an initializer block" do
     called = false
     klass = Class.new do

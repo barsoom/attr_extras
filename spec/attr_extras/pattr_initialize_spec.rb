@@ -19,6 +19,15 @@ describe Object, ".pattr_initialize" do
     example.send(:baz).must_equal "Baz"
   end
 
+  it "works with hash ivars and default values" do
+    klass = Class.new do
+      pattr_initialize :foo, [bar: "Bar", baz!: 'Baz']
+    end
+
+    example = klass.new("Foo")
+    example.send(:baz).must_equal "Baz"
+  end
+
   it "can reference private initializer methods in an initializer block" do
     klass = Class.new do
       pattr_initialize :value do

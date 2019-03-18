@@ -19,6 +19,15 @@ describe Object, ".rattr_initialize" do
     example.public_send(:baz).must_equal "Baz"
   end
 
+  it "works with hash ivars and default values" do
+    klass = Class.new do
+      rattr_initialize :foo, [bar: "Bar", baz!: 'Baz']
+    end
+
+    example = klass.new("Foo")
+    example.send(:baz).must_equal "Baz"
+  end
+
   it "accepts the alias attr_reader_initialize" do
     klass = Class.new do
       attr_reader_initialize :foo, :bar
