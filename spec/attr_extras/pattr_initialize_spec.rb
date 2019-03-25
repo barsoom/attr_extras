@@ -21,7 +21,7 @@ describe Object, ".pattr_initialize" do
 
   it "works with hash ivars and default values" do
     klass = Class.new do
-      pattr_initialize :foo, [bar: "Bar", baz!: 'Baz']
+      pattr_initialize :foo, [ bar: "Bar", baz!: "Baz" ]
     end
 
     example = klass.new("Foo")

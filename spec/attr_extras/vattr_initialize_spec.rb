@@ -26,7 +26,7 @@ describe Object, ".vattr_initialize" do
 
   it "works with hash ivars and default values" do
     klass = Class.new do
-      vattr_initialize :foo, [bar: "Bar", baz!: 'Baz']
+      vattr_initialize :foo, [ bar: "Bar", baz!: "Baz" ]
     end
 
     example1 = klass.new("Foo")

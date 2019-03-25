@@ -12,7 +12,7 @@ describe Object, ".rattr_initialize" do
 
   it "works with hash ivars" do
     klass = Class.new do
-      rattr_initialize :foo, [:bar, :baz!]
+      rattr_initialize :foo, [ :bar, :baz! ]
     end
 
     example = klass.new("Foo", bar: "Bar", baz: "Baz")
@@ -21,7 +21,7 @@ describe Object, ".rattr_initialize" do
 
   it "works with hash ivars and default values" do
     klass = Class.new do
-      rattr_initialize :foo, [bar: "Bar", baz!: 'Baz']
+      rattr_initialize :foo, [ bar: "Bar", baz!: "Baz" ]
     end
 
     example = klass.new("Foo")
