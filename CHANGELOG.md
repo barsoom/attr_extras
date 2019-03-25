@@ -1,5 +1,9 @@
 # Changelog
 
+# 6.2.1
+
+* Bugfix with keyword argument defaults. Thanks to [Roman Dubrovsky](https://github.com/barsoom/attr_extras/pull/29)!
+
 # 6.2.0
 
 * Another bugfix when passing hash values to positional arguments.
