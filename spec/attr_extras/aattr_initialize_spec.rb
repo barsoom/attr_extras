@@ -32,6 +32,16 @@ describe Object, ".aattr_initialize" do
     example.baz.must_equal "Baz"
   end
 
+  it "works with hash ivars and default values" do
+    klass = Class.new do
+      aattr_initialize :foo, [bar: "Bar", baz!: 'Baz']
+    end
+
+    example = klass.new("Foo")
+
+    example.baz.must_equal "Baz"
+  end
+
   it "accepts a block for initialization" do
     klass = Class.new do
       aattr_initialize :value do
