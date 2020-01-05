@@ -10,6 +10,6 @@ describe AttrExtras do
       include mod
     end
 
-    klass.new("Hello").send(:name).must_equal "Hello"
+    _(klass.new("Hello").send(:name)).must_equal "Hello"
   end
 end

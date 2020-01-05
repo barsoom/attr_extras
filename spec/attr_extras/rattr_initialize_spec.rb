@@ -7,7 +7,7 @@ describe Object, ".rattr_initialize" do
     end
 
     example = klass.new("Foo", "Bar")
-    example.public_send(:foo).must_equal "Foo"
+    _(example.public_send(:foo)).must_equal "Foo"
   end
 
   it "works with hash ivars" do
@@ -16,7 +16,7 @@ describe Object, ".rattr_initialize" do
     end
 
     example = klass.new("Foo", bar: "Bar", baz: "Baz")
-    example.public_send(:baz).must_equal "Baz"
+    _(example.public_send(:baz)).must_equal "Baz"
   end
 
   it "works with hash ivars and default values" do
@@ -25,7 +25,7 @@ describe Object, ".rattr_initialize" do
     end
 
     example = klass.new("Foo")
-    example.send(:baz).must_equal "Baz"
+    _(example.send(:baz)).must_equal "Baz"
   end
 
   it "accepts the alias attr_reader_initialize" do
@@ -34,6 +34,6 @@ describe Object, ".rattr_initialize" do
     end
 
     example = klass.new("Foo", "Bar")
-    example.public_send(:foo).must_equal "Foo"
+    _(example.public_send(:foo)).must_equal "Foo"
   end
 end

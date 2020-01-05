@@ -7,11 +7,11 @@ describe AttrExtras::AttrInitialize::ParamsBuilder do
     let(:names) { [ :foo, :bar, [ :baz, :qux!, quux: "Quux" ]] }
 
     it "properly devides params by the type" do
-      subject.positional_args.must_equal [ :foo, :bar ]
-      subject.hash_args.must_equal [ :baz, :qux!, :quux ]
-      subject.hash_args_names.must_equal [ :baz, :qux, :quux ]
-      subject.hash_args_required.must_equal [ :qux ]
-      subject.default_values.must_equal({ quux: "Quux" })
+      _(subject.positional_args).must_equal [ :foo, :bar ]
+      _(subject.hash_args).must_equal [ :baz, :qux!, :quux ]
+      _(subject.hash_args_names).must_equal [ :baz, :qux, :quux ]
+      _(subject.hash_args_required).must_equal [ :qux ]
+      _(subject.default_values).must_equal({ quux: "Quux" })
     end
   end
 
@@ -19,11 +19,11 @@ describe AttrExtras::AttrInitialize::ParamsBuilder do
     let(:names) { [ :foo, :bar] }
 
     it "properly devides params by the type" do
-      subject.positional_args.must_equal [ :foo, :bar ]
-      subject.hash_args.must_be_empty
-      subject.hash_args_names.must_be_empty
-      subject.hash_args_required.must_be_empty
-      subject.default_values.must_be_empty
+      _(subject.positional_args).must_equal [ :foo, :bar ]
+      _(subject.hash_args).must_be_empty
+      _(subject.hash_args_names).must_be_empty
+      _(subject.hash_args_required).must_be_empty
+      _(subject.default_values).must_be_empty
     end
   end
 
@@ -31,11 +31,11 @@ describe AttrExtras::AttrInitialize::ParamsBuilder do
     let(:names) { [[ { baz: "Baz" }, :qux!, { quux: "Quux" } ]] }
 
     it "properly devides params by the type" do
-      subject.positional_args.must_be_empty
-      subject.hash_args.must_equal [ :baz, :qux!, :quux ]
-      subject.hash_args_names.must_equal [ :baz, :qux, :quux ]
-      subject.hash_args_required.must_equal [ :qux ]
-      subject.default_values.must_equal({ quux: "Quux", baz: "Baz" })
+      _(subject.positional_args).must_be_empty
+      _(subject.hash_args).must_equal [ :baz, :qux!, :quux ]
+      _(subject.hash_args_names).must_equal [ :baz, :qux, :quux ]
+      _(subject.hash_args_required).must_equal [ :qux ]
+      _(subject.default_values).must_equal({ quux: "Quux", baz: "Baz" })
     end
   end
 
@@ -43,11 +43,11 @@ describe AttrExtras::AttrInitialize::ParamsBuilder do
     let(:names) { [] }
 
     it "properly devides params by the type" do
-      subject.positional_args.must_be_empty
-      subject.hash_args.must_be_empty
-      subject.hash_args_names.must_be_empty
-      subject.hash_args_required.must_be_empty
-      subject.default_values.must_be_empty
+      _(subject.positional_args).must_be_empty
+      _(subject.hash_args).must_be_empty
+      _(subject.hash_args_names).must_be_empty
+      _(subject.hash_args_required).must_be_empty
+      _(subject.default_values).must_be_empty
     end
   end
 end

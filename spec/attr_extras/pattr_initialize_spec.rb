@@ -7,7 +7,7 @@ describe Object, ".pattr_initialize" do
     end
 
     example = klass.new("Foo", "Bar")
-    example.send(:foo).must_equal "Foo"
+    _(example.send(:foo)).must_equal "Foo"
   end
 
   it "works with hash ivars" do
@@ -16,7 +16,7 @@ describe Object, ".pattr_initialize" do
     end
 
     example = klass.new("Foo", bar: "Bar", baz: "Baz")
-    example.send(:baz).must_equal "Baz"
+    _(example.send(:baz)).must_equal "Baz"
   end
 
   it "works with hash ivars and default values" do
@@ -25,7 +25,7 @@ describe Object, ".pattr_initialize" do
     end
 
     example = klass.new("Foo")
-    example.send(:baz).must_equal "Baz"
+    _(example.send(:baz)).must_equal "Baz"
   end
 
   it "can reference private initializer methods in an initializer block" do
@@ -39,7 +39,7 @@ describe Object, ".pattr_initialize" do
 
     example = klass.new("expected")
 
-    example.copy.must_equal "expected"
+    _(example.copy).must_equal "expected"
   end
 
   it "accepts the alias attr_private_initialize" do
@@ -48,6 +48,6 @@ describe Object, ".pattr_initialize" do
     end
 
     example = klass.new("Foo", "Bar")
-    example.send(:foo).must_equal "Foo"
+    _(example.send(:foo)).must_equal "Foo"
   end
 end

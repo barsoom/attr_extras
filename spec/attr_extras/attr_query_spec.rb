@@ -14,6 +14,6 @@ describe Object, ".attr_query" do
   end
 
   it "requires a trailing questionmark" do
-    lambda { Object.attr_query(:foo) }.must_raise ArgumentError
+    _(lambda { Object.attr_query(:foo) }).must_raise ArgumentError
   end
 end
