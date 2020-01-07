@@ -9,7 +9,7 @@ describe Object, ".attr_value" do
 
     example = klass.new
     example.instance_variable_set("@foo", "Foo")
-    example.foo.must_equal "Foo"
+    _(example.foo).must_equal "Foo"
   end
 
   it "does not create writers" do
@@ -17,7 +17,7 @@ describe Object, ".attr_value" do
       attr_value :foo
     end
 
-    lambda { klass.new.foo = "new value" }.must_raise NoMethodError
+    _(lambda { klass.new.foo = "new value" }).must_raise NoMethodError
   end
 
   describe "object equality" do
@@ -92,21 +92,21 @@ describe Object, ".attr_value" do
       klass1_bar = klass1.new("Bar")
       klass2_foo = klass2.new("Foo")
 
-      klass1_foo.hash.must_equal klass1_foo2.hash
-      klass1_foo.hash.wont_equal klass1_bar.hash
-      klass1_foo.hash.wont_equal klass2_foo.hash
+      _(klass1_foo.hash).must_equal klass1_foo2.hash
+      _(klass1_foo.hash).wont_equal klass1_bar.hash
+      _(klass1_foo.hash).wont_equal klass2_foo.hash
 
       assert klass1_foo.eql?(klass1_foo2), "Examples should be 'eql?'"
       refute klass1_foo.eql?(klass1_bar), "Examples should not be 'eql?'"
       refute klass1_foo.eql?(klass2_foo), "Examples should not be 'eql?'"
 
-      Set[klass1_foo, klass1_foo2, klass1_bar, klass2_foo].length.must_equal 3
+      _(Set[klass1_foo, klass1_foo2, klass1_bar, klass2_foo].length).must_equal 3
 
       hash = {}
       hash[klass1_foo] = :awyeah
       hash[klass1_bar] = :wat
       hash[klass2_foo] = :nooooo
-      hash[klass1_foo2].must_equal :awyeah
+      _(hash[klass1_foo2]).must_equal :awyeah
     end
   end
 end

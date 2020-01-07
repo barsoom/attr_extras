@@ -7,8 +7,8 @@ describe Object, ".attr_implement" do
     end
 
     example = klass.new
-    exception = lambda { example.foo }.must_raise AttrExtras::MethodNotImplementedError
-    exception.message.must_equal "Implement a 'foo()' method"
+    exception = _(lambda { example.foo }).must_raise AttrExtras::MethodNotImplementedError
+    _(exception.message).must_equal "Implement a 'foo()' method"
   end
 
   it "allows specifying arity and argument names" do
@@ -18,10 +18,10 @@ describe Object, ".attr_implement" do
 
     example = klass.new
 
-    exception = lambda { example.foo(1, 2) }.must_raise AttrExtras::MethodNotImplementedError
-    exception.message.must_equal "Implement a 'foo(name, age)' method"
+    exception = _(lambda { example.foo(1, 2) }).must_raise AttrExtras::MethodNotImplementedError
+    _(exception.message).must_equal "Implement a 'foo(name, age)' method"
 
-    lambda { example.foo }.must_raise ArgumentError
+    _(lambda { example.foo }).must_raise ArgumentError
   end
 
   it "does not raise if method is implemented in a subclass" do
@@ -35,7 +35,7 @@ describe Object, ".attr_implement" do
       end
     end
 
-    subklass.new.foo.must_equal "bar"
+    _(subklass.new.foo).must_equal "bar"
   end
 
   # E.g. when Active Record defines column query methods like "admin?"
@@ -55,7 +55,7 @@ describe Object, ".attr_implement" do
       include foo_interface
     end
 
-    klass.new.foo.must_equal "bar"
+    _(klass.new.foo).must_equal "bar"
   end
 
   it "does not mess up missing-method handling" do
@@ -63,7 +63,7 @@ describe Object, ".attr_implement" do
       attr_implement :foo
     end
 
-    lambda { klass.new.some_other_method }.must_raise NoMethodError
+    _(lambda { klass.new.some_other_method }).must_raise NoMethodError
   end
 end
 
@@ -73,9 +73,9 @@ describe Object, ".cattr_implement" do
       cattr_implement :foo, [:name, :age]
     end
 
-    exception = lambda { klass.foo(1, 2) }.must_raise AttrExtras::MethodNotImplementedError
-    exception.message.must_equal "Implement a 'foo(name, age)' method"
+    exception = _(lambda { klass.foo(1, 2) }).must_raise AttrExtras::MethodNotImplementedError
+    _(exception.message).must_equal "Implement a 'foo(name, age)' method"
 
-    lambda { klass.foo }.must_raise ArgumentError
+    _(lambda { klass.foo }).must_raise ArgumentError
   end
 end

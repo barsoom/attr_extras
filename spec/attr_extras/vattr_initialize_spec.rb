@@ -9,8 +9,8 @@ describe Object, ".vattr_initialize" do
     example1 = klass.new("Foo", "Bar")
     example2 = klass.new("Foo", "Bar")
 
-    example1.foo.must_equal "Foo"
-    example1.must_equal example2
+    _(example1.foo).must_equal "Foo"
+    _(example1).must_equal example2
   end
 
   it "works with hash ivars" do
@@ -20,8 +20,8 @@ describe Object, ".vattr_initialize" do
 
     example1 = klass.new("Foo", bar: "Bar", baz: "Baz")
     example2 = klass.new("Foo", bar: "Bar", baz: "Baz")
-    example1.baz.must_equal "Baz"
-    example1.must_equal example2
+    _(example1.baz).must_equal "Baz"
+    _(example1).must_equal example2
   end
 
   it "works with hash ivars and default values" do
@@ -31,8 +31,8 @@ describe Object, ".vattr_initialize" do
 
     example1 = klass.new("Foo")
     example2 = klass.new("Foo")
-    example1.baz.must_equal "Baz"
-    example1.must_equal example2
+    _(example1.baz).must_equal "Baz"
+    _(example1).must_equal example2
   end
 
   it "can accept an initializer block" do
@@ -45,7 +45,7 @@ describe Object, ".vattr_initialize" do
 
     klass.new("expected")
 
-    called.must_equal true
+    _(called).must_equal true
   end
 
   it "accepts the alias attr_value_initialize" do
@@ -56,7 +56,7 @@ describe Object, ".vattr_initialize" do
     example1 = klass.new("Foo", "Bar")
     example2 = klass.new("Foo", "Bar")
 
-    example1.foo.must_equal "Foo"
-    example1.must_equal example2
+    _(example1.foo).must_equal "Foo"
+    _(example1).must_equal example2
   end
 end

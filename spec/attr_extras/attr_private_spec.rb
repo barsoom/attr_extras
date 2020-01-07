@@ -11,8 +11,8 @@ describe Object, ".attr_private" do
     example = klass.new
     example.instance_variable_set("@foo", "Foo")
     example.instance_variable_set("@bar", "Bar")
-    example.send(:foo).must_equal "Foo"
-    example.send(:bar).must_equal "Bar"
-    lambda { example.foo }.must_raise NoMethodError
+    _(example.send(:foo)).must_equal "Foo"
+    _(example.send(:bar)).must_equal "Bar"
+    _(lambda { example.foo }).must_raise NoMethodError
   end
 end

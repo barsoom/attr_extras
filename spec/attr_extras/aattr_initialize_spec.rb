@@ -8,7 +8,7 @@ describe Object, ".aattr_initialize" do
 
     example = klass.new("Foo", "Bar")
 
-    example.foo.must_equal "Foo"
+    _(example.foo).must_equal "Foo"
   end
 
   it "creates public writers" do
@@ -19,7 +19,7 @@ describe Object, ".aattr_initialize" do
     example = klass.new("Foo", "Bar")
     example.foo = "Baz"
 
-    example.foo.must_equal "Baz"
+    _(example.foo).must_equal "Baz"
   end
 
   it "works with hash ivars" do
@@ -29,7 +29,7 @@ describe Object, ".aattr_initialize" do
 
     example = klass.new("Foo", bar: "Bar", baz: "Baz")
 
-    example.baz.must_equal "Baz"
+    _(example.baz).must_equal "Baz"
   end
 
   it "works with hash ivars and default values" do
@@ -39,7 +39,7 @@ describe Object, ".aattr_initialize" do
 
     example = klass.new("Foo")
 
-    example.baz.must_equal "Baz"
+    _(example.baz).must_equal "Baz"
   end
 
   it "accepts a block for initialization" do
@@ -53,7 +53,7 @@ describe Object, ".aattr_initialize" do
 
     example = klass.new("expected")
 
-    example.copy.must_equal "expected"
+    _(example.copy).must_equal "expected"
   end
 
   it "accepts the alias attr_accessor_initialize" do
@@ -63,6 +63,6 @@ describe Object, ".aattr_initialize" do
 
     example = klass.new("Foo", "Bar")
 
-    example.foo.must_equal "Foo"
+    _(example.foo).must_equal "Foo"
   end
 end

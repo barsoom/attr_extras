@@ -13,13 +13,13 @@ describe Object, ".attr_initialize" do
 
   it "creates an initializer setting those instance variables" do
     example = klass.new("Foo", "Bar")
-    example.instance_variable_get("@foo").must_equal "Foo"
-    example.instance_variable_get("@bar").must_equal "Bar"
+    _(example.instance_variable_get("@foo")).must_equal "Foo"
+    _(example.instance_variable_get("@bar")).must_equal "Bar"
   end
 
   it "requires all arguments" do
-    exception = lambda { klass.new("Foo") }.must_raise ArgumentError
-    exception.message.must_equal "wrong number of arguments (1 for 2) for ExampleClass initializer"
+    exception = _(lambda { klass.new("Foo") }).must_raise ArgumentError
+    _(exception.message).must_equal "wrong number of arguments (1 for 2) for ExampleClass initializer"
   end
 
   it "can set ivars from a hash" do
@@ -28,9 +28,9 @@ describe Object, ".attr_initialize" do
     end
 
     example = klass.new("Foo", bar: "Bar", baz: "Baz")
-    example.instance_variable_get("@foo").must_equal "Foo"
-    example.instance_variable_get("@bar").must_equal "Bar"
-    example.instance_variable_get("@baz").must_equal "Baz"
+    _(example.instance_variable_get("@foo")).must_equal "Foo"
+    _(example.instance_variable_get("@bar")).must_equal "Bar"
+    _(example.instance_variable_get("@baz")).must_equal "Baz"
   end
 
   it "can set default values for keyword arguments" do
@@ -39,12 +39,12 @@ describe Object, ".attr_initialize" do
     end
 
     example = klass.new("Foo", bar: "Bar")
-    example.instance_variable_get("@foo").must_equal "Foo"
-    example.instance_variable_get("@bar").must_equal "Bar"
-    example.instance_variable_get("@baz").must_equal "default baz"
+    _(example.instance_variable_get("@foo")).must_equal "Foo"
+    _(example.instance_variable_get("@bar")).must_equal "Bar"
+    _(example.instance_variable_get("@baz")).must_equal "default baz"
 
     example = klass.new("Foo", bar: "Bar", baz: "Baz")
-    example.instance_variable_get("@baz").must_equal "Baz"
+    _(example.instance_variable_get("@baz")).must_equal "Baz"
   end
 
   it "treats hash values as optional" do
@@ -53,10 +53,10 @@ describe Object, ".attr_initialize" do
     end
 
     example = klass.new("Foo", bar: "Bar")
-    example.instance_variable_defined?("@baz").must_equal false
+    _(example.instance_variable_defined?("@baz")).must_equal false
 
     example = klass.new("Foo")
-    example.instance_variable_defined?("@bar").must_equal false
+    _(example.instance_variable_defined?("@bar")).must_equal false
   end
 
   it "can require hash values" do
@@ -65,9 +65,9 @@ describe Object, ".attr_initialize" do
     end
 
     example = klass.new(required: "X")
-    example.instance_variable_get("@required").must_equal "X"
+    _(example.instance_variable_get("@required")).must_equal "X"
 
-    lambda { klass.new(optional: "X") }.must_raise KeyError
+    _(lambda { klass.new(optional: "X") }).must_raise KeyError
   end
 
   it "complains about unknown hash values" do
@@ -78,8 +78,8 @@ describe Object, ".attr_initialize" do
     # Should not raise.
     klass.new("Foo", bar: "Bar", baz: "Baz")
 
-    exception = lambda { klass.new("Foo", bar: "Bar", baz: "Baz", hello: "Hello") }.must_raise ArgumentError
-    exception.message.must_include "[:hello]"
+    exception = _(lambda { klass.new("Foo", bar: "Bar", baz: "Baz", hello: "Hello") }).must_raise ArgumentError
+    _(exception.message).must_include "[:hello]"
   end
 
   # Regression.
@@ -99,8 +99,8 @@ describe Object, ".attr_initialize" do
     end
 
     # Provides a hash to "foo" but does not provide "bar".
-    exception = lambda { klass.new({ bar: 123 }) }.must_raise KeyError
-    exception.message.must_include "[:bar]"
+    exception = _(lambda { klass.new({ bar: 123 }) }).must_raise KeyError
+    _(exception.message).must_include "[:bar]"
   end
 
   # Regression.
@@ -113,7 +113,7 @@ describe Object, ".attr_initialize" do
     # Should not raise.
     example = klass.new({ "invalid.ivar.name" => 123 })
 
-    example.foo.must_equal({ "invalid.ivar.name" => 123 })
+    _(example.foo).must_equal({ "invalid.ivar.name" => 123 })
   end
 
   it "accepts a block for initialization" do
@@ -127,6 +127,6 @@ describe Object, ".attr_initialize" do
 
     example = klass.new("expected")
 
-    example.copy.must_equal "expected"
+    _(example.copy).must_equal "expected"
   end
 end
