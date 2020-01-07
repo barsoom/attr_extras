@@ -21,10 +21,11 @@ module AttrExtras
     end
 
     def attr_private(*names)
-      if names && !names.empty?
-        attr_reader(*names)
-        private(*names)
-      end
+      # Avoid warnings: https://github.com/barsoom/attr_extras/pull/31
+      return unless names && names.any?
+
+      attr_reader(*names)
+      private(*names)
     end
 
     def attr_value(*names)
