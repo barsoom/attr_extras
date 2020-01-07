@@ -1,5 +1,10 @@
 # Changelog
 
+# 6.2.2
+
+- Fix warnings with Ruby 2.7. Thanks to [Juanito Fatas](https://github.com/barsoom/attr_extras/pull/31)!
+- Fix deprecation warnings for Minitest 6. Thanks again to [Juanito Fatas](https://github.com/barsoom/attr_extras/pull/30)!
+
 # 6.2.1
 
 * Bugfix with keyword argument defaults. Thanks to [Roman Dubrovsky](https://github.com/barsoom/attr_extras/pull/29)!
