@@ -1,5 +1,9 @@
 # Changelog
 
+# 6.2.3
+
+- `attr_implement` error says "an 'ear()' method" instead of "a 'ear()' method", when the method starts with a likely vowel.
+
 # 6.2.2
 
 - Fix warnings with Ruby 2.7. Thanks to [Juanito Fatas](https://github.com/barsoom/attr_extras/pull/31)!
