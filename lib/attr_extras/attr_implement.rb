@@ -19,7 +19,7 @@ class AttrExtras::AttrImplement
             raise ArgumentError, "wrong number of arguments (#{provided_arity} for #{expected_arity})"
           end
 
-          raise AttrExtras::MethodNotImplementedError, "Implement a '#{name}(#{arg_names.join(", ")})' method"
+          raise AttrExtras::MethodNotImplementedError, "Implement a#{"n" if name[0].match?(/\A[aeiou]/i)} '#{name}(#{arg_names.join(", ")})' method"
         else
           super(name, *args)
         end

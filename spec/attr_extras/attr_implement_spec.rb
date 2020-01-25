@@ -65,6 +65,16 @@ describe Object, ".attr_implement" do
 
     _(lambda { klass.new.some_other_method }).must_raise NoMethodError
   end
+
+  it "says 'an' if followed by a vowel" do
+    klass = Class.new do
+      attr_implement :ear
+    end
+
+    example = klass.new
+    exception = _(lambda { example.ear }).must_raise AttrExtras::MethodNotImplementedError
+    _(exception.message).must_equal "Implement an 'ear()' method"
+  end
 end
 
 describe Object, ".cattr_implement" do
