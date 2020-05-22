@@ -61,9 +61,17 @@ module AttrExtras
     alias_method :attr_accessor_initialize, :aattr_initialize
 
     def static_facade(method_name_or_names, *names)
-      Array(method_name_or_names).each do |method_name|
-        define_singleton_method(method_name) do |*values, &block|
-          new(*values).public_send(method_name, &block)
+      if names.any? { |name| name.is_a?(Array) }
+        Array(method_name_or_names).each do |method_name|
+          define_singleton_method(method_name) do |*args, **opts, &block|
+            new(*args, **opts).public_send(method_name, &block)
+          end
+        end
+      else
+        Array(method_name_or_names).each do |method_name|
+          define_singleton_method(method_name) do |*args, &block|
+            new(*args).public_send(method_name, &block)
+          end
         end
       end
 
