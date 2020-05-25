@@ -1,5 +1,9 @@
 # Changelog
 
+# Unreleased
+
+- Fix keyword argument warnings with Ruby 2.7. Thanks to [Elliot Winkler](https://github.com/barsoom/attr_extras/pull/34)!
+
 # 6.2.3
 
 - `attr_implement` error says "an 'ear()' method" instead of "a 'ear()' method", when the method starts with a likely vowel.
