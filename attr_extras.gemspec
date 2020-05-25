@@ -16,7 +16,7 @@ Gem::Specification.new do |gem|
   gem.version       = AttrExtras::VERSION
 
   gem.add_development_dependency "minitest", ">= 5"
-  gem.add_development_dependency "m", "~> 1.5.0"  # Running individual tests.
+  gem.add_development_dependency "m", "~> 1.5.1"  # Running individual tests.
 
   # For Travis CI.
   gem.add_development_dependency "rake"
