@@ -56,4 +56,33 @@ describe Object, ".static_facade" do
 
     assert klass.foo { :bar } == :bar
   end
+
+  it "does not blow up when the class method is called with an empty hash" do
+    klass = Class.new do
+      static_facade :foo, :value
+
+      def foo
+      end
+    end
+
+    refute_raises_anything { klass.foo({}) }
+  end
+
+  it "does not emit warnings when the initializer is overridden with more keyword arguments" do
+    superklass = Class.new do
+      static_facade :something, [ :foo!, :bar! ]
+
+      def something
+      end
+    end
+
+    klass = Class.new(superklass) do
+      def initialize(extra:, **rest)
+        super(**rest)
+        @extra = extra
+      end
+    end
+
+    refute_warnings_emitted { klass.something(foo: 1, bar: 2, extra: "yay") }
+  end
 end
