@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## [6.2.4](https://github.com/barsoom/attr_extras/releases/tag/v6.2.4)
 
 - Fix keyword argument warnings with Ruby 2.7. Thanks to [Elliot Winkler](https://github.com/barsoom/attr_extras/pull/34)!
 
