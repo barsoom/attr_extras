@@ -59,7 +59,8 @@ describe Object, ".static_facade" do
 
   it "does not blow up when the class method is called with an empty hash" do
     klass = Class.new do
-      static_facade :foo, :value
+      static_facade :foo,
+        :value
 
       def foo
       end
