@@ -6,17 +6,26 @@
 
 Takes some boilerplate out of Ruby, lowering the barrier to extracting small focused classes, without [the downsides of using `Struct`](http://thepugautomatic.com/2013/08/struct-inheritance-is-overused/).
 
+Provides lower-level methods like `attr_private` and `attr_value` that nicely complement Ruby's built-in `attr_accessor`, `attr_reader` and `attr_writer`.
+
+Also higher-level ones like `pattr_initialize` (or `attr_private_initialize`) and `method_object` to really cut down on the boilerplate.
+
 Instead of
 
 ``` ruby
-class InvoiceBuilder
-  def initialize(invoice, employee)
-    @invoice, @employee = invoice, employee
+class InvoicePolicy
+  def initialize(invoice, company:)
+    @invoice = invoice
+    @company = company
+  end
+
+  def payable?
+    some_logic(invoice, company)
   end
 
   private
 
-  attr_reader :invoice, :employee
+  attr_reader :invoice, :company
 end
 ```
 
@@ -24,11 +33,58 @@ you can just do
 
 ``` ruby
 class InvoiceBuilder
-  pattr_initialize :invoice, :employee
+  pattr_initialize :invoice, [:company!]
+
+  def payable?
+    some_logic(invoice, company)
+  end
 end
 ```
 
-This nicely complements Ruby's built-in `attr_accessor`, `attr_reader` and `attr_writer`.
+And instead of
+
+``` ruby
+class PayInvoice
+  def self.call(invoice, amount)
+    new(invoice, amount).call
+  end
+
+  def initialize(invoice, amount)
+    @invoice = invoice
+    @amount = amount
+  end
+
+  def call
+    PaymentGateway.charge(invoice.id, amount_in_cents)
+  end
+
+  private
+
+  def amount_in_cents
+    amount * 100
+  end
+
+  attr_reader :invoice, :amount
+end
+```
+
+you can just do
+
+``` ruby
+class PayInvoice
+  method_object :invoice, :amount
+
+  def call
+    PaymentGateway.charge(invoice.id, amount_in_cents)
+  end
+
+  private
+
+  def amount_in_cents
+    amount * 100
+  end
+end
+```
 
 Supports positional arguments as well as optional and required keyword arguments.
 
