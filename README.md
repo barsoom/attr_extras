@@ -1,4 +1,5 @@
 [![Gem Version](https://badge.fury.io/rb/attr_extras.svg)](https://badge.fury.io/rb/attr_extras)
+[![Ruby CI](https://github.com/barsoom/attr_extras/actions/workflows/ci.yml/badge.svg)](https://github.com/barsoom/attr_extras/actions/workflows/ci.yml)
 [![Code Climate](https://codeclimate.com/github/barsoom/attr_extras/badges/gpa.svg)](https://codeclimate.com/github/barsoom/attr_extras)
 
 # attr\_extras
