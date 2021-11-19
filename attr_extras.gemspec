@@ -14,7 +14,7 @@ Gem::Specification.new do |gem|
   gem.require_paths = ["lib"]
   gem.license       = "MIT"
   gem.version       = AttrExtras::VERSION
-  gem.metadata       = { "rubygems_mfa_required" => "true" }
+  gem.metadata      = { "rubygems_mfa_required" => "true" }
 
   gem.add_development_dependency "minitest", ">= 5"
   gem.add_development_dependency "m", "~> 1.5.1"  # Running individual tests.
