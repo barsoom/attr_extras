@@ -24,7 +24,7 @@ describe Object, ".attr_initialize" do
 
   it "can set ivars from a hash" do
     klass = Class.new do
-      attr_initialize :foo, [:bar, :baz]
+      attr_initialize :foo, [ :bar, :baz ]
     end
 
     example = klass.new("Foo", bar: "Bar", baz: "Baz")
@@ -35,7 +35,7 @@ describe Object, ".attr_initialize" do
 
   it "can set default values for keyword arguments" do
     klass = Class.new do
-      attr_initialize :foo, [:bar, baz: "default baz"]
+      attr_initialize :foo, [ :bar, baz: "default baz" ]
     end
 
     example = klass.new("Foo", bar: "Bar")
@@ -49,7 +49,7 @@ describe Object, ".attr_initialize" do
 
   it "treats hash values as optional" do
     klass = Class.new do
-      attr_initialize :foo, [:bar, :baz]
+      attr_initialize :foo, [ :bar, :baz ]
     end
 
     example = klass.new("Foo", bar: "Bar")
@@ -61,7 +61,7 @@ describe Object, ".attr_initialize" do
 
   it "can require hash values" do
     klass = Class.new do
-      attr_initialize [:optional, :required!]
+      attr_initialize [ :optional, :required! ]
     end
 
     example = klass.new(required: "X")
@@ -72,7 +72,7 @@ describe Object, ".attr_initialize" do
 
   it "complains about unknown hash values" do
     klass = Class.new do
-      attr_initialize :foo, [:bar, :baz!]
+      attr_initialize :foo, [ :bar, :baz! ]
     end
 
     # Should not raise.
@@ -85,7 +85,7 @@ describe Object, ".attr_initialize" do
   # Regression.
   it "assigns hash values to positional arguments even when there's also hash arguments" do
     klass = Class.new do
-      attr_initialize :foo, [:bar]
+      attr_initialize :foo, [ :bar ]
     end
 
     # Should not raise.
@@ -95,7 +95,7 @@ describe Object, ".attr_initialize" do
   # Regression.
   it "only looks at hash arguments when determining missing required keys" do
     klass = Class.new do
-      attr_initialize :foo, [:bar!]
+      attr_initialize :foo, [ :bar! ]
     end
 
     # Provides a hash to "foo" but does not provide "bar".

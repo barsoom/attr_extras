@@ -4,7 +4,7 @@ describe AttrExtras::AttrInitialize::ParamsBuilder do
   subject { AttrExtras::AttrInitialize::ParamsBuilder.new(names) }
 
   describe "when positional and hash params are present" do
-    let(:names) { [ :foo, :bar, [ :baz, :qux!, quux: "Quux" ]] }
+    let(:names) { [ :foo, :bar, [ :baz, :qux!, quux: "Quux" ] ] }
 
     it "properly devides params by the type" do
       _(subject.positional_args).must_equal [ :foo, :bar ]
@@ -16,7 +16,7 @@ describe AttrExtras::AttrInitialize::ParamsBuilder do
   end
 
   describe "when only positional params are present" do
-    let(:names) { [ :foo, :bar] }
+    let(:names) { [ :foo, :bar ] }
 
     it "properly devides params by the type" do
       _(subject.positional_args).must_equal [ :foo, :bar ]
@@ -28,7 +28,7 @@ describe AttrExtras::AttrInitialize::ParamsBuilder do
   end
 
   describe "when only hash params are present" do
-    let(:names) { [[ { baz: "Baz" }, :qux!, { quux: "Quux" } ]] }
+    let(:names) { [ [ { baz: "Baz" }, :qux!, { quux: "Quux" } ] ] }
 
     it "properly devides params by the type" do
       _(subject.positional_args).must_be_empty

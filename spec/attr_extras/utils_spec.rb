@@ -13,7 +13,7 @@ describe AttrExtras::Utils do
     end
 
     it "flattens hash arguments with defaults and strips any bangs" do
-      _(AttrExtras::Utils.flat_names([ :foo, [ bar: "Bar", baz!: "Baz"] ])).must_equal [ "foo", "bar", "baz" ]
+      _(AttrExtras::Utils.flat_names([ :foo, [ bar: "Bar", baz!: "Baz" ] ])).must_equal [ "foo", "bar", "baz" ]
     end
   end
 end

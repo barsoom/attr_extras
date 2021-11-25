@@ -13,7 +13,7 @@ describe Object, ".attr_implement" do
 
   it "allows specifying arity and argument names" do
     klass = Class.new do
-      attr_implement :foo, [:name, :age]
+      attr_implement :foo, [ :name, :age ]
     end
 
     example = klass.new
@@ -80,7 +80,7 @@ end
 describe Object, ".cattr_implement" do
   it "applies to class methods" do
     klass = Class.new do
-      cattr_implement :foo, [:name, :age]
+      cattr_implement :foo, [ :name, :age ]
     end
 
     exception = _(lambda { klass.foo(1, 2) }).must_raise AttrExtras::MethodNotImplementedError
