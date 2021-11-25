@@ -15,10 +15,4 @@ Gem::Specification.new do |gem|
   gem.license       = "MIT"
   gem.version       = AttrExtras::VERSION
   gem.metadata      = { "rubygems_mfa_required" => "true" }
-
-  gem.add_development_dependency "barsoom_utils"
-  gem.add_development_dependency "m", "~> 1.5.1"  # Running individual tests.
-  gem.add_development_dependency "minitest", ">= 5"
-  gem.add_development_dependency "rake"
-  gem.add_development_dependency "rubocop"
 end
