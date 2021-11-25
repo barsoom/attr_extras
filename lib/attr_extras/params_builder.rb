@@ -25,8 +25,8 @@ module AttrExtras
       end
 
       def hash_args_required
-        @hash_args_required ||= hash_args.select { |name| name.to_s.end_with?(REQUIRED_SIGN) }.
-          map { |name| remove_required_sign(name) }
+        @hash_args_required ||= hash_args.select { |name| name.to_s.end_with?(REQUIRED_SIGN) }
+          .map { |name| remove_required_sign(name) }
       end
 
       def default_values
