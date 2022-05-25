@@ -1,6 +1,7 @@
 class AttrExtras::AttrValue
   def initialize(klass, *names)
-    @klass, @names = klass, names
+    @klass = klass
+    @names = names
   end
 
   attr_reader :klass, :names

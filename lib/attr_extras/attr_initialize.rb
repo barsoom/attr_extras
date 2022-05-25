@@ -2,7 +2,9 @@ require "attr_extras/params_builder"
 
 class AttrExtras::AttrInitialize
   def initialize(klass, names, block)
-    @klass, @names, @block = klass, names, block
+    @klass = klass
+    @names = names
+    @block = block
   end
 
   attr_reader :klass, :names

@@ -1,6 +1,7 @@
 class AttrExtras::AttrImplement
   def initialize(klass, names)
-    @klass, @names = klass, names.dup
+    @klass = klass
+    @names = names.dup
   end
 
   def apply
