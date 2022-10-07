@@ -1,4 +1,3 @@
-require 'byebug'
 require "attr_extras/params_builder"
 
 class AttrExtras::AttrInitialize
