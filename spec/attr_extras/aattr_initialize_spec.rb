@@ -66,7 +66,7 @@ describe Object, ".aattr_initialize" do
     _(example.foo).must_equal "Foo"
   end
 
-  it "does not use the same default values across class instances" do
+  it "does not use the same default value object across class instances" do
     klass = Class.new do
       aattr_initialize [:name, items: []]
     end
