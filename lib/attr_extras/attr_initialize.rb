@@ -1,3 +1,4 @@
+require 'byebug'
 require "attr_extras/params_builder"
 
 class AttrExtras::AttrInitialize
@@ -27,7 +28,7 @@ class AttrExtras::AttrInitialize
       validate_args.call(values, klass_params)
 
       klass_params.default_values.each do |name, default_value|
-        instance_variable_set("@#{name}", default_value)
+        instance_variable_set("@#{name}", default_value.dup)
       end
 
       klass_params.positional_args.zip(values).each do |name, value|
