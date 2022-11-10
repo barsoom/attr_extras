@@ -517,17 +517,6 @@ You can run an individual test using the [m](https://github.com/qrush/m) gem:
 The tests are intentionally split into two test suites for reasons described in `Rakefile`.
 
 
-## Contributors
-
-* [Henrik Nyh](https://github.com/henrik)
-* [Joakim Kolsjö](https://github.com/joakimk)
-* [Victor Arias](https://github.com/victorarias)
-* [Teo Ljungberg](https://github.com/teoljungberg)
-* [Kim Persson](https://github.com/lavinia)
-* [Joe Ferris](https://github.com/jferris)
-* [Julien Vanier](https://github.com/monkbroc)
-
-
 ## License
 
 [MIT](LICENSE.txt)
