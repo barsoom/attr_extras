@@ -1,5 +1,10 @@
 # Changelog
 
+## [7.0.0](https://github.com/barsoom/attr_extras/releases/tag/v7.0.0)
+
+- Drop end-of-lifed Ruby 2.5 and 2.6.
+- Don't share default value object instances. (We now do a shallow `dup`.) Thanks to [sammo1235](https://github.com/barsoom/attr_extras/pull/46)!
+
 ## [6.2.4](https://github.com/barsoom/attr_extras/releases/tag/v6.2.4)
 
 - Fix keyword argument warnings with Ruby 2.7. Thanks to [Elliot Winkler](https://github.com/barsoom/attr_extras/pull/34)!

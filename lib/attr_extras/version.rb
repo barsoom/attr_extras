@@ -1,3 +1,3 @@
 module AttrExtras
-  VERSION = "6.2.5"
+  VERSION = "7.0.0"
 end
