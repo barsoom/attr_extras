@@ -45,6 +45,20 @@ describe Object, ".static_facade" do
     assert klass.barable?(false)
   end
 
+  it "accepts a block for initialization" do
+    klass = Class.new do
+      static_facade :foo, :value do
+        @copy = @value
+      end
+
+      attr_reader :copy
+    end
+
+    example = klass.new("expected")
+
+    _(example.copy).must_equal "expected"
+  end
+
   it "passes along any block to the instance method" do
     klass = Class.new do
       static_facade :foo

@@ -1,5 +1,9 @@
 # Changelog
 
+## [7.1.0](https://github.com/barsoom/attr_extras/releases/tag/v7.1.0)
+
+- Make `static_facade` and `method_object` take a block for initalization.
+
 ## [7.0.0](https://github.com/barsoom/attr_extras/releases/tag/v7.0.0)
 
 - Drop end-of-lifed Ruby 2.5 and 2.6.

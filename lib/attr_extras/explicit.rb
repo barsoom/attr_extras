@@ -60,7 +60,7 @@ module AttrExtras
 
     alias_method :attr_accessor_initialize, :aattr_initialize
 
-    def static_facade(method_name_or_names, *names)
+    def static_facade(method_name_or_names, *names, &block)
       if names.any? { |name| name.is_a?(Array) }
         Array(method_name_or_names).each do |method_name|
           define_singleton_method(method_name) do |*args, **opts, &block|
@@ -75,11 +75,11 @@ module AttrExtras
         end
       end
 
-      pattr_initialize(*names)
+      pattr_initialize(*names, &block)
     end
 
-    def method_object(*names)
-      static_facade :call, *names
+    def method_object(*names, &block)
+      static_facade :call, *names, &block
     end
 
     def attr_query(*names)
