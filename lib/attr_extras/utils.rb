@@ -3,6 +3,6 @@ module AttrExtras::Utils
     names
       .flatten
       .flat_map { |x| x.is_a?(Hash) ? x.keys : x }
-      .map { |x| x.to_s.sub(/!\z/, "") }
+      .map { |x| x.to_s.delete_suffix('!') }
   end
 end
