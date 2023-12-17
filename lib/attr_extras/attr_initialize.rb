@@ -50,7 +50,7 @@ class AttrExtras::AttrInitialize
     arity_without_hashes = names.count { |name| not name.is_a?(Array) }
     arity_with_hashes    = names.length
 
-    unless (arity_without_hashes..arity_with_hashes).include?(provided_arity)
+    unless (arity_without_hashes..arity_with_hashes).cover?(provided_arity)
       arity_range = [ arity_without_hashes, arity_with_hashes ].uniq.join("..")
       raise ArgumentError, "wrong number of arguments (#{provided_arity} for #{arity_range}) for #{klass.name} initializer"
     end
