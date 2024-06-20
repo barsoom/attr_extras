@@ -27,7 +27,15 @@ class AttrExtras::AttrInitialize
       validate_args.call(values, klass_params)
 
       klass_params.default_values.each do |name, default_value|
-        instance_variable_set("@#{name}", default_value.dup)
+        if (default_value.is_a?(Module) || default_value.is_a?(Class)) &&
+          !default_value.name.nil? &&
+          Module.const_defined?(
+            (default_value.to_s if default_value.respond_to?(:to_s)),
+          )
+          instance_variable_set("@#{name}", default_value)
+        else
+          instance_variable_set("@#{name}", default_value.dup)
+        end
       end
 
       klass_params.positional_args.zip(values).each do |name, value|
