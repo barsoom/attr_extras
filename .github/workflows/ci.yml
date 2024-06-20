@@ -12,6 +12,7 @@ jobs:
     with:
       min_version: 3.1
       engine: cruby
+      versions: '["jruby-head"]'
 
   test:
     needs: ruby-versions
