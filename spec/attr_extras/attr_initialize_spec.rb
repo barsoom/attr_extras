@@ -47,6 +47,18 @@ describe Object, ".attr_initialize" do
     _(example.instance_variable_get("@baz")).must_equal "Baz"
   end
 
+  it "can set constants as default values for positional arguments" do
+    klass = Class.new do
+      attr_initialize [ foo: AttrExtras ]
+    end
+
+    example = klass.new
+    _(example.instance_variable_get("@foo")).must_equal AttrExtras
+
+    example = klass.new(foo: AttrExtras::AttrInitialize)
+    _(example.instance_variable_get("@foo")).must_equal AttrExtras::AttrInitialize
+  end
+
   it "treats hash values as optional" do
     klass = Class.new do
       attr_initialize :foo, [ :bar, :baz ]
