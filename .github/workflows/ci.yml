@@ -23,7 +23,7 @@ jobs:
         ruby-version: ${{ fromJson(needs.ruby-versions.outputs.versions) }}
 
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - name: Set up Ruby ${{ matrix.ruby-version }}
         uses: ruby/setup-ruby@v1
         with:
