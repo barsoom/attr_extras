@@ -21,11 +21,20 @@ describe Object, ".pattr_initialize" do
 
   it "works with hash ivars and default values" do
     klass = Class.new do
-      pattr_initialize :foo, [ bar: "Bar", baz!: "Baz" ]
+      pattr_initialize :foo, [ bar: "Bar", baz: "Baz" ]
     end
 
     example = klass.new("Foo")
     _(example.send(:baz)).must_equal "Baz"
+  end
+
+  it "raises when a key is both required (!) and has a default value" do
+    exception = _(lambda {
+      Class.new do
+        pattr_initialize [ :foo! => "defaultvalue" ]
+      end
+    }).must_raise ArgumentError
+    _(exception.message).must_include "foo"
   end
 
   it "can reference private initializer methods in an initializer block" do

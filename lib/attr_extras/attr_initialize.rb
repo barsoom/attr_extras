@@ -16,6 +16,7 @@ class AttrExtras::AttrInitialize
     block = @block
 
     klass_params = AttrExtras::AttrInitialize::ParamsBuilder.new(names)
+    klass_params.validate!
 
     validate_arity = method(:validate_arity)
     validate_args = method(:validate_args)

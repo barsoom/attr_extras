@@ -39,6 +39,13 @@ module AttrExtras
         end
       end
 
+      def validate!
+        conflicting = hash_args_required & default_values.keys
+        if conflicting.any?
+          raise ArgumentError, "#{conflicting.inspect} cannot be both required (!) and have a default value"
+        end
+      end
+
       private
 
       def remove_required_sign(name)
