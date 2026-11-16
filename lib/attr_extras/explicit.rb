@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "attr_extras/version"
 require "attr_extras/attr_initialize"
 require "attr_extras/attr_value"

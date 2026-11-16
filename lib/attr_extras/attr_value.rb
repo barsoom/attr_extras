@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AttrExtras::AttrValue
   def initialize(klass, *names)
     @klass = klass

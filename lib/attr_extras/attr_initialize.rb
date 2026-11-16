@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "attr_extras/params_builder"
 
 class AttrExtras::AttrInitialize
