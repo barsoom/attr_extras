@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module AttrExtras::AttrQuery
   def self.define_with_suffix(klass, suffix, *names)
     names.each do |name|

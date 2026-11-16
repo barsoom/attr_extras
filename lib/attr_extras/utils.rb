@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module AttrExtras::Utils
   def self.flat_names(names)
     names

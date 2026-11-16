@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+# frozen_string_literal: true
 
 # This script is per the Auctionet.com developer conventions for running tests in the same way in any project.
 
